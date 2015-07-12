@@ -1,6 +1,6 @@
 _____________________
 The quran package
-v0.91
+v0.941
 
 The package is prepared for typesetting the Holy Quran. This work is inspired
 by lipsum and ptext packages provides several macros for typesetting the whole or 
@@ -12,7 +12,7 @@ loaded before `bidi' package.
 For more information, please see the documentation.
 
 
-Current version release date: 2015/07/10
+Current version release date: 2015/07/11
 ___________________
 Seiied-Mohammad-Javad Razvian, Ali Ramzi
 javadr@gmail.com
