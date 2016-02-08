@@ -1,61 +1,106 @@
 \documentclass{ltxdoc}
+%\usepackage{pgffor}
+\usepackage{forloop}
+\usepackage{pgf}
+\usepackage{pgfcalendar}
 \usepackage{framed}
 \usepackage{holtxdoc}
 \usepackage{url}
+\usepackage{quran}
 
 \begin{document}
 \title{The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
-\author{Seiied Mohammad Javad Razavian, Ali Ramzi\\\xemail{javadr,ali.ramzi@gmail.com}}
+\author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{July 11, 2015}
+\date{Feb 9, 2016}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 0.941}
+\centerline{ver 1.05}
 \end{framed}
 
 \tableofcontents
 
 \section{Introduction}
 This package is prepared for typesetting the Holy Quran. This work is inspired by \xpackage{lipsum} and 
-\xpackage{ptext} packages provides several macros for
-typesetting the whole or part of Quran based on its popular division.
+\xpackage{ptext} packages, provides several macros for
+typesetting the whole or any parts of the Holy Quran based on its popular division.
 
 \section{Loading Package}
 You can load the package in the ordinary way
 \cs{usepackage[option]\{quran\}}.
-Like the other pakages that use \xpackage{bidi}, it should be loaded just before \xpackage{bidi}.
+%Like the other pakages that use \xpackage{bidi}, it should be loaded just before \xpackage{bidi}.
 
 \section{Typesetting The Holy Quran}
-For typesetting any part or whole of The Holy Quran there are several macros that do this.
+For typesetting any parts or whole of The Holy Quran there are several macros in the package.
 
 \subsection{Surah/Sovar}
 \begin{declcs}{quransurah}\oarg{m}
 \end{declcs}
-This macro can typeset any Surah of Quran. As you know there are 114 Sovar, so \textit{m} must be a integer between
-1 to 114. 
+This macro can typeset any Surah of Quran. As you know there are 114 Sovar, so \textit{m} could 
+be an integer between 1 to 114. The macro also could accept the transliteration of surah's name, 
+e.g. both of \cs{quransurah[1]} and \cs{quransurah[Al-Fatiha]} have the same effect. For using 
+surah's name instead of their order see table~\ref{tab1}.
+\marginpar{\cs{quransurah[1]}}\marginpar{\cs{quransurah[Al-Fatiha]}}
+
+\newcounter{ct}
+\def\mycell#1{
+    \surahname[\value{#1}]
+    \addtocounter{#1}{38}
+}
+\begin{table}[!htbp]
+    \centering
+    \fontsize{8}{10}\selectfont
+    \begin{tabular}{|*{3}{c|l|}}
+    \hline
+     order & surahname & order  & surahname  & order  & surahname  \\
+    \hline\hline%
+    \forloop{ct}{1}{\value{ct} < 38}{%
+        \thect & \mycell{ct} & \thect & \mycell{ct} & \thect & \mycell{ct}  \\
+        \addtocounter{ct}{-114}
+    }%
+    \thect & \mycell{ct} & \thect & \mycell{ct} & \thect & \mycell{ct}\\%
+    \hline
+    \end{tabular}
+    \protect\caption{Surah's name trasliteration.}\label{tab1}
+\end{table}
 
 \begin{declcs}{quransurah}\oarg{m-n}
 \end{declcs}
 This acts like above but can typeset \textit{m}$^{th}$ Surah to \textit{n}$^{th}$  one. 
 
+\begin{declcs}{quransurah}\oarg{m{-}{-}n}
+\end{declcs}
+In this case m and n are tranliterations of surah's names, e.g. \cs{quransurah[An-Nasr--An-Nas]}.
+\marginpar{\cs{quransurah[An-Nasr--An-Nas]}}
+
+\begin{declcs}{quransurah}
+\end{declcs}
 Using \cs{quransurah} without its optional argument typeset the default Surah--Al-Ikhlas.
-To change the default Surah use \cs{setsurahdefault\{m\}}
+To change the default Surah use \cs{setsurahdefault\{m\}}, again m must be between 1 and 114; 
+package's default is 112.
+\marginpar{\cs{setsurahdefault}}
 
 \subsection{Ayah/Ayat}
 \begin{declcs}{quranayah}\oarg{l}\oarg{n}
 \end{declcs}
 The above macro typeset the \textit{n}$^{th}$ Ayah of \textit{l}$^{th}$ Surah. 
-If you just typeset the first Ayah of any Surah, then the Basmalah will not be printed and in writing the way 
-we've choosen for typesetting just the first Ayah is acceptable. In this case if you need Basmalah, then 
-you can use the \cs{Basmalah} macro before.
+If you just typeset the first Ayah of any Surah, then the Basmalah will not be printed.
+In this case if you need Basmalah, then you can use the \cs{Basmalah} macro before.
+\marginpar{\cs{Basmalah}}
 
 \begin{declcs}{quranayah}\oarg{l}\oarg{m-n}
 \end{declcs}
 This macro typeset the \textit{m}$^{th}$ to \textit{n}$^{th}$ Ayat of l$^{th}$ Surah. 
 
-\textit{l} must be an integer less than or equal to 114. \textit{n} is diffirent by every Surah. 
+\par
+\addvspace{4.5ex plus 1ex}%
+\vskip -\parskip
+\noindent\textit{l} could be an integer less than or equal to 114. It also could be 
+the transliteration of  l$^{th}$ Surah's name, see table~\ref{tab1}. 
+\textit{n} is diffirent by every Surah and it relies on the number of the Surah's verses. 
+\textit{m} should be between 1 and a number less than \textit{n}. 
 
 \subsection{Page/Pages}
 \begin{declcs}{quranpage}\oarg{n}
@@ -65,12 +110,12 @@ Typeset the \textit{n}$^{th}$ page of Quran and the macro below typeset \textit{
 
 \begin{declcs}{quranpage}\oarg{m-n}
 \end{declcs}
-The numbers should be between $1$ to $604$, based of Uthmani. 
+The numbers should be between $1$ to $604$, based on Uthmani text. 
 
 \subsection{Juz/Ajza}
 \begin{declcs}{quranjuz}\oarg{n}
 \end{declcs}
-Using above macro typeset the \textit{n}$^{th}$ juz of Quran and below macro typeset m$^{th}$ to n$^{th}$ juzzes of Quran. 
+Above macro typesets the \textit{n}$^{th}$ juz of Quran and below macro typesets m$^{th}$ to n$^{th}$ juzzes of Quran. 
 \begin{declcs}{quranjuz}\oarg{m-n}
 \end{declcs}
 The numbers should be between $1$ to $30$.
@@ -85,17 +130,17 @@ Following macros typeset hizb/ahzab of Quran.
 \end{declcs}
 
 \subsection{Quarter/Quarters}
-Eash hizb of Quran is devided into four quarters, making eight quarters per juz. 
+Eash hizb of Quran is devided into four quarters, making eight quarters per juz, called maqra. 
 There are 240 of these quarters (of hizb) in the Quran. These maqra are often used as sections for revision when memorizing the Quran.\footnote{\url{https://en.wikipedia.org/wiki/Juz'}}
 \begin{declcs}{quranquarter}\oarg{n}
 \end{declcs}
 \begin{declcs}{quranquarter}\oarg{m-n}
 \end{declcs}
 
-Using above macros typeset the \textit{n}$^{th}$ or m$^{th}$ to n$^{th}$ quarter(s) of Quran.   
+Above macros typeset the \textit{n}$^{th}$ or m$^{th}$ to n$^{th}$ quarter(s) of Quran.   
 
 \subsection{Ruku/Rukus}
-``The term ruk\= uʿ --- roughly translated to ``passage", ``pericope" or ``stanza" --- is also used to denote a group of thematically related verses in the Qur'an. Longer suras (chapters) in the Qur'an are usually divided into several rukūʿs, so that the reciters could identify when to make ruk\= u in Salat without breaking an ongoing topic in the Quranic text."\footnote{\url{https://en.wikipedia.org/wiki/Ruku}}
+``The term ruk\= uʿ --- roughly translated to ``passage", ``pericope" or ``stanza" --- is also used to denote a group of thematically related verses in the Qur'an. Longer suras (chapters) in the Qur'an are usually divided into several ruk\= us, so that the reciters could identify when to make ruk\= u in Salat without breaking an ongoing topic in the Quranic text."\footnote{\url{https://en.wikipedia.org/wiki/Ruku}}
 
 The following macros can typeset rukus of The Holy Quran the way the above macros act. 
 
@@ -106,9 +151,9 @@ The following macros can typeset rukus of The Holy Quran the way the above macro
 The numbers should be between $1$ to $556$.
 
 \subsection{Manzil/Manazil}
-``For the convenience of people who wish to read the Qur'an in a week the text may be divided into 7 portions, each portion is known as Manzil.[1]
+``For the convenience of people who wish to read the Qur'an in a week the text may be divided into 7 portions, each portion is known as Manzil.
 
-The following division to 7 equal portions is by Hamza Al-Zayyat (d.156/772):[1]
+The following division to 7 equal portions is by Hamza Al-Zayyat (d.156/772):
 \begin{enumerate}
     \item Al-Fatihah (chapter 1) through An-Nisa' (chapter 4) consisting of 4 surahs.
     \item Al-Ma'ida (chapter 5) through At-Tawba (chapter 9) consisting of 5 surahs.
@@ -132,14 +177,17 @@ are $6236$ Ayat in Quran. This macro can typeset a specific Ayah or any range of
 
 \begin{declcs}{qurantext}\oarg{n}
 \end{declcs}
-Typeset the \textit{n}$^{th}$ Ayah of Quran. 
+Typesets the \textit{n}$^{th}$ Ayah of Quran. 
 
 \begin{declcs}{qurantext}\oarg{m-n}
 \end{declcs}
-Typeset any range of Ayat from the \textit{m}$^{th}$ to \textit{n}$^{th}$ Ayah. 
+Typesets any range of Ayat from the \textit{m}$^{th}$ to \textit{n}$^{th}$ Ayah. 
  
 Using \cs{qurantext} without its optional argument typeset [1-7] --Al-Hamd. To
 change the default text use \cs{setqurantextdefault\{m-n\}}
+\marginpar{\cs{qurantext}}
+\marginpar{\cs{setqurantextdefault\{m-n\}}}
+
 \subsection{Whole of The Holy Quran}
 The following macros can typeset whole of The Holy Quran:
 
@@ -157,8 +205,11 @@ The following macros can typeset whole of The Holy Quran:
 \subsection{Name of Surah}
 \begin{declcs}{surahname}\oarg{m}
 \end{declcs}
-This macro returns the arabic name of \textit{m}$^{th}$ Surah in RTL mode, and returns the 
-english name in LTR mode.
+This macro returns the tranliteration of \textit{m}$^{th}$ Surah.
+
+\begin{declcs}{surahname*}\oarg{m}
+\end{declcs}
+This macro returns the arabic name of \textit{m}$^{th}$ Surah.
 
 \subsection{Basmalah}
 \begin{declcs}{basmalah}
@@ -175,7 +226,7 @@ has a starred version that omit the \cs{par} macro in typesetting the text of Qu
 
 In some cases maybe user wants to typeset the Ayat without their following numbers that can be seen in printed version of The Holy Quran. The \texttt{nonumber}\marginpar{nonumber} 
 option tells the package that print no number after ayah.
-But sometimes we want to typeset just some Ayat without it, so there is a \cs{ChangeAyahNumber} macro
+But sometimes we want to typeset just some Ayat without theirs, so there is a \cs{ToggleAyahNumber} macro
 that can cause numbers will be omitted. With \texttt{nonumber} option this macro acts vice versa, it mean it 
 causes that Ayat number will be printed.
 
