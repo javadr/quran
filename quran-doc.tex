@@ -7,20 +7,78 @@
 \usepackage{holtxdoc}
 \usepackage{url}
 \usepackage{quran}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{fontspec}
+\newfontfamily\quran{Scheherazade}
+\usepackage{bidi}
+\makeatletter
+\bidi@preto\qurantext{\quran}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\boxcs#1{\leftline{\fbox{\mcs{#1}}}}
+\def\mcs#1{\lr{\texttt{\textbackslash{}#1}}}
+\def\tt#1{\lr{\texttt{#1}}}
+\lstdefinestyle{BashInputStyle}{
+  language=bash,
+  basicstyle=\footnotesize\sffamily,
+%  numbers=left,
+%  numberstyle=\tiny,
+%  numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  backgroundcolor=\color{gray!10},
+%  linewidth=0.9\linewidth,
+%  xleftmargin=0.1\linewidth
+}
+\def\qp#1{
+\begin{minipage}{.6\textwidth}
+    #1
+\end{minipage}
+}
+
+% Define box and box title style
+\tikzstyle{mybox} = [draw=black, fill=gray!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=gray, text=white]
+
+\def\mx#1#2{\mybox{#1}{#2}{.45\textwidth}}
+\def\mxf#1#2{\mybox{#1}{#2}{\textwidth}}
+
+\def\mybox#1#2#3{
+\begin{tikzpicture}
+\setRTL
+\node [mybox] (box){%
+    \begin{minipage}[t]{#3}
+        #2
+    \end{minipage}
+};
+\node[fancytitle, anchor=west, right=10pt] at (box.north west) {\small \cs{#1}};
+\node (hole) [anchor=north east, left=5pt ] at (box.north east) { \tikz\fill[very thick,white] (0,0) circle (12pt); };
+\node[ ] at (hole.center) {\includegraphics[width=.05\textwidth]{quran.png}};
+\end{tikzpicture}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\title{The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
+\title{\includegraphics[scale=.3]{quran.png}\\
+The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{Apr 21, 2016}
+\date{May 15, 2016}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.1}
+\centerline{ver 1.14}
 \end{framed}
 
 \tableofcontents
+\newpage
 
 \section{Introduction}
 This package is prepared for typesetting the Holy Quran. This work is inspired by \xpackage{lipsum} and 
@@ -30,7 +88,12 @@ typesetting the whole or any parts of the Holy Quran based on its popular divisi
 \section{Loading Package}
 You can load the package in the ordinary way
 \cs{usepackage[option]\{quran\}}.
-%Like the other pakages that use \xpackage{bidi}, it should be loaded just before \xpackage{bidi}.
+After loading the package, it writes some information about itself to the
+terminal and to the log file, too. The information is something like:
+
+\begin{lstlisting}[style=BashInputStyle, language=tex]
+Package: quran 2016/05/15 v1.14 An easy way to typeset the whole or any part of The Holy Quran
+\end{lstlisting}
 
 \section{Typesetting The Holy Quran}
 For typesetting any parts or whole of The Holy Quran there are several macros in the package.
@@ -43,13 +106,27 @@ be an integer between 1 to 114. The macro also could accept the transliteration 
 e.g. both of \cs{quransurah[1]} and \cs{quransurah[Al-Fatiha]} have the same effect. For using 
 surah's name instead of their order see table~\ref{tab1}.
 \marginpar{\cs{quransurah[1]}}\marginpar{\cs{quransurah[Al-Fatiha]}}
+    \hbox{\mx{quransurah[94]}{\quransurah[94]}\hfill
+    \mx{quransurah[At-Tin]}{\quransurah[At-Tin]}}
+    
+\begin{declcs}{quransurah}\oarg{m-n}
+\end{declcs}
+This acts like above but can typeset \textit{m}$^{th}$ Surah to \textit{n}$^{th}$  one. 
 
+\begin{declcs}{quransurah}\oarg{m{-}{-}n}
+\end{declcs}
+In this case m and n are tranliterations of surah's names, e.g. \cs{quransurah[An-Nasr--An-Nas]}.
+\marginpar{\cs{quransurah[An-Nasr--An-Nas]}}
+
+    \hbox{\mx{quransurah[109-110]}{\quransurah[109-110]}\hfill
+    \mx{quransurah[Al-Masadd--Al-Ikhlas]}{\quransurah[Al-Masadd--Al-Ikhlas]}}
+    
 \newcounter{ct}
 \def\mycell#1{
     \surahname[\value{#1}]
     \addtocounter{#1}{38}
 }
-\begin{table}[!htbp]
+\begin{table}[tbhp]
     \centering
     \fontsize{8}{10}\selectfont
     \begin{tabular}{|*{3}{c|l|}}
@@ -65,30 +142,39 @@ surah's name instead of their order see table~\ref{tab1}.
     \end{tabular}
     \protect\caption{Surah's name trasliteration.}\label{tab1}
 \end{table}
-
-\begin{declcs}{quransurah}\oarg{m-n}
-\end{declcs}
-This acts like above but can typeset \textit{m}$^{th}$ Surah to \textit{n}$^{th}$  one. 
-
-\begin{declcs}{quransurah}\oarg{m{-}{-}n}
-\end{declcs}
-In this case m and n are tranliterations of surah's names, e.g. \cs{quransurah[An-Nasr--An-Nas]}.
-\marginpar{\cs{quransurah[An-Nasr--An-Nas]}}
+    
 
 \begin{declcs}{quransurah}
 \end{declcs}
 Using \cs{quransurah} without its optional argument typeset the default Surah--Al-Ikhlas.
+
+\centerline{\mx{quransurah}{\quransurah}}
+
 To change the default Surah use \cs{setsurahdefault\{m\}}, again m must be between 1 and 114; 
-package's default is 112.
+as know noticed package's default is 112.
 \marginpar{\cs{setsurahdefault}}
+
+After changing package's default surah to 107 by \cs{setsurahdefault\{107\}}, the output would be like below:
+
+    \setsurahdefault{107}
+    \centerline{\mx{quransurah}{\quransurah}}
+
+
 
 \subsection{Ayah/Ayat}
 \begin{declcs}{quranayah}\oarg{l}\oarg{n}
 \end{declcs}
 The above macro typeset the \textit{n}$^{th}$ Ayah of \textit{l}$^{th}$ Surah. 
+
+    \hbox{\mx{quranayah[33][33]}{\quranayah[33][33]}\hfill
+    \mx{quranayah[Al-Ahzab][33]}{\quranayah[Al-Ahzab][33]}}
+    
 If you just typeset the first Ayah of any Surah, then the Basmalah will not be printed.
-In this case if you need Basmalah, then you can use the \cs{Basmalah} macro before.
-\marginpar{\cs{Basmalah}}
+In this case if you need Basmalah, then you can use the \cs{basmalah} macro before.
+\marginpar{\cs{basmalah}}
+
+    \hbox{\mx{quranayah[Ibrahim][1]}{\quranayah[Ibrahim][1]}\hfill
+    \mx{basmalah\textbackslash{}quranayah[14][1]}{\quran\basmalah\quranayah[14][1]}}
 
 \begin{declcs}{quranayah}\oarg{l}\oarg{m-n}
 \end{declcs}
@@ -102,6 +188,9 @@ the transliteration of  l$^{th}$ Surah's name, see table~\ref{tab1}.
 \textit{n} is diffirent by every Surah and it relies on the number of the Surah's verses. 
 \textit{m} should be between 1 and a number less than \textit{n}. 
 
+    \hbox{\mx{quranayah[Ash-Shura][22-26]}{\quranayah[Ash-Shura][22-26]}\hfill
+    \mx{quranayah[42][22-26]}{\quranayah[42][22-26]}}   
+
 \subsection{Page/Pages}
 \begin{declcs}{quranpage}\oarg{n}
 \end{declcs}
@@ -112,6 +201,15 @@ Typeset the \textit{n}$^{th}$ page of Quran and the macro below typeset \textit{
 \end{declcs}
 The numbers should be between $1$ to $604$, based on Uthmani text. 
 
+    \hboxR{\mx{quranpage*[249]}{\quranpage*[249]}
+    \hfill
+    \mx{quranpage*[250]}{\quranpage*[250]}} 
+    
+    * starred version of macros are explained in page~\pageref{starred}; concisely it means
+    typesetting that part of the Holy Quran in one paragraph. 
+    
+    \centerline{\mxf{quranpage*[1-3]}{\quranpage*[1-3]}}
+    
 \subsection{Juz/Ajza}
 \begin{declcs}{quranjuz}\oarg{n}
 \end{declcs}
@@ -126,6 +224,7 @@ Following macros typeset hizb/ahzab of Quran.
 
 \begin{declcs}{quranhizb}\oarg{n}
 \end{declcs}
+\vspace{-12mm}
 \begin{declcs}{quranhizb}\oarg{m-n}
 \end{declcs}
 
@@ -134,11 +233,16 @@ Eash hizb of Quran is devided into four quarters, making eight quarters per juz,
 There are 240 of these quarters (of hizb) in the Quran. These maqra are often used as sections for revision when memorizing the Quran.\footnote{\url{https://en.wikipedia.org/wiki/Juz'}}
 \begin{declcs}{quranquarter}\oarg{n}
 \end{declcs}
+
+\vspace{-12mm}
+
 \begin{declcs}{quranquarter}\oarg{m-n}
 \end{declcs}
 
 Above macros typeset the \textit{n}$^{th}$ or m$^{th}$ to n$^{th}$ quarter(s) of Quran.   
 
+    \centerline{\mxf{quranquarter*[110]}{\quranquarter*[110]}}
+    
 \subsection{Ruku/Rukus}
 ``The term ruk\= uʿ --- roughly translated to ``passage", ``pericope" or ``stanza" --- is also used to denote a group of thematically related verses in the Qur'an. Longer suras (chapters) in the Qur'an are usually divided into several ruk\= us, so that the reciters could identify when to make ruk\= u in Salat without breaking an ongoing topic in the Quranic text."\footnote{\url{https://en.wikipedia.org/wiki/Ruku}}
 
@@ -146,10 +250,16 @@ The following macros can typeset rukus of The Holy Quran the way the above macro
 
 \begin{declcs}{quranruku}\oarg{n}
 \end{declcs}
+
+    \centerline{\mxf{quranruku*[363]}{\quranruku*[363]}}
+    
 \begin{declcs}{quranruku}\oarg{m-n}
 \end{declcs}
 The numbers should be between $1$ to $556$.
 
+    \centerline{\mxf{quranruku*[58-59]}{\quranruku*[58-59]}} 
+
+    
 \subsection{Manzil/Manazil}
 ``For the convenience of people who wish to read the Qur'an in a week the text may be divided into 7 portions, each portion is known as Manzil.
 
@@ -168,6 +278,7 @@ Following macros typeset manzil/manazil of Quran.
 
 \begin{declcs}{quranmanzil}\oarg{n}
 \end{declcs}
+\vspace{-12mm}
 \begin{declcs}{quranmanzil}\oarg{m-n}
 \end{declcs}
 
@@ -179,14 +290,25 @@ are $6236$ Ayat in Quran. This macro can typeset a specific Ayah or any range of
 \end{declcs}
 Typesets the \textit{n}$^{th}$ Ayah of Quran. 
 
+\centerline{\mxf{qurantext[1023]}{\begingroup\qurantext[1023]\endgroup}}
+
 \begin{declcs}{qurantext}\oarg{m-n}
 \end{declcs}
 Typesets any range of Ayat from the \textit{m}$^{th}$ to \textit{n}$^{th}$ Ayah. 
+
+    \centerline{\mxf{qurantext*[4111-4117]}{\begingroup\qurantext*[4111-4117]\endgroup}}
  
 Using \cs{qurantext} without its optional argument typeset [1-7] --Al-Hamd. To
 change the default text use \cs{setqurantextdefault\{m-n\}}
 \marginpar{\cs{qurantext}}
 \marginpar{\cs{setqurantextdefault\{m-n\}}}
+
+    \centerline{\mx{qurantext}{\qurantext}}
+    
+    below, the default is changed to \cs{setqurantextdefault\{4128-4147\}}:
+    
+    \setqurantextdefault{4128-4147}
+    \centerline{\mxf{qurantext*}{\qurantext*}}
 
 \subsection{Whole of The Holy Quran}
 The following macros can typeset whole of The Holy Quran:
@@ -213,11 +335,17 @@ This macro returns the tranliteration of \textit{m}$^{th}$ Surah.
 \end{declcs}
 This macro returns the arabic name of \textit{m}$^{th}$ Surah.
 
+    \hbox{\mx{surahname[19]}{\surahname[19]}
+    \hfill
+    \mx{surahname*[19]}{\quran\surahname*[19]}} 
+    
 \subsection{Basmalah}
 \begin{declcs}{basmalah}
 \end{declcs}
 It provides the basmalah in arabic text which every Surah is started by that.
 
+    \centerline{\mx{basmalah}{\quran\basmalah}}
+    
 \subsection{Index Converting}
 \begin{declcs}{indexconvert}\marg{index}\marg{surah macro}\marg{ayah macro}
 \end{declcs}
@@ -234,16 +362,106 @@ that causes no macros of the package terminated by \cs{par}.
 Another way for achieving this, is using the starred version of macros. All macros of the package
 has a starred version that omit the \cs{par} macro in typesetting the text of Quran. 
 
+\label{starred}
 In some cases maybe user wants to typeset the Ayat without their following numbers that can be seen in printed version of The Holy Quran. The \texttt{nonumber}\marginpar{nonumber} 
 option tells the package that print no number after ayah.
 But sometimes we want to typeset just some Ayat without theirs, so there is a \cs{ToggleAyahNumber} macro
 that can cause numbers will be omitted. With \texttt{nonumber} option this macro acts vice versa, it mean it 
 causes that Ayat number will be printed.
 
+    \centerline{\mxf{ToggleAyahNumber\textbackslash{}quransurah*[89]}
+    {\ToggleAyahNumber\quransurah*[89]}}  
+    
 \section{Acknowledgment}
 At first, I should appreciate Vafa Khaligi by preparing such adorable packages --\xpackage{bidi} and 
 \xpackage{xepersian}. Secondly, the costly \url{http://tanzil.net/} for providing the text of The Holy Quran that 
 is developed by Hamid Zarrabi-Zadeh. And finally, people in Parsi\LaTeX\footnote{\url{http://parsilatex.com/}}
 group who tested and commented this work in advance. 
+
+\section{Frequently Asked Questions}
+    \subsection{What is the best font for typesetting quran text?}
+    We strongly recommend you to use "Scheherazade" font.%
+    \footnote{\url{http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=scheherazade}} 
+    Scheherazade is released under the SIL Open Font License (OFL), version 1.1. Copyright (c) 2004-2015,
+    SIL International (http://scripts.sil.org/) with Reserved Font Names "Scheherazade" and "SIL". Therefore
+    you can freely download it. 
+    All examples in this document use this font.  
+    
+    \subsection{How to use \xpackage{quran} package?}
+    As you've noticed, for typesetting quran text you need a package that can typeset text
+    in RTL mode in additon to using UTF8 fonts. The \xpackage{polyglossia}, 
+    \xpackage{fontspec}, and \xpackage{bidi} will do that for you. 
+    You can also use \xpackage{xepersian} that depends on \xpackage{fontspec}, too. 
+    Below, we demonstrated two examples for both approaches:
+
+\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with polyglossia{,} 
+fontspec{,} and bidi"]
+\documentclass[12pt]{article}
+
+\usepackage{quran}
+
+%%% for typesetting arabic text
+\usepackage{polyglossia}
+\setotherlanguage{arabic}
+
+\usepackage{fontspec}
+\setmainfont{Scheherazade}
+
+%%% for typesetting in Rigth-To-Left direction
+\usepackage{bidi}
+
+\begin{document}
+
+\setRTL % tell bidi to typeset the text in Rigth-To-Left direction
+\textarabic{\quransurah}
+
+\end{document}
+\end{lstlisting}    
+    
+
+\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with xepersian"]
+\documentclass[12pt]{article}
+
+\usepackage{quran}
+
+%%% for typesetting Persian/Arabic text in Rigth-To-Left direction
+\usepackage{xepersian}
+\settextfont{Scheherazade}
+
+\begin{document}
+
+\quransurah
+
+\end{document}
+\end{lstlisting}  
+    
+    \subsection{How to set quran default font?}
+        If you want to automatically change the font of quran text in your document, you 
+        can put your willing font in precede of \cs{qurantext} like below:
+        
+        In case you are using \xpackage{xepersian}, put below commands in preamble:
+        
+\begin{lstlisting}[style=BashInputStyle]
+\defpersianfont\quran{Scheherazade}
+\makeatletter
+\bidi@preto\qurantext{\quran}
+\makeatother
+\end{lstlisting}
+
+    In case you are using \xpackage{fontspec}, put below commands in preamble:
+\begin{lstlisting}[style=BashInputStyle]
+\usepackage{etoolbox}
+\newfontfamily\quran{Scheherazade}
+\preto\qurantext{\quran}
+\end{lstlisting}
+
+    \subsection{How to typeset a portion of the Holy Quran in one paragraph
+    with no ayah number without affecting the behaviour of \xpackage{quran} package 
+    in other cases?}
+    
+    Just put the code that was describled on page~\pageref{starred} in a group like:
+\begin{lstlisting}[style=BashInputStyle]
+{\ToggleAyahNumber\quransurah*}
+\end{lstlisting}    
 
 \end{document}
