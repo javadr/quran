@@ -1,6 +1,6 @@
 _____________________
 The quran package
-v1.14
+v1.2
 
 The package is prepared for typesetting the Holy Quran. This work is inspired
 by lipsum and ptext packages, provides several macros for typesetting the whole or 
@@ -8,7 +8,7 @@ any parts of The Holy Quran based on its popular divisions.
 
 For more information, please see the documentation.
 
-Current version release date: 2016/05/15
+Current version release date: 2016/11/05
 ___________________
 Seiied-Mohammad-Javad Razvian
 javadr@gmail.com

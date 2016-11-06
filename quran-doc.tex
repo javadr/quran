@@ -1,5 +1,5 @@
 \documentclass{ltxdoc}
-%\usepackage{pgffor}
+%\usepackage{caption}
 \usepackage{forloop}
 \usepackage{pgf}
 %\usepackage{pgfcalendar}
@@ -12,6 +12,11 @@
 \usetikzlibrary{calc}
 \usepackage{fontspec}
 \newfontfamily\quran{Scheherazade}
+% because of definition of \XeTeX and \XeLaTeX symbols in bidi, I should undef these macro that are also defined in holtxdoc package. 
+\makeatletter
+\bidi@undef\XeTeX
+\bidi@undef\XeLaTeX
+\makeatother
 \usepackage{bidi}
 \makeatletter
 \bidi@preto\qurantext{\quran}
@@ -69,12 +74,12 @@
 The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{May 15, 2016}
+\date{November 5, 2016}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.14}
+\centerline{ver 1.2}
 \end{framed}
 
 \tableofcontents
@@ -106,8 +111,8 @@ be an integer between 1 to 114. The macro also could accept the transliteration 
 e.g. both of \cs{quransurah[1]} and \cs{quransurah[Al-Fatiha]} have the same effect. For using 
 surah's name instead of their order see table~\ref{tab1}.
 \marginpar{\cs{quransurah[1]}}\marginpar{\cs{quransurah[Al-Fatiha]}}
-    \hbox{\mx{quransurah[94]}{\quransurah[94]}\hfill
-    \mx{quransurah[At-Tin]}{\quransurah[At-Tin]}}
+    \centerline{\hbox{\mx{quransurah[94]}{\quransurah[94]}\hfill
+    \mx{quransurah[At-Tin]}{\quransurah[At-Tin]}}}
     
 \begin{declcs}{quransurah}\oarg{m-n}
 \end{declcs}
@@ -118,8 +123,8 @@ This acts like above but can typeset \textit{m}$^{th}$ Surah to \textit{n}$^{th}
 In this case m and n are tranliterations of surah's names, e.g. \cs{quransurah[An-Nasr--An-Nas]}.
 \marginpar{\cs{quransurah[An-Nasr--An-Nas]}}
 
-    \hbox{\mx{quransurah[109-110]}{\quransurah[109-110]}\hfill
-    \mx{quransurah[Al-Masadd--Al-Ikhlas]}{\quransurah[Al-Masadd--Al-Ikhlas]}}
+    \centerline{\hbox{\mx{quransurah[109-110]}{\quransurah[109-110]}\hfill
+    \mx{quransurah[Al-Masadd--Al-Ikhlas]}{\quransurah[Al-Masadd--Al-Ikhlas]}}}
     
 \newcounter{ct}
 \def\mycell#1{
@@ -166,15 +171,15 @@ After changing package's default surah to 107 by \cs{setsurahdefault\{107\}}, th
 \end{declcs}
 The above macro typeset the \textit{n}$^{th}$ Ayah of \textit{l}$^{th}$ Surah. 
 
-    \hbox{\mx{quranayah[33][33]}{\quranayah[33][33]}\hfill
-    \mx{quranayah[Al-Ahzab][33]}{\quranayah[Al-Ahzab][33]}}
+    \centerline{\hbox{\mx{quranayah[33][33]}{\quranayah[33][33]}\hfill
+    \mx{quranayah[Al-Ahzab][33]}{\quranayah[Al-Ahzab][33]}}}
     
 If you just typeset the first Ayah of any Surah, then the Basmalah will not be printed.
 In this case if you need Basmalah, then you can use the \cs{basmalah} macro before.
 \marginpar{\cs{basmalah}}
 
-    \hbox{\mx{quranayah[Ibrahim][1]}{\quranayah[Ibrahim][1]}\hfill
-    \mx{basmalah\textbackslash{}quranayah[14][1]}{\quran\basmalah\quranayah[14][1]}}
+    \centerline{\hbox{\mx{quranayah[Ibrahim][1]}{\quranayah[Ibrahim][1]}\hfill
+    \mx{basmalah\textbackslash{}quranayah[14][1]}{\quran\basmalah\quranayah[14][1]}}}
 
 \begin{declcs}{quranayah}\oarg{l}\oarg{m-n}
 \end{declcs}
@@ -188,8 +193,8 @@ the transliteration of  l$^{th}$ Surah's name, see table~\ref{tab1}.
 \textit{n} is diffirent by every Surah and it relies on the number of the Surah's verses. 
 \textit{m} should be between 1 and a number less than \textit{n}. 
 
-    \hbox{\mx{quranayah[Ash-Shura][22-26]}{\quranayah[Ash-Shura][22-26]}\hfill
-    \mx{quranayah[42][22-26]}{\quranayah[42][22-26]}}   
+    \centerline{\hbox{\mx{quranayah[Ash-Shura][22-26]}{\quranayah[Ash-Shura][22-26]}\hfill
+    \mx{quranayah[42][22-26]}{\quranayah[42][22-26]}}}
 
 \subsection{Page/Pages}
 \begin{declcs}{quranpage}\oarg{n}
@@ -201,9 +206,9 @@ Typeset the \textit{n}$^{th}$ page of Quran and the macro below typeset \textit{
 \end{declcs}
 The numbers should be between $1$ to $604$, based on Uthmani text. 
 
-    \hboxR{\mx{quranpage*[249]}{\quranpage*[249]}
+    \centerline{\hboxR{\mx{quranpage*[249]}{\quranpage*[249]}
     \hfill
-    \mx{quranpage*[250]}{\quranpage*[250]}} 
+    \mx{quranpage*[250]}{\quranpage*[250]}}}
     
     * starred version of macros are explained in page~\pageref{starred}; concisely it means
     typesetting that part of the Holy Quran in one paragraph. 
@@ -335,9 +340,9 @@ This macro returns the tranliteration of \textit{m}$^{th}$ Surah.
 \end{declcs}
 This macro returns the arabic name of \textit{m}$^{th}$ Surah.
 
-    \hbox{\mx{surahname[19]}{\surahname[19]}
+    \centerline{\hbox{\mx{surahname[19]}{\surahname[19]}
     \hfill
-    \mx{surahname*[19]}{\quran\surahname*[19]}} 
+    \mx{surahname*[19]}{\quran\surahname*[19]}}}
     
 \subsection{Basmalah}
 \begin{declcs}{basmalah}
@@ -371,6 +376,14 @@ causes that Ayat number will be printed.
 
     \centerline{\mxf{ToggleAyahNumber\textbackslash{}quransurah*[89]}
     {\ToggleAyahNumber\quransurah*[89]}}  
+    
+By default, the package typesets the text of The Holy Quran in simple script, but if you prefer the Uthmani script you can use \texttt{uthmani} \marginpar{uthmani} 
+option. Compare the following text to figure out the differences between default and uthmani script.
+    \centerline{\hbox{
+    \mx{quransurah*[1] (default)}{\includegraphics{defaulttext.pdf}}
+    \hfill
+    \mx{quransurah*[1] (uthmani)}{\includegraphics{uthmanitext.pdf}}
+    }}
     
 \section{Acknowledgment}
 At first, I should appreciate Vafa Khaligi by preparing such adorable packages --\xpackage{bidi} and 
