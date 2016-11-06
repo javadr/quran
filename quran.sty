@@ -17,14 +17,16 @@
 %% by Seiied-Mohammad-Javad Razavian..
 %% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
 %% 
-%% This work consists of the files quran.sty and quran-doc.tex
-%% and quran-doc.pdf.%% 
+%% This work consists of the files quran.sty, qurantext-simple.def, qurantext-uthmani.def, 
+%% quran-doc.tex, quran-doc.pdf, quran.png , defaulttext.pdf, and uthmanitext.pdf.
 %%
 %% to one who has devoted his life to Quran
 %%
 %% Change Log
+%% ver 1.21 ## November 7th, 2016
+%% some minor bugs in uploading to CTAN
 %% ver 1.2  ## November 5th, 2016
-%% Supports Uthmani script with uthmani option.
+%% Supports Uthmani script via uthmani option.
 %% This option asked by one of the package's user.
 %% ver 1.14  ## May 15th, 2016
 %% Some improvements in help document.
@@ -74,7 +76,7 @@
 %        #1\else 1\fi}
         
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{quran}[2016/11/05 v1.2 An easy way to typeset the whole or any part of The Holy Quran]
+\ProvidesPackage{quran}[2016/11/07 v1.21 An easy way to typeset the whole or any part of The Holy Quran]
 \RequirePackage{biditools}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
@@ -86,7 +88,7 @@
 
 \DeclareOption{nopar}{\let\qt@par\relax}
 \DeclareOption{nonumber}{\def\qt@no#1{\relax}}
-\DeclareOption{uthmani}{\qt@uthmanitrue\typeout{booooq}}
+\DeclareOption{uthmani}{\qt@uthmanitrue}
 \ProcessOptions
 
 \bidi@newrobustcmd\surahname{%    
