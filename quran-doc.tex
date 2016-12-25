@@ -1,4 +1,5 @@
 \documentclass{ltxdoc}
+
 %\usepackage{caption}
 \usepackage{forloop}
 \usepackage{pgf}
@@ -11,7 +12,7 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{fontspec}
-\newfontfamily\quran{Scheherazade}
+\newfontfamily\quran[Script=Arabic]{Scheherazade}
 % because of definition of \XeTeX and \XeLaTeX symbols in bidi, I should undef these macro that are also defined in holtxdoc package. 
 \makeatletter
 \bidi@undef\XeTeX
@@ -73,14 +74,14 @@
 The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{November 7, 2016}
+\date{December 25, 2016}
 
 \begin{document}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.21}
+\centerline{ver 1.25}
 \end{framed}
 
 \tableofcontents
@@ -98,7 +99,7 @@ After loading the package, it writes some information about itself to the
 terminal and to the log file, too. The information is something like:
 
 \begin{lstlisting}[style=BashInputStyle, language=tex]
-Package: quran 2016/05/15 v1.14 An easy way to typeset the whole or any part of The Holy Quran
+Package: quran 2016/12/25 v1.25 An easy way to typeset the whole or any part of The Holy Quran
 \end{lstlisting}
 
 \section{Typesetting The Holy Quran}
@@ -394,19 +395,30 @@ group who tested and commented this work in advance.
 
 \section{Frequently Asked Questions}
     \subsection{What is the best font for typesetting quran text?}
-    We strongly recommend you to use "Scheherazade" font.%
-    \footnote{\url{http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=scheherazade}} 
+    We strongly recommend you to use "Scheherazade"%
+    \footnote{\url{http://software.sil.org/scheherazade/}} 
+    and "Amiri"% 
+    \footnote{\url{http://www.amirifont.org/}} fonts.
+
     Scheherazade is released under the SIL Open Font License (OFL), version 1.1. Copyright (c) 2004-2015,
     SIL International (http://scripts.sil.org/) with Reserved Font Names "Scheherazade" and "SIL". Therefore
     you can freely download it. 
     All examples in this document use this font.  
     
+    Amiri is a classical Arabic typeface in Naskh style for typesetting books and other running text.
+    Amiri is a revival of the beautiful typeface pioneered in early 20th century by Bulaq Press in Cairo, 
+    also known as Amiria Press, after which the font is named.
+    Amiri is a free, open source project that everyone is encouraged to use and modify.
+    
     \subsection{How to use \xpackage{quran} package?}
     As you've noticed, for typesetting quran text you need a package that can typeset text
-    in RTL mode in additon to using UTF8 fonts. The \xpackage{polyglossia}, 
+    in RTL mode in additon to using UTF8 fonts, because \xpackage{quran} draws its text from a 
+    unicoded databases. The \xpackage{polyglossia}, 
     \xpackage{fontspec}, and \xpackage{bidi} will do that for you. 
     You can also use \xpackage{xepersian} that depends on \xpackage{fontspec}, too. 
-    Below, we demonstrated two examples for both approaches:
+    Another choice is \xpackage{arabluatex} that just works with \LuaLaTeX{} while former 
+    choices work with \XeLaTeX. \xpackage{arabluatex}  uses Amiri font by default. 
+    The following demonstrates  examples for all three approaches:
 
 \begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with polyglossia{,} 
 fontspec{,} and bidi"]
@@ -448,6 +460,21 @@ fontspec{,} and bidi"]
 
 \end{document}
 \end{lstlisting}  
+
+\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with arabluatex"]
+\documentclass[12pt]{article}
+
+\usepackage{arabluatex} % for typesetting Arabic text in Rigth-To-Left direction
+\usepackage{quran}
+
+\begin{document}
+
+\begin{txarab}
+    \quransurah
+\end{txarab}
+
+\end{document}
+\end{lstlisting} 
     
     \subsection{How to set quran default font?}
         If you want to automatically change the font of quran text in your document, you 

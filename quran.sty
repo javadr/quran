@@ -23,6 +23,14 @@
 %% to one who has devoted his life to Quran
 %%
 %% Change Log
+%% ver 1.25 ## December 25th, 2016
+%% manual update
+%% ver 1.241 ## December 15th, 2016
+%% some minor bugs in manual
+%% ver 1.24 ## November 12th, 2016
+%% manual update + waqf symbol wes missed the penultimate version of uthmani script.
+%% ver 1.22 ## November 8th, 2016
+%% just adding source of two pdf files to the installation.
 %% ver 1.21 ## November 7th, 2016
 %% some minor bugs in uploading to CTAN
 %% ver 1.2  ## November 5th, 2016
@@ -69,14 +77,8 @@
 %% ver 0.1 
 %% initial commit
 
-%%% below macro is gotten from http://tex.stackexchange.com/questions/7180/testing-for-number
-%%% it's really nice macro.
-%\def\isnum#1{%test wether input is number or not! in my case I should return 1 for appendix chapters.
-%  \if!\ifnum9<1#1!\fi
-%        #1\else 1\fi}
-        
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{quran}[2016/11/07 v1.21 An easy way to typeset the whole or any part of The Holy Quran]
+\ProvidesPackage{quran}[2016/12/25 v1.25 An easy way to typeset the whole or any part of The Holy Quran]
 \RequirePackage{biditools}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
@@ -98,7 +100,7 @@
 \def\@@surahname[#1]{%
 \ifcase#1 {}\or الفاتحة\or البقرة\or آل عمران\or النساء\or المائدة\or الأنعام\or الأعراف\or الأنفال\or التوبة\or يونس\or هود\or يوسف\or الرعد\or إبراهيم\or الحجر\or النحل\or الإسراء\or الكهف\or مريم\or طه\or الأنبياء\or الحج\or المؤمنون\or النور\or الفرقان\or الشعراء\or النمل\or القصص\or العنكبوت\or الروم\or لقمان\or السجدة\or الأحزاب\or سبأ\or فاطر\or يس\or الصافات\or ص\or الزمر\or غافر\or فصلت\or الشورى\or الزخرف\or الدخان\or الجاثية\or الأحقاف\or محمد\or الفتح\or الحجرات\or ق\or الذاريات\or الطور\or النجم\or القمر\or الرحمن\or الواقعة\or الحديد\or المجادلة\or الحشر\or الممتحنة\or الصف\or الجمعة\or المنافقون\or التغابن\or الطلاق\or التحريم\or الملك\or القلم\or الحاقة\or المعارج\or نوح\or الجن\or المزمل\or المدثر\or القيامة\or الإنسان\or المرسلات\or النبأ\or النازعات\or عبس\or التكوير\or الإنفطار\or المطففين\or الانشقاق\or البروج\or الطارق\or الأعلى\or الغاشية\or الفجر\or البلد\or الشمس\or الليل\or الضحى\or الشرح\or التين\or العلق\or القدر\or البينة\or الزلزلة\or العاديات\or القارعة\or التكاثر\or العصر\or الهمزة\or الفيل\or قريش\or الماعون\or الكوثر\or الكافرون\or النصر\or المسد\or الإخلاص\or الفلق\or الناس\else\relax\fi}
 \def\@surahname[#1]{%
-\ifcase#1\or Al-Fatiha\or Al-Baqara\or Aal-e-Imran\or An-Nisa\or Al-Maeda\or Al-Anaam\or Al-Araf\or Al-Anfal\or At-Taubah\or Yunus\or Hud\or Yusuf\or Ar-Rad\or Ibrahim\or Al-Hijr\or An-Nahl\or Al-Isra\or Al-Kahf\or Maryam\or Taha\or Al-Anbiya\or Al-Hajj\or Al-Mumenoon\or An-Noor\or Al-Furqan\or Ash-Shuara\or An-Naml\or Al-Qasas\or Al-Ankaboot\or Ar-Room\or Luqman\or As-Sajda\or Al-Ahzab\or Saba\or Fatir\or Ya Seen\or As-Saaffat\or Sad\or Az-Zumar\or Ghafir\or Fussilat\or Ash-Shura\or Az-Zukhruf\or Ad-Dukhan\or Al-Jathiya\or Al-Ahqaf\or Muhammad\or Al-Fath\or Al-Hujraat\or Qaf\or Adh-Dhariyat\or At-tur\or An-Najm\or Al-Qamar\or Al-Rahman\or Al-Waqia\or Al-Hadid\or Al-Mujadila\or Al-Hashr\or Al-Mumtahina\or As-Saff\or Al-Jumua\or Al-Munafiqoon\or At-Taghabun\or At-Talaq\or At-Tahrim\or Al-Mulk\or Al-Qalam\or Al-Haaqqa\or Al-Maarij\or Nooh\or Al-Jinn\or Al-Muzzammil\or Al-Muddathir\or Al-Qiyama\or Al-Insan\or Al-Mursalat\or An-Naba\or An-Naziat\or Abasa\or At-Takwir\or AL-Infitar\or Al-Mutaffifin\or Al-Inshiqaq\or Al-Burooj\or At-Tariq\or Al-Ala\or Al-Ghashiya\or Al-Fajr\or Al-Balad\or Ash-Shams\or Al-Lail\or Ad-Dhuha\or Al-Inshirah\or At-Tin\or Al-Alaq\or Al-Qadr\or Al-Bayyina\or Al-Zalzala\or Al-Adiyat\or Al-Qaria\or At-Takathur\or Al-Asr\or Al-Humaza\or Al-fil\or Quraish\or Al-Maun\or Al-Kauther\or Al-Kafiroon\or An-Nasr\or Al-Masadd\or Al-Ikhlas\or Al-Falaq\or An-Nas\else\relax\fi}
+\ifcase#1\or Al-Fatiha\or Al-Baqara\or Aal-e-Imran\or An-Nisa\or Al-Maeda\or Al-Anaam\or Al-Araf\or Al-Anfal\or At-Taubah\or Yunus\or Hud\or Yusuf\or Ar-Rad\or Ibrahim\or Al-Hijr\or An-Nahl\or Al-Isra\or Al-Kahf\or Maryam\or Taha\or Al-Anbiya\or Al-Hajj\or Al-Mumenoon\or An-Noor\or Al-Furqan\or Ash-Shuara\or An-Naml\or Al-Qasas\or Al-Ankaboot\or Ar-Room\or Luqman\or As-Sajda\or Al-Ahzab\or Saba\or Fatir\or Ya-Seen\or As-Saaffat\or Sad\or Az-Zumar\or Ghafir\or Fussilat\or Ash-Shura\or Az-Zukhruf\or Ad-Dukhan\or Al-Jathiya\or Al-Ahqaf\or Muhammad\or Al-Fath\or Al-Hujraat\or Qaf\or Adh-Dhariyat\or At-tur\or An-Najm\or Al-Qamar\or Al-Rahman\or Al-Waqia\or Al-Hadid\or Al-Mujadila\or Al-Hashr\or Al-Mumtahina\or As-Saff\or Al-Jumua\or Al-Munafiqoon\or At-Taghabun\or At-Talaq\or At-Tahrim\or Al-Mulk\or Al-Qalam\or Al-Haaqqa\or Al-Maarij\or Nooh\or Al-Jinn\or Al-Muzzammil\or Al-Muddathir\or Al-Qiyama\or Al-Insan\or Al-Mursalat\or An-Naba\or An-Naziat\or Abasa\or At-Takwir\or AL-Infitar\or Al-Mutaffifin\or Al-Inshiqaq\or Al-Burooj\or At-Tariq\or Al-Ala\or Al-Ghashiya\or Al-Fajr\or Al-Balad\or Ash-Shams\or Al-Lail\or Ad-Dhuha\or Al-Inshirah\or At-Tin\or Al-Alaq\or Al-Qadr\or Al-Bayyina\or Al-Zalzala\or Al-Adiyat\or Al-Qaria\or At-Takathur\or Al-Asr\or Al-Humaza\or Al-Fil\or Quraish\or Al-Maun\or Al-Kauther\or Al-Kafiroon\or An-Nasr\or Al-Masadd\or Al-Ikhlas\or Al-Falaq\or An-Nas\else\relax\fi}
 
 %% makes some macros for surah name to convert them to their original number in surah list.
     \newcount\qt@tempcount \qt@tempcount=1%
