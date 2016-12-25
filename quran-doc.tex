@@ -81,7 +81,7 @@ The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.25}
+\centerline{ver 1.251}
 \end{framed}
 
 \tableofcontents
@@ -415,14 +415,15 @@ group who tested and commented this work in advance.
     in RTL mode in additon to using UTF8 fonts, because \xpackage{quran} draws its text from a 
     unicoded databases. The \xpackage{polyglossia}, 
     \xpackage{fontspec}, and \xpackage{bidi} will do that for you. 
-    You can also use \xpackage{xepersian} that depends on \xpackage{fontspec}, too. 
-    Another choice is \xpackage{arabluatex} that just works with \LuaLaTeX{} while former 
-    choices work with \XeLaTeX. \xpackage{arabluatex}  uses Amiri font by default. 
-    The following demonstrates  examples for all three approaches:
+    You can also use \xpackage{xepersian} that relies on \xpackage{fontspec}, too. 
+    Another choices are \xpackage{arabxetex} and \xpackage{arabluatex} that the latter just 
+    works with  \LuaLaTeX{} while former 
+    ways work with \XeLaTeX. \xpackage{arabxetex} and \xpackage{arabluatex}  use Amiri font by default. 
+    The following demonstrates  examples for all four approaches:
 
 \begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with polyglossia{,} 
 fontspec{,} and bidi"]
-\documentclass[12pt]{article}
+\documentclass{article}
 
 \usepackage{quran}
 
@@ -446,7 +447,7 @@ fontspec{,} and bidi"]
     
 
 \begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with xepersian"]
-\documentclass[12pt]{article}
+\documentclass{article}
 
 \usepackage{quran}
 
@@ -461,8 +462,23 @@ fontspec{,} and bidi"]
 \end{document}
 \end{lstlisting}  
 
+\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with arabxetex"]
+\documentclass{article}
+
+\usepackage{arabxetex} % for typesetting Arabic text in Rigth-To-Left direction
+\usepackage{quran}
+
+\begin{document}
+
+\begin{arab}[utf]
+    \quransurah
+\end{arab}
+
+\end{document}
+\end{lstlisting} 
+
 \begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with arabluatex"]
-\documentclass[12pt]{article}
+\documentclass{article}
 
 \usepackage{arabluatex} % for typesetting Arabic text in Rigth-To-Left direction
 \usepackage{quran}
