@@ -1,9 +1,7 @@
 \documentclass{ltxdoc}
 
-%\usepackage{caption}
 \usepackage{forloop}
 \usepackage{pgf}
-%\usepackage{pgfcalendar}
 \usepackage{framed}
 \usepackage{holtxdoc}
 \usepackage{url}
@@ -13,6 +11,14 @@
 \usetikzlibrary{calc}
 \usepackage{fontspec}
 \newfontfamily\quran[Script=Arabic]{Scheherazade}
+\hypersetup{%
+  plainpages=false,%
+  bookmarksnumbered,%
+  pdftitle={The quran Package},%
+  pdfkeywords={quran, surah, ayah, juz, hizb, ruku, manzil},%
+  pdfauthor={Seiied-Mohammad-Javad Razavian},%
+  baseurl={http://mirrors.ctan.org/macros/xetex/latex/quran/doc/quran-doc.pdf},%
+}
 % because of definition of \XeTeX and \XeLaTeX symbols in bidi, I should undef these macro that are also defined in holtxdoc package. 
 \makeatletter
 \bidi@undef\XeTeX
@@ -74,14 +80,14 @@
 The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{December 25, 2016}
+\date{August 22, 2017}
 
 \begin{document}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.251}
+\centerline{ver 1.26}
 \end{framed}
 
 \tableofcontents
@@ -512,6 +518,11 @@ fontspec{,} and bidi"]
 \preto\qurantext{\quran}
 \end{lstlisting}
 
+    By setting default font as above, if you want to use \cs{quratext}, you have to enclose it in curly braces. If you don't, 
+    it will affect the following text font. 
+\begin{lstlisting}[style=BashInputStyle]
+{\qurantext[x-y]}
+\end{lstlisting}    
     \subsection{How to typeset a portion of the Holy Quran in one paragraph
     with no ayah number without affecting the behaviour of \xpackage{quran} package 
     in other cases?}
