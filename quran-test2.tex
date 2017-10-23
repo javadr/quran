@@ -1,12 +1,14 @@
 \documentclass[12pt]{article}
 
-\usepackage{quran}
-%%% for typesetting Persian/Arabic text in Rigth-To-Left direction
-\usepackage{xepersian}
-\settextfont{Scheherazade}
+\usepackage{arabxetex} % for typesetting Arabic text in Rigth−To−Left direction
+\usepackage[translt,]{quran}
 
-\begin{document} 
-\quranayah[2][10-20]
+\begin{document}
 
-\quranayah*[2][10-20]
+\begin{arab}[utf]
+\quransurah
+\end{arab}
+
+\quransurahlt
+
 \end{document}

@@ -5,7 +5,7 @@
 \usepackage{framed}
 \usepackage{holtxdoc}
 \usepackage{url}
-\usepackage{quran}
+\usepackage[translt]{quran}
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -80,14 +80,14 @@
 The \xpackage{quran} Package\footnote{to one who has devoted his life to Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{August 22, 2017}
+\date{\qurandate}
 
 \begin{document}
 \maketitle
 
 \begin{framed}
 This manual is incomplete and the package is under development. \par 
-\centerline{ver 1.261}
+\centerline{\quranversion}
 \end{framed}
 
 \tableofcontents
@@ -108,7 +108,7 @@ terminal and to the log file, too. The information is something like:
 Package: quran 2017/08/22 v1.261 An easy way to typeset the whole or any part of The Holy Quran
 \end{lstlisting}
 
-\section{Typesetting The Holy Quran}
+\section{Typesetting The Holy Quran}\label{sec:qurantypesetting}
 For typesetting any parts or whole of The Holy Quran there are several macros in the package.
 
 \subsection{Surah/Sovar}
@@ -393,6 +393,29 @@ option. Compare the following text to figure out the differences between default
     \mx{quransurah*[1] (uthmani)}{\includegraphics{uthmanitext.pdf}}
     }}
     
+By version 1.3, the package can typeset the transliteration of The Holy Quran. 
+This option will be useful for whom doesn't really know how to read the arabic text. By loading \texttt{translt}
+option all macros that defined in section~\ref{sec:qurantypesetting} will have an ``\texttt{lt}" version. In other words, 
+this will add the following macros:
+\marginpar{translt} 
+
+\begin{itemize}
+
+    \item \cs{quransurahlt}
+    \item \cs{quranayahlt}
+    \item \cs{quranpagelt}
+    \item \cs{quranjuzlt}
+    \item \cs{quranhizblt}
+    \item \cs{quranquarterlt}
+    \item \cs{quranrukult}
+    \item \cs{quranmanzillt}
+    \item \cs{qurantextlt}
+\end{itemize}
+
+    \centerline{\mx{quransurahlt[108]}{\setLTR\quransurahlt[108]}
+    \hfill
+    \mx{quransurah[108]}{\quransurah[108]}}
+
 \section{Acknowledgment}
 At first, I should appreciate Vafa Khaligi by preparing such adorable packages --\xpackage{bidi} and 
 \xpackage{xepersian}. Secondly, the costly \url{http://tanzil.net/} for providing the text of The Holy Quran that 

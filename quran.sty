@@ -23,6 +23,8 @@
 %% to one who has devoted his life to Quran
 %%
 %% Change Log
+%% ver 1.3 ## October 22th, 2017
+%% Transliteration support, now all macros have an ``lt" version for typesetting transliteration of the original macros.
 %% ver 1.261 ## August 22th, 2017
 %% typo in version number. 
 %% ver 1.26 ## August 22th, 2017
@@ -82,14 +84,16 @@
 %%  Stack overflow solved by a nonrecursive function
 %% ver 0.1 
 %% initial commit
-
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{quran}[2017/08/22 v1.261 An easy way to typeset the whole or any part of The Holy Quran]
+\def\qurandate{2017/10/22}
+\def\quranversion{ver 1.3}
+\ProvidesPackage{quran}[\qurandate\space \quranversion\space An easy way to typeset the whole or any part of The Holy Quran]
 \RequirePackage{biditools}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
 \newif\ifqt@uthmani%
 \newif\ifqt@basmalah%
+\newif\ifqt@translt%
 %
 \def\qt@par{\par}%
 \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}%
@@ -98,6 +102,7 @@
 \DeclareOption{nopar}{\let\qt@par\relax}
 \DeclareOption{nonumber}{\def\qt@no#1{\relax}}
 \DeclareOption{uthmani}{\qt@uthmanitrue}
+\DeclareOption{translt}{\qt@translttrue}
 \ProcessOptions
 %
 \bidi@newrobustcmd\surahname{%    
@@ -148,10 +153,6 @@
     \repeat%
 }%
 %
-\bidi@newrobustcmd\qurantext{%
-\@ifstar\@@qurantext\@qurantext%
-}%
-%
 \bidi@newrobustcmd\ChangeQtPar{%
   \ifx\qt@par\relax%
     \def\qt@par{\par}%
@@ -174,6 +175,9 @@
   \else%
     \def\qt@no##1{\relax}%
   \fi%
+}%
+\bidi@newrobustcmd\qurantext{%
+\@ifstar\@@qurantext\@qurantext%
 }%
 %
 \bidi@newrobustcmd\@@qurantext[1][\qt@default]{%
@@ -219,7 +223,7 @@
 \newcounter{qt@end}%
 %
 \bidi@newrobustcmd\quransurah{%
-  \@ifstar\@@quransurah\@quransurah
+  \@ifstar\@@quransurah\@quransurah%
 }%
 %
 \bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlas
@@ -335,7 +339,7 @@
 }%
 %
 \bidi@newrobustcmd\quranjuz{%
-  \@ifstar\@@quranjuz\@quranjuz
+  \@ifstar\@@quranjuz\@quranjuz%
 }%
 %
 \def\@@quranjuz[#1]{%
@@ -362,7 +366,7 @@
 }%
 %
 \bidi@newrobustcmd\quranpage{%
-  \@ifstar\@@quranpage\@quranpage
+  \@ifstar\@@quranpage\@quranpage%
 }%
 \def\@@quranpage[#1]{%
   \begingroup%
@@ -388,7 +392,7 @@
 }%
 %
 \bidi@newrobustcmd\quranquarter{%
-  \@ifstar\@@quranquarter\@quranquarter
+  \@ifstar\@@quranquarter\@quranquarter%
 }%
 \def\@@quranquarter[#1]{%
   \begingroup%
@@ -413,7 +417,7 @@
 }%
 %
 \bidi@newrobustcmd\quranruku{%
-  \@ifstar\@@quranruku\@quranruku
+  \@ifstar\@@quranruku\@quranruku%
 }%
 \def\@@quranruku[#1]{%
   \begingroup%
@@ -439,7 +443,7 @@
 }%
 %
 \bidi@newrobustcmd\quranhizb{%
-  \@ifstar\@@quranhizb\@quranhizb
+  \@ifstar\@@quranhizb\@quranhizb%
 }%
 \def\@@quranhizb[#1]{%
   \begingroup%
@@ -466,7 +470,7 @@
 }%
 %
 \bidi@newrobustcmd\quranmanzil{%
-  \@ifstar\@@quranmanzil\@quranmanzil
+  \@ifstar\@@quranmanzil\@quranmanzil%
 }
 %
 \def\@@quranmanzil[#1]{%
@@ -530,4 +534,8 @@
     \input{qurantext-simple.def}%
 \fi%
 %%
+\ifqt@translt%
+    \input{qurantext-en.transliteration.def}%
+    \input{quran-translt.def}
+\fi%
 %% End of file `quran.sty'.

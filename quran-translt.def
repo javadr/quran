@@ -1,0 +1,156 @@
+\let\q@b\textbf
+\let\q@i\textit
+\let\q@u\underline
+\let\qt@doqt@orig\qt@doqt
+\let\ToggleBasmalah@orig\ToggleBasmalah
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\basmalahlt{Bismi All\q@u{a}hi a\q@b{l}rra\q@u{h}m\q@u{a}ni a\q@b{l}rra\q@u{h}eem\q@b{i} \qt@par}
+\bidi@newrobustcmd\ToggleBasmalahlt{%
+  \ifx\basmalahlt\relax%
+    \def\basmalahlt{Bismi All\q@u{a}hi a\q@b{l}rra\q@u{h}m\q@u{a}ni a\q@b{l}rra\q@u{h}eem\q@b{i} \qt@par}
+  \else%
+    \let\basmalahlt\relax%
+  \fi%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qt@dolt{%
+    \addtocounter{qt@count}{1}%
+    \loop%
+        \csname qurantrans@lt@\roman{qt@count}\endcsname%
+        \ifnum\value{qt@count}<\qt@max\relax%
+        { }% an extra space between verses
+        \qt@par%
+        \addtocounter{qt@count}{1}%
+    \repeat%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qurantextlt{%
+    \@ifstar\@@qurantextlt\@qurantextlt%
+}%
+\bidi@newrobustcmd\@@qurantextlt[1][\qt@default]{%
+    \let\qt@doqt\qt@dolt%
+    \@@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@qurantextlt[1][\qt@default]{%
+    \let\qt@doqt\qt@dolt%
+    \@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quransurahlt{%
+    \@ifstar\@@quransurahlt\@quransurahlt%
+}%
+\bidi@newrobustcmd\@@quransurahlt[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@quransurahlt[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dolt%
+    \@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranayahlt{%
+    \@ifstar\@@quranayahlt\@quranayahlt%
+}%
+\def\@@quranayahlt[#1][#2]{%
+    \let\qt@doqt\qt@dolt%
+    \let\ToggleBasmalah\ToggleBasmalahlt%
+    \@@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%
+}%
+\def\@quranayahlt[#1][#2]{%
+    \let\qt@doqt\qt@dolt%
+    \let\ToggleBasmalah\ToggleBasmalahlt%    
+    \@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranjuzlt{%
+    \@ifstar\@@quranjuzlt\@quranjuzlt%
+}%
+\def\@@quranjuzlt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranjuzlt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranpagelt{%
+    \@ifstar\@@quranpagelt\@quranpagelt%
+}%
+\def\@@quranpagelt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranpagelt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranquarterlt{%
+  \@ifstar\@@quranquarterlt\@quranquarterlt%
+}%
+\def\@@quranquarterlt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranquarterlt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranrukult{%
+    \@ifstar\@@quranrukult\@quranrukult%
+}%
+\def\@@quranrukult[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranrukult[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranhizblt{%
+    \@ifstar\@@quranhizblt\@quranhizblt%
+}%
+\def\@@quranhizblt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranhizblt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranmanzillt{%
+    \@ifstar\@@quranmanzillt\@quranmanzillt%
+}
+\def\@@quranmanzillt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranmanzillt[#1]{%
+    \let\qt@doqt\qt@dolt%
+    \@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
