@@ -1,0 +1,153 @@
+\let\qt@doqt@orig\qt@doqt
+\let\ToggleBasmalah@orig\ToggleBasmalah
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
+\bidi@newrobustcmd\ToggleBasmalahde{%
+  \ifx\basmalahlt\relax%
+    \def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
+  \else%
+    \let\basmalahlt\relax%
+  \fi%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qt@dode{%
+    \addtocounter{qt@count}{1}%
+    \loop%
+        \csname qurantrans@de@\roman{qt@count}\endcsname%
+        \ifnum\value{qt@count}<\qt@max\relax%
+        { }% an extra space between verses
+        \qt@par%
+        \addtocounter{qt@count}{1}%
+    \repeat%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qurantextde{%
+    \@ifstar\@@qurantextde\@qurantextde%
+}%
+\bidi@newrobustcmd\@@qurantextde[1][\qt@default]{%
+    \let\qt@doqt\qt@dode%
+    \@@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@qurantextde[1][\qt@default]{%
+    \let\qt@doqt\qt@dode%
+    \@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quransurahde{%
+    \@ifstar\@@quransurahde\@quransurahde%
+}%
+\bidi@newrobustcmd\@@quransurahde[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dode%
+    \@@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@quransurahde[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dode%
+    \@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranayahde{%
+    \@ifstar\@@quranayahde\@quranayahde%
+}%
+\def\@@quranayahde[#1][#2]{%
+    \let\qt@doqt\qt@dode%
+    \let\ToggleBasmalah\ToggleBasmalahde%
+    \@@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%
+}%
+\def\@quranayahde[#1][#2]{%
+    \let\qt@doqt\qt@dode%
+    \let\ToggleBasmalah\ToggleBasmalahde%    
+    \@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranjuzde{%
+    \@ifstar\@@quranjuzde\@quranjuzde%
+}%
+\def\@@quranjuzde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranjuzde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranpagede{%
+    \@ifstar\@@quranpagede\@quranpagede%
+}%
+\def\@@quranpagede[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranpagede[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranquarterde{%
+  \@ifstar\@@quranquarterde\@quranquarterde%
+}%
+\def\@@quranquarterde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranquarterde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranrukulde{%
+    \@ifstar\@@quranrukulde\@quranrukulde%
+}%
+\def\@@quranrukulde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranrukulde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranhizbde{%
+    \@ifstar\@@quranhizbde\@quranhizbde%
+}%
+\def\@@quranhizbde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranhizbde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranmanzilde{%
+    \@ifstar\@@quranmanzilde\@quranmanzilde%
+}
+\def\@@quranmanzilde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranmanzilde[#1]{%
+    \let\qt@doqt\qt@dode%
+    \@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%

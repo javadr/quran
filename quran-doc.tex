@@ -5,7 +5,8 @@
 \usepackage{framed}
 \usepackage{holtxdoc}
 \usepackage{url}
-\usepackage[translt]{quran}
+\usepackage{addlines}
+\usepackage[trans={lt, de, en, fa}]{quran}
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -27,6 +28,8 @@
 \usepackage{bidi}
 \makeatletter
 \bidi@preto\qurantext{\quran}
+\bidi@BeforeBeginEnvironment{declcs}{\vspace*{-4mm}}
+%\bidi@AfterEndEnvironment{declcs}{\vspace{-2mm}}
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,9 +97,14 @@ This manual is incomplete and the package is under development. \par
 \newpage
 
 \section{Introduction}
-This package is prepared for typesetting the Holy Quran. This work is inspired by \xpackage{lipsum} and 
-\xpackage{ptext} packages, provides several macros for
-typesetting the whole or any parts of the Holy Quran based on its popular division.
+This package is prepared for typesetting The Holy Quran%. 
+, provides several macros for
+typesetting the whole or any parts of The Holy Quran based on its popular division.\footnote{This work is inspired by \xpackage{lipsum} and 
+\xpackage{ptext} packages.}
+%\footnote{
+By recent versions, the package can typeset the translation of The Holy Quran in 
+german, english, and persian. It also can typeset quarn transliteration. 
+%}\addlines[1]
 
 \section{Loading Package}
 You can load the package in the ordinary way
@@ -104,8 +112,8 @@ You can load the package in the ordinary way
 After loading the package, it writes some information about itself to the
 terminal and to the log file, too. The information is something like:
 
-\begin{lstlisting}[style=BashInputStyle, language=tex]
-Package: quran 2017/08/22 v1.261 An easy way to typeset the whole or any part of The Holy Quran
+\begin{lstlisting}[style=BashInputStyle, language=tex, escapechar={|}]
+Package: quran |\qurandate| |\quranversion| An easy way to typeset the whole or any part of The Holy Quran
 \end{lstlisting}
 
 \section{Typesetting The Holy Quran}\label{sec:qurantypesetting}
@@ -224,31 +232,36 @@ The numbers should be between $1$ to $604$, based on Uthmani text.
     \centerline{\mxf{quranpage*[1-3]}{\quranpage*[1-3]}}
     
 \subsection{Juz/Ajza}
+%\vspace{-6mm}
 \begin{declcs}{quranjuz}\oarg{n}
 \end{declcs}
 Above macro typesets the \textit{n}$^{th}$ juz of Quran and below macro typesets m$^{th}$ to n$^{th}$ juzzes of Quran. 
+
 \begin{declcs}{quranjuz}\oarg{m-n}
 \end{declcs}
+%\vspace{-6mm}
 The numbers should be between $1$ to $30$.
 
 \subsection{Hizb/Ahzab}
 Each juz of Quran is devided into two ahzab (group),  so there are 60 ahzab.
 Following macros typeset hizb/ahzab of Quran. 
 
+%\vspace{-6mm}
 \begin{declcs}{quranhizb}\oarg{n}
 \end{declcs}
-\vspace{-12mm}
+%\vspace{-14mm}
 \begin{declcs}{quranhizb}\oarg{m-n}
 \end{declcs}
+
 
 \subsection{Quarter/Quarters}
 Eash hizb of Quran is devided into four quarters, making eight quarters per juz, called maqra. 
 There are 240 of these quarters (of hizb) in the Quran. These maqra are often used as sections for revision when memorizing the Quran.\footnote{\url{https://en.wikipedia.org/wiki/Juz'}}
+
+%\vspace{-6mm}
 \begin{declcs}{quranquarter}\oarg{n}
 \end{declcs}
-
-\vspace{-12mm}
-
+%\vspace{-14mm}
 \begin{declcs}{quranquarter}\oarg{m-n}
 \end{declcs}
 
@@ -291,7 +304,7 @@ Following macros typeset manzil/manazil of Quran.
 
 \begin{declcs}{quranmanzil}\oarg{n}
 \end{declcs}
-\vspace{-12mm}
+%\vspace{-12mm}
 \begin{declcs}{quranmanzil}\oarg{m-n}
 \end{declcs}
 
@@ -314,11 +327,12 @@ Typesets any range of Ayat from the \textit{m}$^{th}$ to \textit{n}$^{th}$ Ayah.
 Using \cs{qurantext} without its optional argument typeset [1-7] --Al-Hamd. To
 change the default text use \cs{setqurantextdefault\{m-n\}}
 \marginpar{\cs{qurantext}}
-\marginpar{\cs{setqurantextdefault\{m-n\}}}
+
 
     \centerline{\mx{qurantext}{\qurantext}}
     
-    below, the default is changed to \cs{setqurantextdefault\{4128-4147\}}:
+    \noindent below, the default is changed to \cs{setqurantextdefault\{4128-4147\}}:
+    \marginpar{\cs{setqurantextdefault\{m-n\}}}
     
     \setqurantextdefault{4128-4147}
     \centerline{\mxf{qurantext*}{\qurantext*}}
@@ -415,6 +429,75 @@ this will add the following macros:
     \centerline{\mx{quransurahlt[108]}{\setLTR\quransurahlt[108]}
     \hfill
     \mx{quransurah[108]}{\quransurah[108]}}
+    
+
+
+By version 1.4, the package can typeset the translation of The Holy Quran in germany, english, and persian. 
+\marginpar{transde}\marginpar{transen}\marginpar{transfa}%
+These options added because of some requests from users who need the translation of The Holy Quran in their languages. 
+By loading \texttt{transde}, \texttt{transen}, and \texttt{transfa} the package can typeset the translation in 
+ germany, english, and persian, respectively.
+
+By loading echo of these options, all macros that defined in section~\ref{sec:qurantypesetting} will have 
+a ``\texttt{de}"/``\texttt{en}"/``\texttt{fa}"  version. In other words, 
+thsee will add the following macros:
+
+
+\begin{multicols}{3}
+\texttt{transde} option:
+\begin{itemize}
+    \item \cs{quransurahde}
+    \item \cs{quranayahde}
+    \item \cs{quranpagede}
+    \item \cs{quranjuzde}
+    \item \cs{quranhizbde}
+    \item \cs{quranquarterde}
+    \item \cs{quranrukude}
+    \item \cs{quranmanzilde}
+    \item \cs{qurantextde}
+\end{itemize}
+
+\texttt{transen} option:
+\begin{itemize}
+    \item \cs{quransurahen}
+    \item \cs{quranayahen}
+    \item \cs{quranpageen}
+    \item \cs{quranjuzen}
+    \item \cs{quranhizben}
+    \item \cs{quranquarteren}
+    \item \cs{quranrukuen}
+    \item \cs{quranmanzilen}
+    \item \cs{qurantexten}
+\end{itemize}
+
+\texttt{transfa} option:
+\begin{itemize}
+    \item \cs{quransurahfa}
+    \item \cs{quranayahfa}
+    \item \cs{quranpagefa}
+    \item \cs{quranjuzfa}
+    \item \cs{quranhizbfa}
+    \item \cs{quranquarterfa}
+    \item \cs{quranrukufa}
+    \item \cs{quranmanzilfa}
+    \item \cs{qurantextfa}
+\end{itemize}
+\end{multicols}
+    
+    All translations are from \url{tanzil.net}. For germen, english, and persian languages the ``Abu Rida Muhammad ibn Ahmad ibn Rassoul", ``Ahmed Ali", ``Mohammad Mahdi Fooladvand" is choosen respectively, by suggestion of the package's users.
+    
+    Another option is defined that simplifies the usage of mutiple translations simultaneously. The \texttt{trans} option can get 
+    any permutation of  ``\texttt{lt}", ``\texttt{de}", ``\texttt{en}", and ``\texttt{fa}". e.g. this document loads the \texttt{quran} 
+    package with ``\texttt{trans=\{lt, de, en, fa\}}" option. 
+    \marginpar{trans}  
+        
+    \centerline{\mx{quransurahfa[108]}{\quransurahfa[108]}
+    \hfill
+    \mx{quransurah[108]}{\quransurah[108]}} 
+    \centerline{\mx{quransurahen[108]}{\setLTR\small\quransurahen[108]}
+    \hfill
+    \mx{quransurahde[108]}{\setLTR\small\quransurahde[108]}}
+    
 
 \section{Acknowledgment}
 At first, I should appreciate Vafa Khaligi by preparing such adorable packages --\xpackage{bidi} and 

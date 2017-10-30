@@ -23,6 +23,10 @@
 %% to one who has devoted his life to Quran
 %%
 %% Change Log
+%% ver 1.4 ## October 28th, 2017
+%% Persian, English, and Duetch tranliteration added and ``fa", ``en", and ``de" version of macros defined for them. 
+%% for using this option, the `transfa`, `transen`, `transde` is defined. There is also a `trans` option that can get the 
+%% `'lt`, `en`, `de`, and `fa` as its value seperated by comma. 
 %% ver 1.3 ## October 22th, 2017
 %% Transliteration support, now all macros have an ``lt" version for typesetting transliteration of the original macros.
 %% ver 1.261 ## August 22th, 2017
@@ -85,25 +89,51 @@
 %% ver 0.1 
 %% initial commit
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2017/10/22}
-\def\quranversion{ver 1.3}
+\def\qurandate{2017/10/28}
+\def\quranversion{ver 1.4}
 \ProvidesPackage{quran}[\qurandate\space \quranversion\space An easy way to typeset the whole or any part of The Holy Quran]
 \RequirePackage{biditools}
+\RequirePackage{xkeyval}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
 \newif\ifqt@uthmani%
 \newif\ifqt@basmalah%
 \newif\ifqt@translt%
+\newif\ifqt@transen%
+\newif\ifqt@transde%
+\newif\ifqt@transfa%
+\newif\if@qt@TestSubString%
+\def\qt@IfSubString #1#2{%
+    \edef\@qt@MainString{#1}%
+    \def\@qt@TestSubS ##1#2##2\@qt@Del{\edef\@qt@TestTemp{##1}}%
+    \expandafter\@qt@TestSubS\@qt@MainString#2\@qt@Del%
+    \ifx\@qt@MainString\@qt@TestTemp%
+        \@qt@TestSubStringfalse%
+    \else%
+        \@qt@TestSubStringtrue%
+    \fi%
+}%
 %
 \def\qt@par{\par}%
 \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}%
 \def\qt@no#1{ #1}%
 %
-\DeclareOption{nopar}{\let\qt@par\relax}
-\DeclareOption{nonumber}{\def\qt@no#1{\relax}}
-\DeclareOption{uthmani}{\qt@uthmanitrue}
-\DeclareOption{translt}{\qt@translttrue}
-\ProcessOptions
+\DeclareOptionX{nopar}{\let\qt@par\relax}
+\DeclareOptionX{nonumber}{\def\qt@no##1{\relax}}
+\DeclareOptionX{uthmani}{\qt@uthmanitrue}
+\DeclareOptionX{translt}{\qt@translttrue}
+\DeclareOptionX{transen}{\qt@transentrue}
+\DeclareOptionX{transde}{\qt@transdetrue}
+\DeclareOptionX{transfa}{\qt@transfatrue}
+\DeclareOptionX{trans}[lt]{%
+    \qt@IfSubString{#1}{lt}\if@qt@TestSubString\qt@translttrue\fi
+    \qt@IfSubString{#1}{de}\if@qt@TestSubString\qt@transdetrue\fi
+    \qt@IfSubString{#1}{en}\if@qt@TestSubString\qt@transentrue\fi
+    \qt@IfSubString{#1}{fa}\if@qt@TestSubString\qt@transfatrue\fi
+}
+\DeclareOptionX*{\PackageWarning{quran}{Unknown option ‘\CurrentOption’}}
+\ProcessOptionsX\relax
+%\ProcessOptions\relax
 %
 \bidi@newrobustcmd\surahname{%    
   \@ifstar\@@surahname\@surahname
@@ -147,7 +177,7 @@
     \loop%
         \csname qurantext@\roman{qt@count}\endcsname%
         \ifnum\value{qt@count}<\qt@max\relax%
-        { }% an extra space between verses
+        \ifx\qt@par\relax{ }\fi% an extra space between verses
         \qt@par%
         \addtocounter{qt@count}{1}%
     \repeat%
@@ -204,17 +234,17 @@
   \else\expandafter\qt@stripmax\qt@max\fi%
 }%
 %
-\newif\if@qt@TestSubString%
-\def\qt@IfSubString #1#2{%
-    \edef\@qt@MainString{#1}%
-    \def\@qt@TestSubS ##1#2##2\@qt@Del{\edef\@qt@TestTemp{##1}}%
-    \expandafter\@qt@TestSubS\@qt@MainString#2\@qt@Del%
-    \ifx\@qt@MainString\@qt@TestTemp%
-        \@qt@TestSubStringfalse%
-    \else%
-        \@qt@TestSubStringtrue%
-    \fi%
-}%
+%\newif\if@qt@TestSubString%
+%\def\qt@IfSubString #1#2{%
+%    \edef\@qt@MainString{#1}%
+%    \def\@qt@TestSubS ##1#2##2\@qt@Del{\edef\@qt@TestTemp{##1}}%
+%    \expandafter\@qt@TestSubS\@qt@MainString#2\@qt@Del%
+%    \ifx\@qt@MainString\@qt@TestTemp%
+%        \@qt@TestSubStringfalse%
+%    \else%
+%        \@qt@TestSubStringtrue%
+%    \fi%
+%}%
 %
 \def\qt@getrange#1--#2;{\def\qt@min{#1}\def\qt@max{#2}}%
 %
@@ -536,6 +566,18 @@
 %%
 \ifqt@translt%
     \input{qurantext-en.transliteration.def}%
-    \input{quran-translt.def}
+    \input{quran-translt.def}%
+\fi%
+\ifqt@transen%
+    \input{qurantext-en.translation.def}%
+    \input{quran-transen.def}%
+\fi%
+\ifqt@transde%
+    \input{qurantext-de.translation.def}%
+    \input{quran-transde.def}%
+\fi%
+\ifqt@transfa%
+    \input{qurantext-fa.translation.def}%
+    \input{quran-transfa.def}%
 \fi%
 %% End of file `quran.sty'.

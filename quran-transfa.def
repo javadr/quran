@@ -1,0 +1,153 @@
+\let\qt@doqt@orig\qt@doqt
+\let\ToggleBasmalah@orig\ToggleBasmalah
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\basmalahfa{به نام خداوند رحمتگر مهربان \qt@par}
+\bidi@newrobustcmd\ToggleBasmalahfa{%
+  \ifx\basmalahlt\relax%
+    \def\basmalahfa{به نام خداوند رحمتگر مهربان \qt@par}
+  \else%
+    \let\basmalahfa\relax%
+  \fi%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qt@dofa{%
+    \addtocounter{qt@count}{1}%
+    \loop%
+        \csname qurantrans@fa@\roman{qt@count}\endcsname%
+        \ifnum\value{qt@count}<\qt@max\relax%
+        { }% an extra space between verses
+        \qt@par%
+        \addtocounter{qt@count}{1}%
+    \repeat%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\qurantextfa{%
+    \@ifstar\@@qurantextfa\@qurantextfa%
+}%
+\bidi@newrobustcmd\@@qurantextfa[1][\qt@default]{%
+    \let\qt@doqt\qt@dofa%
+    \@@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@qurantextfa[1][\qt@default]{%
+    \let\qt@doqt\qt@dofa%
+    \@qurantext[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quransurahfa{%
+    \@ifstar\@@quransurahfa\@quransurahfa%
+}%
+\bidi@newrobustcmd\@@quransurahfa[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\bidi@newrobustcmd\@quransurahfa[1][\qt@surah@default]{%
+    \let\qt@doqt\qt@dofa%
+    \@quransurah[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranayahfa{%
+    \@ifstar\@@quranayahfa\@quranayahfa%
+}%
+\def\@@quranayahfa[#1][#2]{%
+    \let\qt@doqt\qt@dofa%
+    \let\ToggleBasmalah\ToggleBasmalahfa%
+    \@@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%
+}%
+\def\@quranayahfa[#1][#2]{%
+    \let\qt@doqt\qt@dofa%
+    \let\ToggleBasmalah\ToggleBasmalahfa%    
+    \@quranayah[#1][#2]%
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranjuzfa{%
+    \@ifstar\@@quranjuzfa\@quranjuzfa%
+}%
+\def\@@quranjuzfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranjuzfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranjuz[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranpagefa{%
+    \@ifstar\@@quranpagefa\@quranpagefa%
+}%
+\def\@@quranpagefa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranpagefa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranpage[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranquarterfa{%
+  \@ifstar\@@quranquarterfa\@quranquarterfa%
+}%
+\def\@@quranquarterfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranquarterfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranquarter[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranrukufa{%
+    \@ifstar\@@quranrukufa\@quranrukufa%
+}%
+\def\@@quranrukufa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranrukufa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranruku[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranhizbfa{%
+    \@ifstar\@@quranhizbfa\@quranhizbfa%
+}%
+\def\@@quranhizbfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranhizbfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranhizb[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bidi@newrobustcmd\quranmanzilfa{%
+    \@ifstar\@@quranmanzilfa\@quranmanzilfa%
+}
+\def\@@quranmanzilfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+\def\@quranmanzilfa[#1]{%
+    \let\qt@doqt\qt@dofa%
+    \@quranmanzil[#1]%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
