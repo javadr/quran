@@ -23,6 +23,10 @@
 %% to one who has devoted his life to Quran
 %%
 %% Change Log
+%% ver 1.41 ## December 22th, 2017
+%% in previous versions, \quransurah and \quranayah macros were case-sensitive in case of using surah names, 
+%% but by this version both macros are case-insensitive, i.e. there in no diffirences between Al-Fatihda, al-fatiha, al-Fatiha, 
+%% and the other possible combination of lower-uppercase letters.
 %% ver 1.4 ## October 28th, 2017
 %% Persian, English, and Duetch tranliteration added and ``fa", ``en", and ``de" version of macros defined for them. 
 %% for using this option, the `transfa`, `transen`, `transde` is defined. There is also a `trans` option that can get the 
@@ -89,8 +93,8 @@
 %% ver 0.1 
 %% initial commit
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2017/10/28}
-\def\quranversion{ver 1.4}
+\def\qurandate{2017/12/22}
+\def\quranversion{ver 1.41}
 \ProvidesPackage{quran}[\qurandate\space \quranversion\space An easy way to typeset the whole or any part of The Holy Quran]
 \RequirePackage{biditools}
 \RequirePackage{xkeyval}
@@ -147,7 +151,10 @@
 %% makes some macros for surah name to convert them to their original number in surah list.
     \newcount\qt@tempcount \qt@tempcount=1%
     \loop%
-        \expandafter\xdef\csname qt@surah@\@surahname[\qt@tempcount]\endcsname{\the\qt@tempcount}%
+        \edef\qt@tmp{\lowercase{\edef\noexpand\qt@surah@name{\@surahname[\qt@tempcount]}}}%
+        \qt@tmp%
+%        \expandafter\xdef\csname qt@surah@\@surahname[\qt@tempcount]\endcsname{\the\qt@tempcount}%
+        \expandafter\xdef\csname qt@surah@\qt@surah@name\endcsname{\the\qt@tempcount}%
     \ifnum\qt@tempcount<114%
         \advance\qt@tempcount by 1\relax%
     \repeat%
@@ -253,7 +260,7 @@
 \newcounter{qt@end}%
 %
 \bidi@newrobustcmd\quransurah{%
-  \@ifstar\@@quransurah\@quransurah%
+  \@ifstar\@@quransurah\@@@quransurah%
 }%
 %
 \bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlas
@@ -263,8 +270,13 @@
 \bidi@newrobustcmd\@@quransurah[1][\qt@surah@default]{%
   \begingroup
     \ChangeQtPar
-    \@quransurah[#1]
+    \lowercase{\def\qt@arglc{#1}}%
+    \@quransurah[\qt@arglc]%
   \endgroup
+}%
+\bidi@newrobustcmd\@@@quransurah[1][\qt@surah@default]{%
+    \lowercase{\def\qt@arglc{#1}}%
+    \@quransurah[\qt@arglc]%
 }%
 %
 \bidi@newrobustcmd\@quransurah[1][\qt@surah@default]{%
@@ -313,14 +325,19 @@
 }%
 %
 \bidi@newrobustcmd\quranayah{%
-  \@ifstar\@@quranayah\@quranayah%
+  \@ifstar\@@quranayah\@@@quranayah%
 }%
 %
 \def\@@quranayah[#1][#2]{%
   \begingroup%
     \ChangeQtPar%
-    \@quranayah[#1][#2]%
+    \lowercase{\def\qt@arglc{#1}}%
+    \@quranayah[\qt@arglc][#2]%
   \endgroup%
+}%
+\def\@@@quranayah[#1][#2]{%
+    \lowercase{\def\qt@arglc{#1}}
+    \@quranayah[\qt@arglc][#2]
 }%
 %
 \def\@quranayah[#1][#2]{%
