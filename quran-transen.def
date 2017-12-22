@@ -45,7 +45,8 @@
 }%
 \bidi@newrobustcmd\@quransurahen[1][\qt@surah@default]{%
     \let\qt@doqt\qt@doen%
-    \@quransurah[#1]%
+    \lowercase{\def\qt@arglc{#1}}%
+    \@quransurah[\qt@arglc]%
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,9 +61,10 @@
     \let\ToggleBasmalah\ToggleBasmalah@orig%
 }%
 \def\@quranayahen[#1][#2]{%
+    \lowercase{\def\qt@arglc{#1}}%
     \let\qt@doqt\qt@doen%
     \let\ToggleBasmalah\ToggleBasmalahen%    
-    \@quranayah[#1][#2]%
+    \@quranayah[\qt@arglc][#2]%
     \let\qt@doqt\qt@doqt@orig%    
     \let\ToggleBasmalah\ToggleBasmalah@orig%    
 }%
