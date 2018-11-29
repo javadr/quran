@@ -3,10 +3,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
 \bidi@newrobustcmd\ToggleBasmalahde{%
-  \ifx\basmalahlt\relax%
+  \ifx\basmalahde\relax%
     \def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
   \else%
-    \let\basmalahlt\relax%
+    \let\basmalahde\relax%
   \fi%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,6 +1,6 @@
 _____________________
 The quran package
-v1.42
+v1.42b
 
 The package is prepared for typesetting the Holy Quran. This work is inspired
 by lipsum and ptext packages, provides several macros for typesetting the whole or 
@@ -8,12 +8,12 @@ any parts of The Holy Quran based on its popular divisions.
 
 For more information, please see the documentation.
 
-Current version release date: 2017/12/22
+Current version release date: 2018/11/29
 ___________________
 Seiied-Mohammad-Javad Razvian
 javadr@gmail.com
 
-Copyright © 2015-2017
+Copyright © 2015-2018
 It may be distributed and/or modified under the LaTeX Project Public License,
 version 1.3c or higher (your choice). The latest version of
 this license is at: http://www.latex-project.org/lppl.txt

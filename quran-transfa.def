@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \def\basmalahfa{به نام خداوند رحمتگر مهربان \qt@par}
 \bidi@newrobustcmd\ToggleBasmalahfa{%
-  \ifx\basmalahlt\relax%
+  \ifx\basmalahfa\relax%
     \def\basmalahfa{به نام خداوند رحمتگر مهربان \qt@par}
   \else%
     \let\basmalahfa\relax%

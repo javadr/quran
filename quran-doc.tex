@@ -6,11 +6,11 @@
 \usepackage{holtxdoc}
 \usepackage{url}
 \usepackage{addlines}
-\usepackage[trans={lt, de, en, fa}]{quran}
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{fontspec}
+\usepackage[trans={lt, de, en, fa}]{quran}
 \newfontfamily\quran[Script=Arabic]{Scheherazade}
 \hypersetup{%
   plainpages=false,%
@@ -38,7 +38,7 @@
 \def\mcs#1{\lr{\texttt{\textbackslash{}#1}}}
 \def\tt#1{\lr{\texttt{#1}}}
 \lstdefinestyle{BashInputStyle}{
-  language=bash,
+%  language=bash,
   basicstyle=\footnotesize\sffamily,
 %  numbers=left,
 %  numberstyle=\tiny,
@@ -112,7 +112,7 @@ You can load the package in the ordinary way
 After loading the package, it writes some information about itself to the
 terminal and to the log file, too. The information is something like:
 
-\begin{lstlisting}[style=BashInputStyle, language=tex, escapechar={|}]
+\begin{lstlisting}[style=BashInputStyle, escapechar={|}]
 Package: quran |\qurandate| |\quranversion| An easy way to typeset the whole or any part of The Holy Quran
 \end{lstlisting}
 
@@ -210,7 +210,7 @@ the transliteration of  l$^{th}$ Surah's name, see table~\ref{tab1}.
 \textit{m} should be between 1 and a number less than \textit{n}. 
 
 In case of using tranliteration of surah's name, both \cs{quransurah} and \cs{quranayah} are \emph{case-insensitive}, i.e. 
-for example there is no differences between Al-Fatihda, al-fatiha, al-Fatiha, 
+for example there is no differences between Al-Fatiha, al-fatiha, al-Fatiha, 
  and any other possible combinations of lowercase and uppercase letters.
 
     \centerline{\hbox{\mx{quranayah[Ash-Shura][22-26]}{\quranayah[Ash-Shura][22-26]}\hfill
@@ -537,7 +537,7 @@ group who tested and commented this work in advance.
     ways work with \XeLaTeX. \xpackage{arabxetex} and \xpackage{arabluatex}  use Amiri font by default. 
     The following demonstrates  examples for all four approaches:
 
-\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with polyglossia{,} 
+\begin{lstlisting}[style=BashInputStyle, title=``example: with polyglossia{,} 
 fontspec{,} and bidi"]
 \documentclass{article}
 
@@ -562,7 +562,7 @@ fontspec{,} and bidi"]
 \end{lstlisting}    
     
 
-\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with xepersian"]
+\begin{lstlisting}[style=BashInputStyle, title=``example: with xepersian"]
 \documentclass{article}
 
 \usepackage{quran}
@@ -578,7 +578,7 @@ fontspec{,} and bidi"]
 \end{document}
 \end{lstlisting}  
 
-\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with arabxetex"]
+\begin{lstlisting}[style=BashInputStyle, title=``example: with arabxetex"]
 \documentclass{article}
 
 \usepackage{arabxetex} % for typesetting Arabic text in Rigth-To-Left direction
@@ -593,7 +593,7 @@ fontspec{,} and bidi"]
 \end{document}
 \end{lstlisting} 
 
-\begin{lstlisting}[style=BashInputStyle, language=tex, title=``example: with arabluatex"]
+\begin{lstlisting}[style=BashInputStyle, title=``example: with arabluatex"]
 \documentclass{article}
 
 \usepackage{arabluatex} % for typesetting Arabic text in Rigth-To-Left direction
