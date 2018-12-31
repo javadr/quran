@@ -141,7 +141,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \bidi@newrobustcmd\quranmanzilfa{%
     \@ifstar\@@quranmanzilfa\@quranmanzilfa%
-}
+}%
 \def\@@quranmanzilfa[#1]{%
     \let\qt@doqt\qt@dofa%
     \@@quranmanzil[#1]%
