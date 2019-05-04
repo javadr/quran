@@ -111,15 +111,15 @@
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranrukulde{%
-    \@ifstar\@@quranrukulde\@quranrukulde%
+\bidi@newrobustcmd\quranrukude{%
+    \@ifstar\@@quranrukude\@quranrukude%
 }%
-\def\@@quranrukulde[#1]{%
+\def\@@quranrukude[#1]{%
     \let\qt@doqt\qt@dode%
     \@@quranruku[#1]%
     \let\qt@doqt\qt@doqt@orig%    
 }%
-\def\@quranrukulde[#1]{%
+\def\@quranrukude[#1]{%
     \let\qt@doqt\qt@dode%
     \@quranruku[#1]%
     \let\qt@doqt\qt@doqt@orig%    
