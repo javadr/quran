@@ -1,155 +1,116 @@
 \let\qt@doqt@orig\qt@doqt
 \let\ToggleBasmalah@orig\ToggleBasmalah
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
+\def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}%
 \bidi@newrobustcmd\ToggleBasmalahde{%
   \ifx\basmalahde\relax%
-    \def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}
+    \def\basmalahde{Im Namen Allahs, des Allerbarmers, des Barmherzigen! \qt@par}%
   \else%
     \let\basmalahde\relax%
   \fi%
 }%
+\def\Basmalahde{%
+        \begingroup%
+        \let\par\relax%
+        \def\qt@no##1{\relax}%
+        \quranayahde[1][1][1]%
+        \endgroup%
+}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\qt@dode{%
+\DeclareDocumentCommand\qt@dode{ o o }{%
     \addtocounter{qt@count}{1}%
+    \def\@qtexp{}%
     \loop%
-        \csname qurantrans@de@\roman{qt@count}\endcsname%
+        \global\xdef\@qtexp{\@qtexp\csname qurantrans@de@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi\qt@par}%
         \ifnum\value{qt@count}<\qt@max\relax%
-        { }% an extra space between verses
-        \qt@par%
         \addtocounter{qt@count}{1}%
     \repeat%
+    \IfNoValueTF{#1}%
+    {\@qtexp}%true
+    {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
+    \readlist*\qt@words{\@qtexp}%
+        \IfNoValueTF{#2}%
+        {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
+        \foreachitem\qt@word\in\qt@words{%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
+        }%
+        \qt@showitems{\ifdefined\arabicfont\arabicfont\fi\showitems\qt@words}%
+    }%false
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\qurantextde{%
-    \@ifstar\@@qurantextde\@qurantextde%
-}%
-\bidi@newrobustcmd\@@qurantextde[1][\qt@default]{%
+\DeclareDocumentCommand{\qurantextde}{ s O{\qt@default} o t{+} }{%
+    \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
     \let\qt@doqt\qt@dode%
-    \@@qurantext[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\bidi@newrobustcmd\@qurantextde[1][\qt@default]{%
-    \let\qt@doqt\qt@dode%
-    \@qurantext[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
+    \IfBooleanTF{#1}%
+    {\IfBooleanTF{#4}{\qurantext*[#2][#3]+}{\qurantext*[#2][#3]}}%
+    {\IfBooleanTF{#4}{\qurantext[#2][#3]+}{\qurantext[#2][#3]}}%
+    \let\qt@doqt\qt@doqt@orig% 
+    \def\qt@showitems##1{\relax}%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quransurahde{%
-    \@ifstar\@@quransurahde\@quransurahde%
-}%
-\bidi@newrobustcmd\@@quransurahde[1][\qt@surah@default]{%
+\DeclareDocumentCommand\quransurahde{ s O{\qt@surah@default} }{%
     \let\qt@doqt\qt@dode%
-    \@@quransurah[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\bidi@newrobustcmd\@quransurahde[1][\qt@surah@default]{%
-    \let\qt@doqt\qt@dode%
-    \lowercase{\def\qt@arglc{#1}}%
-    \@quransurah[\qt@arglc]%
-    \let\qt@doqt\qt@doqt@orig%    
+    \IfBooleanTF{#1}%
+    {\quransurah*[#2]}%
+    {\quransurah[#2]}%
+    \let\qt@doqt\qt@doqt@orig%        
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranayahde{%
-    \@ifstar\@@quranayahde\@quranayahde%
-}%
-\def\@@quranayahde[#1][#2]{%
+\DeclareDocumentCommand{\quranayahde}{ s o o o t{+} }{%
     \let\qt@doqt\qt@dode%
     \let\ToggleBasmalah\ToggleBasmalahde%
-    \@@quranayah[#1][#2]%
-    \let\qt@doqt\qt@doqt@orig%    
+    \IfBooleanTF{#1}%
+    {\IfBooleanTF{#5}{\quranayah*[#2][#3][#4]+}{\quranayah*[#2][#3][#4]}}%
+    {\IfBooleanTF{#5}{\quranayah[#2][#3][#4]+}{\quranayah[#2][#3][#4]}}%    
+    \let\qt@doqt\qt@doqt@orig%
     \let\ToggleBasmalah\ToggleBasmalah@orig%
 }%
-\def\@quranayahde[#1][#2]{%
-    \lowercase{\def\qt@arglc{#1}}%
-    \let\qt@doqt\qt@dode%
-    \let\ToggleBasmalah\ToggleBasmalahde%    
-    \@quranayah[\qt@arglc][#2]%
-    \let\qt@doqt\qt@doqt@orig%    
-    \let\ToggleBasmalah\ToggleBasmalah@orig%    
-}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranjuzde{%
-    \@ifstar\@@quranjuzde\@quranjuzde%
-}%
-\def\@@quranjuzde[#1]{%
+\DeclareDocumentCommand{\quranjuzde}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranjuz[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranjuzde[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranjuz[#1]%
+    \IfBooleanTF{#1}%
+    {\quranjuz*[#2]}%
+    {\quranjuz[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranpagede{%
-    \@ifstar\@@quranpagede\@quranpagede%
-}%
-\def\@@quranpagede[#1]{%
+\DeclareDocumentCommand{\quranpagede}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranpage[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranpagede[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranpage[#1]%
+    \IfBooleanTF{#1}%
+    {\quranpage*[#2]}%
+    {\quranpage[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranquarterde{%
-  \@ifstar\@@quranquarterde\@quranquarterde%
-}%
-\def\@@quranquarterde[#1]{%
+\DeclareDocumentCommand{\quranquarterde}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranquarter[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranquarterde[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranquarter[#1]%
+    \IfBooleanTF{#1}%
+    {\quranquarter*[#2]}%
+    {\quranquarter[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranrukude{%
-    \@ifstar\@@quranrukude\@quranrukude%
-}%
-\def\@@quranrukude[#1]{%
+\DeclareDocumentCommand{\quranrukude}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranruku[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranrukude[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranruku[#1]%
+    \IfBooleanTF{#1}%
+    {\quranruku*[#2]}%
+    {\quranruku[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranhizbde{%
-    \@ifstar\@@quranhizbde\@quranhizbde%
-}%
-\def\@@quranhizbde[#1]{%
+\DeclareDocumentCommand{\quranhizbde}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranhizb[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranhizbde[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranhizb[#1]%
+    \IfBooleanTF{#1}%
+    {\quranhizb*[#2]}%
+    {\quranhizb[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\bidi@newrobustcmd\quranmanzilde{%
-    \@ifstar\@@quranmanzilde\@quranmanzilde%
-}
-\def\@@quranmanzilde[#1]{%
+\DeclareDocumentCommand{\quranmanzilde}{ s o }{%
     \let\qt@doqt\qt@dode%
-    \@@quranmanzil[#1]%
-    \let\qt@doqt\qt@doqt@orig%    
-}%
-\def\@quranmanzilde[#1]{%
-    \let\qt@doqt\qt@dode%
-    \@quranmanzil[#1]%
+    \IfBooleanTF{#1}%
+    {\quranmanzil*[#2]}%
+    {\quranmanzil[#2]}%        
     \let\qt@doqt\qt@doqt@orig%    
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%

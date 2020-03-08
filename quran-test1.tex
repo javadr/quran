@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\usepackage[uthmani]{quran}
+\usepackage[uthmani, wordwise]{quran}
 %%% for typesetting arabic text
 \usepackage{polyglossia}
 \setotherlanguage{arabic}
@@ -12,7 +12,6 @@
 
 \begin{document} 
 \setRTL
-\textarabic{\quranayah[2][10-20]}
-
-\textarabic{\quranayah*[2][10-20]}
+\textarabic{\quranayah[2][10-20][1-99]}
+\textarabic{\textbf{\quranayah*[2][10-20][100]}}
 \end{document}

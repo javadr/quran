@@ -2,7 +2,7 @@
 \documentclass{article}
 
 \usepackage{forloop}
-\usepackage{quran}
+\usepackage[trans={lt,de,en,fa}]{quran}
 %The xepersian package automatically load bidi, and I've loaded it because I want to set a font that supports Arabic letters
 \usepackage{xepersian}
 
@@ -10,7 +10,7 @@
 \settextfont[Scale=1.1]{Scheherazade}
 
 \def\surna[#1]{\centerline{\hss\surahname*[#1]\hss\surahname[#1]\hss}}
-\def\test#1{
+\def\test#1{%
     \par
     \surna[#1]
     \quransurah*[#1]
@@ -18,7 +18,15 @@
 }
 
 \begin{document}
+\quransurah*[1]
 
+\quranayah*[2][286][5-24]
+
+\quranayah*[1][1-7][3-4]
+
+\qurantext*[1-2][6]+
+
+\qurantext*[1-2][6-8]
 % For typesetting بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ use below macro
 %\centerline{\basmalah}
 
@@ -37,8 +45,8 @@
 \quranayah*[76][1-22]
 
 %%You can typeset whole of Holy Quran with below commands.
-%%\newcounter{ct}
-%%\forloop{ct}{1}{\value{ct} < 115} {\test{\value{ct}}}
+\newcounter{ct}
+\forloop{ct}{110}{\value{ct} < 115} {\test{\the\value{ct}}}
 
 %%You can typeset whole of Holy Quran with below commands.
 %%\newcounter{jz}
@@ -55,7 +63,7 @@
 \hfill  صفحة  \arabic{pg} \par
 \quranpage*[\value{pg}]\vfill}
 
-%\quranhizb*[117-120]
+%\quranhizb*[57-60]
 
 %\quranquarter*[1-4]
 %\quranquarter*[239-240]

@@ -1,7 +1,7 @@
 %% This is file `quran.sty',
 %% Inspired by Patrick Happel's lipsum package
 %% 
-%%% Copyright © 2015-2019 by Seiied-Mohammad-Javad Razavian
+%%% Copyright © 2015-2020 by Seiied-Mohammad-Javad Razavian
 %% <javadr@gmail.com>
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -17,97 +17,20 @@
 %% by Seiied-Mohammad-Javad Razavian..
 %% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
 %% 
-%% This work consists of the files quran.sty, qurantext-simple.def, qurantext-uthmani.def, 
-%% quran-doc.tex, quran-doc.pdf, quran.png , defaulttext.pdf, and uthmanitext.pdf.
-%%
 %% to one who has devoted his life to Quran
 %%
-%% Change Log
-%% ver 1.51 ## May 4th, 2019
-%% A typo in quran-transde.def.
-%% ver 1.5 ## December 31th, 2018
-%% some minor bugs in \ToggleBasmalah and \quransurah.
-%% ver 1.42b ## November 29th, 2018
-%% A typo in quran-transde.def. 
-%% ver 1.42a ## December 22nd, 2017
-%% A typo in doc. Some of files were missed in the last update so the new version put them back. 
-%% ver 1.42 ## December 22nd, 2017
-%% \quransurahX and \quranayahX macros also act case-insensitive in translations. X is one of en, de, fa, and lt. 
-%% ver 1.41 ## December 22nd, 2017
-%% in previous versions, \quransurah and \quranayah macros were case-sensitive in case of using surah names, 
-%% but by this version both macros are case-insensitive, i.e. there in no diffirences between Al-Fatihda, al-fatiha, al-Fatiha, 
-%% and the other possible combinations of lower-uppercase letters.
-%% ver 1.4 ## October 28th, 2017
-%% Persian, English, and Duetch tranliteration added and ``fa", ``en", and ``de" version of macros defined for them. 
-%% for using this option, the `transfa`, `transen`, `transde` is defined. There is also a `trans` option that can get the 
-%% `'lt`, `en`, `de`, and `fa` as its value seperated by comma. 
-%% ver 1.3 ## October 22th, 2017
-%% Transliteration support, now all macros have an ``lt" version for typesetting transliteration of the original macros.
-%% ver 1.261 ## August 22th, 2017
-%% typo in version number. 
-%% ver 1.26 ## August 22th, 2017
-%% minor improvements, fixes a bug in using \quranayah[x][y] that in this case it hadn't enclosed in group + manual update. 
-%% ver 1.252 ## February 28th, 2017
-%% minor improvements
-%% ver 1.25 and 1.251## December 25th, 2016
-%% manual update
-%% ver 1.241 ## December 15th, 2016
-%% some minor bugs in manual
-%% ver 1.24 ## November 12th, 2016
-%% manual update + waqf symbol wes missed the penultimate version of uthmani script.
-%% ver 1.22 ## November 8th, 2016
-%% just adding source of two pdf files to the installation.
-%% ver 1.21 ## November 7th, 2016
-%% some minor bugs in uploading to CTAN
-%% ver 1.2  ## November 5th, 2016
-%% Supports Uthmani script via uthmani option.
-%% This option asked by one of the package's user.
-%% ver 1.14  ## May 15th, 2016
-%% Some improvements in help document.
-%% ver 1.1  ## Apr 21st, 2016
-%% \indexconvert macro converts a number between 1 to 6236 to its exact surah and ayah number in 
-%% the whole text of Quran.
-%% ver 1.05  ## Feb 9th, 2016
-%% \ChangeBasmalah and \ChangeAyahNumber are converted to \ToggleBasmalah and \ToggleAyahNumber respectively. 
-%% a minor bug in \quransurah* macro has fixed, this bug caused extra space in the text. 
-%% ver 1.0 ## Feb 5th, 2016
-%% support for surahname as an argument in \quransurah and \quranayah macros.
-%% ver 0.941 ## July 11th, 2015
-%%  \qt@par moved to \qurantext from Ayat for minimizing sourcefile.
-%% ver 0.94 ## July 11th, 2015
-%%  \ChangeAyahNumber, \ChangeBasmalah can change the way ayah number and basmalah will appear.  
-%% a minor bug in extra white space around one ayah is solved now, it is founded by Masoud Yazdani.
-%% ver 0.91 ## July 10th, 2015
-%% default surah in \quransurah is now Al-Ikhlas
-%% ver 0.9 ## July 7th, 2015
-%% \quranhizb and \quranmanzil are provided now
-%% ver 0.8 ## July 4th, 2015
-%% \quranquarter and \quranruku are provided now
-%% ver 0.72 ## July 2nd, 2015
-%% \basmalah macro typeset basmalah
-%% ver 0.71 ## July 2nd, 2015
-%% in par mode after every basmalah a \par is set now
-%% ver 0.7 ## Jun 30th, 2015
-%% \quranpage command puts one or more pages of  Quran
-%% ver 0.6 ## Jun 28th, 2015
-%% \quranjuz command puts one or more  juzs of  Quran
-%% ver 0.5 ## Jun 24, 2015
-%% package renamed form qurantext to quran
-%% \quranayah command can put a specific ayah/ayar from a surah.
-%% ver 0.4 
-%% Sura's name add by \surahname command, it'll choose the arabic/latin name of  sura based on text direction.
-%% ver 0.3
-%% Ayat numbers added.
-%% ver 0.2
-%%  Stack overflow solved by a nonrecursive function
-%% ver 0.1 
-%% initial commit
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2019/05/04}
-\def\quranversion{ver 1.51}
-\ProvidesPackage{quran}[\qurandate\space \quranversion\space An easy way to typeset the whole or any part of The Holy Quran]
+\def\qurandate{2020/03/07}
+\def\quranversion{1.6}
+\ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
+\RequirePackage{ifxetex}
 \RequirePackage{biditools}
 \RequirePackage{xkeyval}
+\RequirePackage{listofitems}
+\setsepchar{ ||\qt@par||\par}\ignoreemptyitems%
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+\RequirePackage{xspace}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
 \newif\ifqt@uthmani%
@@ -116,20 +39,18 @@
 \newif\ifqt@transen%
 \newif\ifqt@transde%
 \newif\ifqt@transfa%
-\newif\if@qt@TestSubString%
-\def\qt@IfSubString #1#2{%
-    \edef\@qt@MainString{#1}%
-    \def\@qt@TestSubS ##1#2##2\@qt@Del{\edef\@qt@TestTemp{##1}}%
-    \expandafter\@qt@TestSubS\@qt@MainString#2\@qt@Del%
-    \ifx\@qt@MainString\@qt@TestTemp%
-        \@qt@TestSubStringfalse%
-    \else%
-        \@qt@TestSubStringtrue%
-    \fi%
-}%
-%
+\newif\ifqt@wordwise
 \def\qt@par{\par}%
-\def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}%
+\def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
+\def\Basmalah{%
+        \begingroup%
+        \let\par\relax%
+        \def\qt@no##1{\relax}%
+        \quranayah[1][1][1]%
+        \endgroup%
+}%
+\newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
+\def\qt@showitems#1{\footnote{#1}}%
 \def\qt@no#1{ #1}%
 %
 \DeclareOptionX{nopar}{\let\qt@par\relax}
@@ -140,15 +61,21 @@
 \DeclareOptionX{transde}{\qt@transdetrue}
 \DeclareOptionX{transfa}{\qt@transfatrue}
 \DeclareOptionX{trans}[lt]{%
-    \qt@IfSubString{#1}{lt}\if@qt@TestSubString\qt@translttrue\fi
-    \qt@IfSubString{#1}{de}\if@qt@TestSubString\qt@transdetrue\fi
-    \qt@IfSubString{#1}{en}\if@qt@TestSubString\qt@transentrue\fi
-    \qt@IfSubString{#1}{fa}\if@qt@TestSubString\qt@transfatrue\fi
-}
+    \IfSubStr{#1}{lt}{\qt@translttrue}{}%
+    \IfSubStr{#1}{de}{\qt@transdetrue}{}%
+    \IfSubStr{#1}{en}{\qt@transentrue}{}%
+    \IfSubStr{#1}{fa}{\qt@transfatrue}{}%
+}%
+\DeclareOptionX{wordwise}{\qt@wordwisetrue}
 \DeclareOptionX*{\PackageWarning{quran}{Unknown option ‘\CurrentOption’}}
 \ProcessOptionsX\relax
 %\ProcessOptions\relax
 %
+\ifqt@wordwise
+    \let\qt@newcmd\newcommand%
+\else
+    \let\qt@newcmd\bidi@newrobustcmd%
+\fi
 \bidi@newrobustcmd\surahname{%    
   \@ifstar\@@surahname\@surahname
 }%
@@ -163,12 +90,10 @@
     \loop%
         \edef\qt@tmp{\lowercase{\edef\noexpand\qt@surah@name{\@surahname[\qt@tempcount]}}}%
         \qt@tmp%
-%        \expandafter\xdef\csname qt@surah@\@surahname[\qt@tempcount]\endcsname{\the\qt@tempcount}%
         \expandafter\xdef\csname qt@surah@\qt@surah@name\endcsname{\the\qt@tempcount}%
     \ifnum\qt@tempcount<114%
         \advance\qt@tempcount by 1\relax%
     \repeat%
-%
 %
 \newcount\surahcount%
 \newcount\ayahcount%
@@ -181,23 +106,48 @@
         \advance\ayahcount by -\qt@getversenum\surahcount\relax%
         \advance\surahcount by 1\relax%
     \repeat
-    #2=\surahcount%
-    #3=\ayahcount%
+    \ifdefined#2\else\newcount#2\fi#2=\surahcount%
+    \ifdefined#3\else\newcount#3\fi#3=\ayahcount%
 }%
 %
 \bidi@newrobustcmd\qt@default{1-7}% Surah Al-hamd
 \bidi@newrobustcmd\setqurantextdefault[1]{%
 \bidi@renewrobustcmd{\qt@default}{#1}}%
 %
-\bidi@newrobustcmd\qt@doqt{%
+\def\clap#1{\hbox to 0pt{\hss#1\hss}}%
+\newcount\qt@WordCount%
+\newcommand*{\qt@PrintWordCount}{\leavevmode\raise-.6\baselineskip%
+\clap{\tiny\global\advance\qt@WordCount\@ne{\the\qt@WordCount}}}%
+\def\showitemsmacro#1{%
+    \begingroup\fboxsep=0.25pt \fboxrule=0.5pt%
+    {\ifxetex\beginL\special{color push rgb 1 0 0}\ttfamily\fi%
+    \ifluatex\addfontfeature{Color=FF0000BB}\fi%
+    \qt@PrintWordCount%
+    \ifxetex\special{color pop}\endL\fi}%
+    \mbox{\strut#1}\endgroup%
+    \hskip0.25em\relax%
+}%
+%
+\DeclareDocumentCommand{\qt@doqt}{ o o }{%
     \addtocounter{qt@count}{1}%
+    \def\@qtexp{}%
     \loop%
-        \csname qurantext@\roman{qt@count}\endcsname%
+        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi\qt@par}%
         \ifnum\value{qt@count}<\qt@max\relax%
-        \ifx\qt@par\relax{ }\fi% an extra space between verses
-        \qt@par%
         \addtocounter{qt@count}{1}%
     \repeat%
+    \IfNoValueTF{#1}%
+    {\@qtexp}%true
+    {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
+    \readlist*\qt@words{\@qtexp}%
+        \IfNoValueTF{#2}%
+        {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
+        \foreachitem\qt@word\in\qt@words{%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
+        }%
+        \qt@showitems{\ifdefined\arabicfont\arabicfont\fi\showitems\qt@words}%
+    }%false
+%    \ifx\qt@par\relax{ }\fi% an extra space between verses
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
@@ -208,37 +158,35 @@
   \fi%
 }%
 %
-%\bidi@newrobustcmd\ToggleBasmalah{%
-%  \ifx\basmalah\relax%
-%    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}%
-%  \else%
-%    \let\basmalah\relax%
-%  \fi%
-%}%
-%
 \bidi@newrobustcmd\ToggleAyahNumber{%
-  \expandafter\ifx\qt@no{test}\relax%
+  \expandafter\ifx\qt@no{0}\relax%
     \def\qt@no##1{ ##1}%
   \else%
     \def\qt@no##1{\relax}%
   \fi%
 }%
-\bidi@newrobustcmd\qurantext{%
-\@ifstar\@@qurantext\@qurantext%
+\DeclareDocumentCommand{\qurantext}{ s O{\qt@default} o t{+} }{%
+    \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+    \IfBooleanTF{#1}{%
+        \begingroup%
+        \ChangeQtPar%
+        \@qurantext[#2][#3]%
+        \endgroup%
+    }%
+    {\@qurantext[#2][#3]}%
+    \def\qt@showitems##1{\relax}%
 }%
 %
-\bidi@newrobustcmd\@@qurantext[1][\qt@default]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@qurantext[#1]%
-  \endgroup%
-}%
-%
-\bidi@newrobustcmd\@qurantext[1][\qt@default]{%
+\def\@qurantext[#1][#2]{%
   \expandafter\qt@minmax\expandafter{#1}%
   \setcounter{qt@count}{\qt@min}%
   \addtocounter{qt@count}{-1}%
-  \qt@doqt%
+  \IfNoValueTF{#2}{\qt@doqt}{%
+      \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
+      \qt@doqt[\qt@@start][\qt@@end]%
+      }%
+      {\qt@doqt[#2]}%
+    }%
 }%
 %
 \def\qt@get#1-#2;{\edef\qt@min{#1}\edef\qt@max{#2}}%
@@ -251,58 +199,40 @@
   \else\expandafter\qt@stripmax\qt@max\fi%
 }%
 %
-%\newif\if@qt@TestSubString%
-%\def\qt@IfSubString #1#2{%
-%    \edef\@qt@MainString{#1}%
-%    \def\@qt@TestSubS ##1#2##2\@qt@Del{\edef\@qt@TestTemp{##1}}%
-%    \expandafter\@qt@TestSubS\@qt@MainString#2\@qt@Del%
-%    \ifx\@qt@MainString\@qt@TestTemp%
-%        \@qt@TestSubStringfalse%
-%    \else%
-%        \@qt@TestSubStringtrue%
-%    \fi%
-%}%
-%
 \def\qt@getrange#1--#2;{\def\qt@min{#1}\def\qt@max{#2}}%
 %
 \newcounter{qt@i}%
 \newcounter{qt@start}%
 \newcounter{qt@end}%
 %
-\bidi@newrobustcmd\quransurah{%
-  \@ifstar\@@quransurah\@@@quransurah%
-}%
-%
 \bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlas
 \bidi@newrobustcmd\setsurahdefault[1]{%
 \bidi@renewrobustcmd{\qt@surah@default}{#1}}%
 % 
-\bidi@newrobustcmd\@@quransurah[1][\qt@surah@default]{%
-  \begingroup
-    \ChangeQtPar
-    \lowercase{\edef\qt@arglc{#1}}%
-    \@quransurah[\qt@arglc]%
-  \endgroup
-}%
-\bidi@newrobustcmd\@@@quransurah[1][\qt@surah@default]{%
-    \lowercase{\edef\qt@arglc{#1}}%
-    \@quransurah[\qt@arglc]%
+\DeclareDocumentCommand\quransurah{ s O{\qt@surah@default} }{%
+    \lowercase{\edef\qt@arglc{#2}}%
+    \IfBooleanTF{#1}%
+    {%  
+        \begingroup%
+        \ChangeQtPar%
+        \@quransurah[\qt@arglc]%
+        \endgroup%
+    }%
+    {\@quransurah[\qt@arglc]}%
 }%
 %
 \bidi@newrobustcmd\@quransurah[1][\qt@surah@default]{%
     \setcounter{qt@i}{1}%
     \setcounter{qt@start}{1}%
 %
-    \@qt@TestSubStringfalse%
-    \qt@IfSubString{#1}{--}%
-    \if@qt@TestSubString% case of surahname range, e.g. An-Nasr--An-Nas
+    \IfSubStr{#1}{--}{% case of surahname range, e.g. An-Nasr--An-Nas
         \expandafter\qt@getrange#1;%
         \edef\qt@min{\csname qt@surah@\qt@min\endcsname}%
         \edef\qt@max{\csname qt@surah@\qt@max\endcsname}%
         \setcounter{qt@end}{\qt@getversenum\qt@max}%
-    \else%
+    }%
+    {%
         \expandafter\qt@minmax\expandafter{#1}%
-%
         \if!\ifnum9<1\qt@min!\fi% \qt@min is a number. 
             \ifx\qt@min\qt@max%
                 \setcounter{qt@end}{\qt@getversenum{\qt@min}}%
@@ -314,7 +244,7 @@
                 \edef\qt@max{\qt@min}%
                 \setcounter{qt@end}{\qt@getversenum\qt@min}%
         \fi%
-    \fi%
+    }%
     \loop%
     \ifnum\value{qt@i}<\qt@min%
         \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
@@ -334,23 +264,24 @@
     \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
 }%
 %
-\bidi@newrobustcmd\quranayah{%
-  \@ifstar\@@quranayah\@@@quranayah%
+\DeclareDocumentCommand{\quranayah}{ s o o o t{+} }{%
+%    \IfBooleanTF{#5}{\let\showitems\showitems@Orig}{\def\showitems##1{\relax}}%
+    \IfBooleanTF{#5}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+    \lowercase{\edef\qt@arglc{#2}}%
+    \IfBooleanTF {#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranayah[\qt@arglc][#3][#4]#5%
+        \endgroup%
+    }%
+    {%
+        \@quranayah[\qt@arglc][#3][#4]#5%
+    }%
+    \def\qt@showitems##1{\relax}%
 }%
 %
-\def\@@quranayah[#1][#2]{%
-  \begingroup%
-    \ChangeQtPar%
-    \lowercase{\edef\qt@arglc{#1}}%
-    \@quranayah[\qt@arglc][#2]%
-  \endgroup%
-}%
-\def\@@@quranayah[#1][#2]{%
-    \lowercase{\edef\qt@arglc{#1}}
-    \@quranayah[\qt@arglc][#2]
-}%
-%
-\def\@quranayah[#1][#2]{%
+\def\@quranayah[#1][#2][#3]#4{% #1->Surah, #2->Ayah, #3->specific part
     \if!\ifnum9<1#1!\fi% #1 is a number. 
         \def\qt@surahnumber{#1}%
     \else%
@@ -381,25 +312,29 @@
         \ifx\qt@max\qt@min%
             %omitting basmalah when only first ayah is requested
             \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
-            \begingroup\qurantext[\value{qt@start}]\endgroup%
+            \IfBooleanTF{#4}%
+            {\begingroup\qurantext[\value{qt@start}][#3]+\endgroup}%
+            {\begingroup\qurantext[\value{qt@start}][#3]\endgroup}%
             \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
         \else%
             \addtocounter{qt@end}{\value{qt@start}}%
             \addtocounter{qt@end}{-\qt@min}%
-            \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+            \IfBooleanTF{#4}%
+            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]+\endgroup}%
+            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]\endgroup}%
         \fi%
     \fi%
 }%
 %
-\bidi@newrobustcmd\quranjuz{%
-  \@ifstar\@@quranjuz\@quranjuz%
-}%
-%
-\def\@@quranjuz[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranjuz[#1]%
-  \endgroup%
+\DeclareDocumentCommand\quranjuz{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranjuz[#2]%
+        \endgroup%
+    }%
+    {\@quranjuz[#2]}%
 }%
 %
 \def\@quranjuz[#1]{%
@@ -418,14 +353,15 @@
     \fi%
 }%
 %
-\bidi@newrobustcmd\quranpage{%
-  \@ifstar\@@quranpage\@quranpage%
-}%
-\def\@@quranpage[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranpage[#1]%
-  \endgroup%
+\DeclareDocumentCommand\quranpage{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranpage[#2]%
+        \endgroup%
+    }%
+    {\@quranpage[#2]}%
 }%
 %
 \def\@quranpage[#1]{%
@@ -444,15 +380,17 @@
     \fi%
 }%
 %
-\bidi@newrobustcmd\quranquarter{%
-  \@ifstar\@@quranquarter\@quranquarter%
+\DeclareDocumentCommand\quranquarter{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranquarter[#2]%
+        \endgroup%
+    }%
+    {\@quranquarter[#2]}%
 }%
-\def\@@quranquarter[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranquarter[#1]%
-  \endgroup%
-}%
+%
 \def\@quranquarter[#1]{%
     \expandafter\qt@minmax\expandafter{#1}%
     \ifx\qt@max\qt@min%
@@ -469,14 +407,15 @@
     \fi%
 }%
 %
-\bidi@newrobustcmd\quranruku{%
-  \@ifstar\@@quranruku\@quranruku%
-}%
-\def\@@quranruku[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranruku[#1]%
-  \endgroup%
+\DeclareDocumentCommand\quranruku{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranruku[#2]%
+        \endgroup%
+    }%
+    {\@quranruku[#2]}%
 }%
 %
 \def\@quranruku[#1]{%
@@ -495,42 +434,41 @@
     \fi%
 }%
 %
-\bidi@newrobustcmd\quranhizb{%
-  \@ifstar\@@quranhizb\@quranhizb%
-}%
-\def\@@quranhizb[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranhizb[#1]%
-  \endgroup%
+\DeclareDocumentCommand\quranhizb{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranhizb[#2]%
+        \endgroup%
+    }%
+    {\@quranhizb[#2]}%
 }%
 %
-\newcount\qt@start%
-\newcount\qt@end%
 \def\@quranhizb[#1]{%
     \expandafter\qt@minmax\expandafter{#1}%
     \ifx\qt@max\qt@min%
-        \qt@start=#1%
-        \qt@end=#1%
+        \c@qt@start=#1%
+        \c@qt@end=#1%
     \else%
-        \qt@start=\qt@min%
-        \qt@end=\qt@max%
+        \c@qt@start=\qt@min%
+        \c@qt@end=\qt@max%
     \fi%
-    \multiply\qt@start by 4%
-    \advance\qt@start by -3%
-    \multiply\qt@end by 4%
-    \quranquarter[\qt@start-\qt@end]%
+    \multiply\c@qt@start by 4%
+    \advance\c@qt@start by -3%
+    \multiply\c@qt@end by 4%
+    \quranquarter[\c@qt@start-\c@qt@end]%
 }%
 %
-\bidi@newrobustcmd\quranmanzil{%
-  \@ifstar\@@quranmanzil\@quranmanzil%
-}
-%
-\def\@@quranmanzil[#1]{%
-  \begingroup%
-    \ChangeQtPar%
-    \@quranmanzil[#1]%
-  \endgroup%
+\DeclareDocumentCommand\quranmanzil{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranmanzil[#2]%
+        \endgroup%
+    }%
+    {\@quranmanzil[#2]}%
 }%
 %
 \def\@quranmanzil[#1]{%
@@ -579,12 +517,10 @@
 \ifcase#1\or1-7\or8-14\or15-27\or28-36\or37-46\or47-53\or54-66\or67-68\or69-78\or79-89\or90-93\or94-103\or104-110\or111-119\or120-128\or129-136\or137-148\or149-154\or155-159\or160-170\or171-174\or175-183\or184-189\or190-195\or196-203\or204-217\or218-223\or224-228\or229-235\or236-238\or239-242\or243-249\or250-255\or256-260\or261-264\or265-267\or268-273\or274-280\or281-288\or289-290\or291-293\or294-302\or303-313\or314-323\or324-334\or335-347\or348-356\or357-364\or365-373\or374-384\or385-394\or395-402\or403-413\or414-422\or423-436\or437-441\or442-448\or449-464\or465-473\or474-482\or483-493\or494-503\or504-507\or508-515\or516-518\or519-526\or527-535\or536-543\or544-552\or553-563\or564-569\or570-580\or581-584\or585-589\or590-593\or594-597\or598-605\or606-608\or609-619\or620-627\or628-634\or635-645\or646-655\or656-664\or665-669\or670-674\or675-680\or681-688\or689-695\or696-703\or704-712\or713-719\or720-725\or726-735\or736-746\or747-755\or756-762\or763-769\or770-777\or778-784\or785-789\or790-799\or800-809\or810-819\or820-830\or831-839\or840-844\or845-849\or850-859\or860-871\or872-879\or880-883\or884-889\or890-899\or900-910\or911-918\or919-929\or930-933\or934-939\or940-943\or944-954\or955-964\or965-979\or980-985\or986-993\or994-1001\or1002-1007\or1008-1012\or1013-1018\or1019-1026\or1027-1038\or1039-1047\or1048-1053\or1054-1062\or1063-1080\or1081-1083\or1084-1095\or1096-1101\or1102-1105\or1106-1111\or1112-1116\or1117-1125\or1126-1135\or1136-1142\or1143-1160\or1161-1170\or1171-1179\or1180-1188\or1189-1197\or1198-1204\or1205-1208\or1209-1218\or1219-1224\or1225-1229\or1230-1235\or1236-1241\or1242-1251\or1252-1259\or1260-1264\or1265-1272\or1273-1277\or1278-1294\or1295-1301\or1302-1307\or1308-1315\or1316-1324\or1325-1334\or1335-1345\or1346-1353\or1354-1357\or1358-1364\or1365-1374\or1375-1384\or1385-1394\or1395-1404\or1405-1417\or1418-1424\or1425-1434\or1435-1446\or1447-1456\or1457-1467\or1468-1473\or1474-1481\or1482-1497\or1498-1508\or1509-1522\or1523-1533\or1534-1541\or1542-1556\or1557-1568\or1569-1582\or1583-1596\or1597-1602\or1603-1616\or1617-1625\or1626-1631\or1632-1638\or1639-1645\or1646-1653\or1654-1664\or1665-1675\or1676-1689\or1690-1700\or1701-1707\or1708-1714\or1715-1725\or1726-1733\or1734-1738\or1739-1744\or1745-1750\or1751-1756\or1757-1762\or1763-1771\or1772-1777\or1778-1784\or1785-1791\or1792-1802\or1803-1817\or1818-1827\or1828-1846\or1847-1862\or1863-1881\or1882-1901\or1902-1910\or1911-1922\or1923-1926\or1927-1935\or1936-1941\or1942-1951\or1952-1961\or1962-1966\or1967-1971\or1972-1977\or1978-1984\or1985-1990\or1991-2001\or2002-2011\or2012-2020\or2021-2029\or2030-2039\or2040-2051\or2052-2059\or2060-2069\or2070-2081\or2082-2089\or2090-2099\or2100-2106\or2107-2113\or2114-2122\or2123-2129\or2130-2140\or2141-2152\or2153-2157\or2158-2162\or2163-2171\or2172-2184\or2185-2189\or2190-2193\or2194-2199\or2200-2210\or2211-2222\or2223-2241\or2242-2250\or2251-2265\or2266-2290\or2291-2300\or2301-2315\or2316-2332\or2333-2348\or2349-2372\or2373-2402\or2403-2424\or2425-2437\or2438-2452\or2453-2463\or2464-2476\or2477-2483\or2484-2493\or2494-2512\or2513-2524\or2525-2533\or2534-2558\or2559-2576\or2577-2595\or2596-2605\or2606-2617\or2618-2620\or2621-2628\or2629-2633\or2634-2643\or2644-2652\or2653-2659\or2660-2667\or2668-2673\or2674-2695\or2696-2705\or2706-2723\or2724-2750\or2751-2765\or2766-2791\or2792-2801\or2802-2811\or2812-2817\or2818-2825\or2826-2831\or2832-2841\or2842-2848\or2849-2852\or2853-2855\or2856-2864\or2865-2875\or2876-2889\or2890-2899\or2900-2915\or2916-2932\or2933-2941\or2942-2965\or2966-2984\or2985-3001\or3002-3036\or3037-3054\or3055-3072\or3073-3091\or3092-3107\or3108-3123\or3124-3159\or3160-3173\or3174-3190\or3191-3203\or3204-3217\or3218-3225\or3226-3241\or3242-3252\or3253-3265\or3266-3273\or3274-3280\or3281-3294\or3295-3302\or3303-3312\or3313-3327\or3328-3340\or3341-3353\or3354-3362\or3363-3370\or3371-3384\or3385-3391\or3392-3403\or3404-3409\or3410-3419\or3420-3428\or3429-3436\or3437-3449\or3450-3462\or3463-3469\or3470-3480\or3481-3488\or3489-3503\or3504-3514\or3515-3525\or3526-3533\or3534-3541\or3542-3553\or3554-3560\or3561-3567\or3568-3573\or3574-3585\or3586-3591\or3592-3601\or3602-3606\or3607-3615\or3616-3627\or3628-3636\or3637-3642\or3643-3651\or3652-3660\or3661-3667\or3668-3674\or3675-3686\or3687-3697\or3698-3705\or3706-3717\or3718-3737\or3738-3755\or3756-3772\or3773-3788\or3789-3809\or3810-3862\or3863-3901\or3902-3926\or3927-3970\or3971-3984\or3985-3996\or3997-4010\or4011-4034\or4035-4058\or4059-4067\or4068-4079\or4080-4089\or4090-4099\or4100-4110\or4111-4121\or4122-4128\or4129-4133\or4134-4142\or4143-4153\or4154-4160\or4161-4170\or4171-4183\or4184-4193\or4194-4201\or4202-4211\or4212-4218\or4219-4226\or4227-4236\or4237-4243\or4244-4250\or4251-4262\or4263-4272\or4273-4281\or4282-4291\or4292-4301\or4302-4315\or4316-4325\or4326-4340\or4341-4350\or4351-4360\or4361-4370\or4371-4381\or4382-4392\or4393-4414\or4415-4443\or4444-4456\or4457-4473\or4474-4484\or4485-4494\or4495-4499\or4500-4510\or4511-4520\or4521-4530\or4531-4536\or4537-4545\or4546-4556\or4557-4564\or4565-4573\or4574-4583\or4584-4593\or4594-4600\or4601-4609\or4610-4612\or4613-4622\or4623-4630\or4631-4645\or4646-4659\or4660-4675\or4676-4698\or4699-4721\or4722-4735\or4736-4763\or4764-4784\or4785-4809\or4810-4816\or4817-4846\or4847-4868\or4869-4886\or4887-4901\or4902-4926\or4927-4946\or4947-4979\or4980-5017\or5018-5053\or5054-5075\or5076-5085\or5086-5094\or5095-5100\or5101-5104\or5105-5110\or5111-5117\or5118-5126\or5127-5136\or5137-5143\or5144-5150\or5151-5156\or5157-5163\or5164-5172\or5173-5177\or5178-5185\or5186-5188\or5189-5196\or5197-5199\or5200-5209\or5210-5217\or5218-5224\or5225-5229\or5230-5236\or5237-5241\or5242-5255\or5256-5271\or5272-5304\or5305-5323\or5324-5360\or5361-5375\or5376-5410\or5411-5419\or5420-5439\or5440-5447\or5448-5466\or5467-5475\or5476-5494\or5495-5495\or5496-5526\or5527-5551\or5552-5581\or5582-5591\or5592-5613\or5614-5622\or5623-5662\or5663-5672\or5673-5702\or5703-5712\or5713-5738\or5739-5758\or5759-5800\or5801-5829\or5830-5848\or5849-5884\or5885-5909\or5910-5931\or5932-5948\or5949-5967\or5968-5993\or5994-6023\or6024-6043\or6044-6058\or6059-6079\or6080-6090\or6091-6098\or6099-6106\or6107-6125\or6126-6130\or6131-6138\or6139-6146\or6147-6157\or6158-6168\or6169-6176\or6177-6179\or6180-6188\or6189-6193\or6194-6197\or6198-6204\or6205-6207\or6208-6213\or6214-6216\or6217-6221\or6222-6225\or6226-6230\or6231-6236\else\relax\fi
 }%
 %
-%\bidi@newrobustcmd\basmalah{%
-%بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}
 \bidi@newrobustcmd\ToggleBasmalah{%
   \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
   \ifx\basmalah\relax%
-    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ \qt@par}%
+    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
   \else%
     \let\basmalah\relax%
   \fi%
