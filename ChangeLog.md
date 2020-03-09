@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 1.61 ## March 9th, 2020
+%% use current font in showitem instead of Amiri
 %% ver 1.6 ## March 7th, 2020
 %% support for getting any chunks of an Ayah with two extra optional arguments for \qurantext and \quranayah. 
 %% \Basmalah outputs basmalah without any surrounding whitespaces.

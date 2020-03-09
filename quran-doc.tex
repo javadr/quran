@@ -964,11 +964,15 @@ fontspec{,} and bidi"]
         \item A typo in quran-transde.def.
     \end{Version}
 
-    \begin{Version}{2020/03/03 v1.6}
+    \begin{Version}{2020/03/07 v1.6}
         \item support for getting any chunks of an ayah with two extra optional arguments for \cs{qurantext} and \cs{quranayah}. 
         This feature has been suggested and supported financially by \emph{Atiyah Elsheikh}. 
         May God bless him. 
         \item \cs{Basmalah} outputs basmalah without any surrounding whitespaces.
+    \end{Version}
+    
+    \begin{Version}{2020/03/09 v1.61}
+        \item Applying current font in footnote when \cs{quranayah}/\cs{qurantext} is called by its \tt{+} optional argument. In the last version it used Amiri font. 
     \end{Version}
 
     \begin{table}[!htbp]
@@ -1019,15 +1023,16 @@ fontspec{,} and bidi"]
         2017/10/28 & 1.4 &  \cb Persian, English, and Deutsch translations via \xoption{transfa}, \xoption{transen}, and \xoption{transde} options\par 
                                             \cb \xoption{trans} option with `lt', `en', `de', and `fa' values \\
         2017/12/22 & 1.41 &  \cb case-insensitive  \cs{quransurah} and \cs{quranayah} \\
-        2017/12/22 & 1.42 &  \cb case-insensitive  \cs{quransurahX} and \cs{quranayahX}; \par\tt{X} $\in$ \{`en', `de', `fa',  `lt'\}  \\
+        2017/12/22 & 1.42 &  \cb case-insensitive  \cs{quransurahX} and \cs{quranayahX} \par\tt{X} $\in$ \{`en', `de', `fa',  `lt'\}  \\
         2017/12/22 & 1.42a &  \cb Documentation updates \\
         2018/11/29 & 1.42b &  \cb A typo in \tt{quran-transde.def}\\
         2018/12/01 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-de} package \mrule \space\null}\\
         2018/12/31 & 1.5 &  \cb Bug fix in \cs{ToggleBasmalah} and \cs{quransurah}  \\
         2019/05/03 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-ur} package \mrule \space\null}\\
         2019/05/04 & 1.51 &  \cb A typo in \tt{quran-transde.def}\\
-        2020/03/03 & 1.6 &  \cb \cs{qurantext} and \cs{quranayah} support any chunks of an ayah\par 
+        2020/03/07 & 1.6 &  \cb \cs{qurantext} and \cs{quranayah} support any chunks of an ayah\par 
                                             \cb \cs{Basmalah} \\
+        2020/03/09 & 1.61 &  \cb Minor update in \cs{quranayah} and \cs{qurantext} \\
         \bottomrule
     \end{tabularx}
     \end{small}

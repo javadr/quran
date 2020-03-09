@@ -20,8 +20,8 @@
 %% to one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2020/03/07}
-\def\quranversion{1.6}
+\def\qurandate{2020/03/09}
+\def\quranversion{1.61}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -145,9 +145,9 @@
         \foreachitem\qt@word\in\qt@words{%
             \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
         }%
-        \qt@showitems{\ifdefined\arabicfont\arabicfont\fi\showitems\qt@words}%
+        \global\edef\qt@currentfont{\the\font}%
+        \qt@showitems{\qt@currentfont\showitems\qt@words}%
     }%false
-%    \ifx\qt@par\relax{ }\fi% an extra space between verses
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
