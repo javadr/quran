@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 1.62 ## March 12th, 2020
+%% licence update from lppl1.3 to lppl1.3c
 %% ver 1.61 ## March 9th, 2020
 %% use current font in showitem instead of Amiri
 %% ver 1.6 ## March 7th, 2020
