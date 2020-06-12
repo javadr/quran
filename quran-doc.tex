@@ -129,7 +129,7 @@ The \xpackage{quran} package\footnote{This work has been inspired by \xpackage{l
 has been prepared for typesetting the holy Quran. 
 It provides several macros for typesetting not only the whole or any parts of the holy Quran based on its popular divisions, 
 but also any chunks of an ayah.
-Three translations of the holy Quran in German, English, and Persian in addition to its transliteration are also supported.%
+Four translations of the holy Quran in German, English, French, and Persian in addition to its transliteration are also supported.%
 \footnote{There are two packages, \xpackage{quran-de}  and \xpackage{quran-ur}, in companion with, which provide several other translations in Deutsch and Urdu.}
 Please, report any issues including bugs, typos in the documentation
 or feature requests on \url{https://github.com/javadr/quran/issues}.
@@ -567,17 +567,17 @@ the following macros are added by this option:
     
 \medskip
     
-By version 1.4, the package can typeset some translations of the holy Quran in other languages. 
+The package can typeset some translations of the holy Quran in other languages. 
 These options were added because of some requests from users who had required the translation of the holy Quran in their languages. 
-Loading \xmgpar{transde}, \xmgpar{transen}, or \xmgpar{transfa} brings some other macros for typesetting the translation in 
-German, English, and Persian, respectively.
+Loading \xmgpar{transde}, \xmgpar{transen}, \xmgpar{transfr}, or \xmgpar{transfa} brings some other macros for typesetting the translation in 
+German, English, French, and Persian, respectively.
 
 By loading each of these options, all macros defined in section~\ref{sec:qurantypesetting} will have 
-a ``\texttt{de}"/``\texttt{en}"/``\texttt{fa}"  version. In other words, 
+a ``\texttt{de}"/``\texttt{en}"/``\texttt{fr}"/``\texttt{fa}"  version. In other words, 
 these  options will add the following macros:
 
 
-\begin{multicols}{3}
+\begin{multicols}{2}
 \texttt{transde} option:
 \begin{itemize}
     \item \cs{quransurahde}
@@ -604,6 +604,19 @@ these  options will add the following macros:
     \item \cs{qurantexten}
 \end{itemize}
 
+\texttt{transfr} option:
+\begin{itemize}
+    \item \cs{quransurahfr}
+    \item \cs{quranayahfr}
+    \item \cs{quranpagefr}
+    \item \cs{quranjuzfr}
+    \item \cs{quranhizbfr}
+    \item \cs{quranquarterfr}
+    \item \cs{quranrukufr}
+    \item \cs{quranmanzilfr}
+    \item \cs{qurantextfr}
+\end{itemize}
+
 \texttt{transfa} option:
 \begin{itemize}
     \item \cs{quransurahfa}
@@ -616,22 +629,30 @@ these  options will add the following macros:
     \item \cs{quranmanzilfa}
     \item \cs{qurantextfa}
 \end{itemize}
+
 \end{multicols}
     
-    All translations are from \url{tanzil.net}. For Germen, English, and Persian languages the ``Abu Rida Muhammad ibn Ahmad ibn Rassoul", ``Ahmed Ali", ``Mohammad Mahdi Fooladvand" have been chosen respectively, by suggestion of the package's users.
+    All translations are from \url{tanzil.net}. For Germen, English, French, and Persian languages the ``Abu Rida Muhammad ibn Ahmad ibn Rassoul", ``Ahmed Ali", ``Muhammad Hamidullah", and ``Mohammad Mahdi Fooladvand" have been chosen respectively, by suggestion of the package's users.
     
 \medskip
         
     The \xmgpar{trans} option has been prepared to simplify the usage of mutiple translations simultaneously. This option accepts 
-    any permutation of  ``\texttt{lt}", ``\texttt{de}", ``\texttt{en}", and ``\texttt{fa}", e.g. this document is loaded
-    with ``\xmgpar{trans=\{lt, de, en, fa\}}" option with some others. 
+    any permutation of  ``\texttt{lt}", ``\texttt{de}", ``\texttt{en}", ``\texttt{fr}", and ``\texttt{fa}", e.g.  
+    ``\xoption{trans=\{de, en, lt\}}".
         
-    \centerline{\mx{quransurahfa[108]}{\quransurahfa[108]}
-    \hfill
-    \mx{quransurah[108]}{\quransurah[108]}} 
+    \marginpar{\dbend} There is no way to load all of the translations together. It is out of \TeX{} memory capacity. For more details, see \emph{Why do I get the “! TeX capacity exceeded” error?} on page \pageref{sec:texcapacity}.
+
+\protected\def\frkothar{Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux.\par Nous t'avons certes, accordé l'Abondance. (1)\par Accomplis la Salât pour ton Seigneur et sacrifie. (2)\par Celui qui te hait sera certes, sans postérité. (3)}
+        
+    \centerline{\mxf{quransurah*[108]}{\quransurah*[108]}}
+    
     \centerline{\mx{quransurahen[108]}{\setLTR\small\quransurahen[108]}
     \hfill
-    \mx{quransurahde[108]}{\setLTR\small\quransurahde[108]}}
+    \mx{quransurahde[108]}{\setLTR\small\quransurahde[108]}} 
+    
+    \centerline{\mx{quransurahfr[108]}{\setLTR\quran\small\frkothar}
+    \hfill
+    \mx{quransurahfa[108]}{\quransurahfa[108]}}
     
 \section{Frequently Asked Questions}
     \subsection{What is the best font for typesetting quran text?}
@@ -788,6 +809,7 @@ fontspec{,} and bidi"]
 {\quransurah* »{\ToggleAyahNumber\quransurah*}« \quransurah*}
 
     \subsection{Why do I get the ``\tt{! TeX capacity exceeded}'' error?}
+   \label{sec:texcapacity}
 
     Invention of \TeX{} dates back to many years ago. Although we have great hardware nowadays, 
     \TeX{} engine has been designed so that to use a very small amount of computer hardware 
@@ -1007,7 +1029,13 @@ fontspec{,} and bidi"]
         \item Pause marks (waqf symbols) have been removed from \cs{quranayah} and \cs{qurantext}
         whenever \oarg{chunk range} optional parameter is used.
     \end{Version}
-    
+
+    \begin{Version}{2020/06/10 v1.7}
+        \item French translation added and ``fr'' version of macros defined for it. New option, \xoption{transfr}, is defined for this translation.
+        \item There is also a new value `\xoption{fr}' for  \xoption{trans} option.
+        \item Documentation updates.
+    \end{Version}
+        
     \def\cb{{\tiny$\bullet$\space}}
     \def\mrule{\leaders\vrule height 2.5pt depth -1.5pt \hfill}
     \begin{small}
@@ -1074,6 +1102,9 @@ fontspec{,} and bidi"]
         2020/03/09 & 1.61 &  \cb Minor update in \cs{quranayah} and \cs{qurantext} \\
         2020/03/12 & 1.62 &  \cb License update to LPPL Version 1.3c \\
         2020/03/14 & 1.63 &  \cb Removing pause marks with \meta{chunk range} optional parameter\\
+        2020/06/10 & 1.7 &  \cb French translation available via 
+                                            \xoption{transfr} option, or   
+                                            \xoption{trans} option with ‘\xoption{fr}’ value\\
         \bottomrule
     \end{longtable}
     \end{small}
