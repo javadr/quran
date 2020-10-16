@@ -20,8 +20,8 @@
 %% to one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2020/06/12}
-\def\quranversion{1.7a}
+\def\qurandate{2020/10/14}
+\def\quranversion{1.8}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -34,6 +34,7 @@
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
 \newif\ifqt@uthmani%
+\newif\ifqt@uthmanimin%
 \newif\ifqt@basmalah\qt@basmalahtrue%
 \newif\ifqt@translt%
 \newif\ifqt@transen%
@@ -57,6 +58,7 @@
 \DeclareOptionX{nopar}{\let\qt@par\relax}
 \DeclareOptionX{nonumber}{\def\qt@no##1{\relax}}
 \DeclareOptionX{uthmani}{\qt@uthmanitrue}
+\DeclareOptionX{uthmani-min}{\qt@uthmanimintrue}
 \DeclareOptionX{translt}{\qt@translttrue}
 \DeclareOptionX{transen}{\qt@transentrue}
 \DeclareOptionX{transde}{\qt@transdetrue}
@@ -535,7 +537,11 @@
 \ifqt@uthmani%
     \input{qurantext-uthmani.def}%
 \else%
-    \input{qurantext-simple.def}%
+    \ifqt@uthmanimin% 
+        \input{qurantext-uthmani-min.def}%
+    \else%
+        \input{qurantext-simple.def}%
+    \fi%
 \fi%
 %%
 \ifqt@translt%

@@ -517,30 +517,39 @@ It means that the macro can enable/disable the ayahs' index in output text.
     {\ToggleAyahNumber\quransurah*[89]}}  
 
 \medskip
-    
-The package, by default, typesets the text of the holy Quran in simple script, 
-but \xmgpar{uthmani} changes the default to  Uthmani script.
-Compare the following texts to figure out the differences between ``default'' and ``uthmani'' scripts.
-    
-    \centerline{\mxf{quransurah*[1] (default)}{\quransurah*[1]}}
-    \makeatletter\let\qt@newcmd\renewcommand
-    \input{qurantext-uthmani.def}%
-    \makeatother
-    \centerline{\mxf{quransurah*[1] (uthmani)}{\quransurah*[1]}}
-    \makeatletter\let\qt@newcmd\renewcommand
-    \input{qurantext-simple.def}%
-    \makeatother
 
-\medskip
-    
 Version 1.6 comes wtih the \xmgpar{wordwise} option
 which makes the package capable of outputing any chunks of an ayah. 
 See section~\ref{chunk} for more details. 
 
     \centerline{\mx{quranayah[9][111][1-23]}{\quranayah[9][111][1-23]}}
+    \centerline{\mxf{ToggleAyahNumber\textbackslash{}quranayah[An-Nisa][171-172][14-64]}
+                    {\ToggleAyahNumber\quranayah[An-Nisa][171-172][14-64]}}
 
 
 \medskip
+    
+The package, by default, typesets the text of the holy Quran in simple script, 
+but \xmgpar{uthmani} and \xmgpar{uthmani-min} change the default to  Uthmani script.
+Compare the following texts to figure out the differences between ``default'', ``uthmani'', and  ``uthmani-min'' scripts.
+    
+    %\makeatletter\let\qt@newcmd\renewcommand
+    %\input{qurantext-simple.def}%
+    %\makeatother
+    \centerline{\mxf{quranayah*[Al-Araf][54-56] (default)}{\quranayah*[al-araf][54-56]}}
+    \makeatletter\let\qt@newcmd\renewcommand
+    \input{qurantext-uthmani.def}%
+    \makeatother
+    \centerline{\mxf{quranayah*[Al-Araf][54-56] (uthmani)}{\quranayah*[al-araf][54-56]}}
+    \makeatletter\let\qt@newcmd\renewcommand
+    \input{qurantext-uthmani-min.def}%
+    \makeatother
+    \centerline{\mxf{quranayah*[Al-Araf][54-56] (uthmani-min)}{\quranayah*[al-araf][54-56]}}
+    \makeatletter\let\qt@newcmd\renewcommand
+    \input{qurantext-simple.def}%
+    \makeatother
+\medskip
+    
     
 By version 1.3, the package can typeset the transliteration of the holy Quran. 
 This option will be useful for whom doesn't really know how to read the arabic text. By loading \xmgpar{translt}
@@ -1039,6 +1048,11 @@ fontspec{,} and bidi"]
     \begin{Version}{2020/06/12 v1.7a}
         \item Some of missed files (the French part) uploaded to CTAN.
     \end{Version}
+    
+    \begin{Version}{2020/10/14 v1.8}
+        \item New option `\xoption{uthmani-min}'; same behavior like `\xoption{uthmani}' option prior to this release. 
+        \item Now, the `\xoption{uthmani}' option typesets the text of the Holy Quran with more diacritical marks; requested on \href{https://github.com/javadr/quran/issues/4}{this issue}. 
+    \end{Version}
 
     \def\cb{{\tiny$\bullet$\space}}
     \def\mrule{\leaders\vrule height 2.5pt depth -1.5pt \hfill}
@@ -1110,6 +1124,8 @@ fontspec{,} and bidi"]
                                             \xoption{transfr} option, or   
                                             \xoption{trans} option with ‘\xoption{fr}’ value\\
         2020/06/12 & 1.7a &  \cb CTAN upload correction. \\
+        2020/10/14 & 1.8 &  \cb `\xoption{uthmani}' is renamed to `\xoption{uthmani-min}' \par
+                            \cb `\xoption{uthmani}' typesets text of the Holy Quran with more diacritical marks.\\
         \bottomrule
     \end{longtable}
     \end{small}

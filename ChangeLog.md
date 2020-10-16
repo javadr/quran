@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 1.8 ## Oct. 14th, 2020
+%% uthmani option is replaced with uthmani-min and uthmani is now more decorated version of the Quran's text.
 %% ver 1.63 ## March 14th, 2020
 %% Removing pause marks with ⟨chunk range⟩ optional parameter
 %% ver 1.62 ## March 12th, 2020
