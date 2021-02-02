@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 1.81 ## Feb. 2nd, 2021
+%% Doc update for quran-bn
 %% ver 1.8 ## Oct. 14th, 2020
 %% uthmani option is replaced with uthmani-min and uthmani is now more decorated version of the Quran's text.
 %% ver 1.63 ## March 14th, 2020
