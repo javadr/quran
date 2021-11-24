@@ -2,7 +2,7 @@
 *.aux
 *~
 *.toc
-Makefile
 WebNote.*
 test.*
 *-de-*
+*ati*
