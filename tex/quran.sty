@@ -1,0 +1,567 @@
+%% This is file `quran.sty',
+%%
+%% Copyright © 2015-2021
+%% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% This work is “author-maintained” (as per LPPL maintenance status).
+%%
+%% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
+%%
+%% to one who has devoted his life to Quran
+%%
+\NeedsTeXFormat{LaTeX2e}
+\def\qurandate{2021/02/02}
+\def\quranversion{1.81}
+\ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
+\RequirePackage{ifxetex}
+\RequirePackage{biditools}
+\RequirePackage{xkeyval}
+\RequirePackage{listofitems}
+\setsepchar{ ||\qt@par||\par||ۖ||ۗ||ۘ||ۙ||ۚ||ۛ||ۜ||۞}\ignoreemptyitems%
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+\RequirePackage{xspace}
+\newcounter{qt@count}
+\setcounter{qt@count}{0}
+\newif\ifqt@uthmani%
+\newif\ifqt@uthmanimin%
+\newif\ifqt@basmalah\qt@basmalahtrue%
+\newif\ifqt@translt%
+\newif\ifqt@transen%
+\newif\ifqt@transde%
+\newif\ifqt@transfa%
+\newif\ifqt@transfr%
+\newif\ifqt@wordwise
+\def\qt@par{\par}%
+\def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
+\def\Basmalah{%
+        \begingroup%
+        \let\par\relax%
+        \def\qt@no##1{\relax}%
+        \quranayah[1][1][1]%
+        \endgroup%
+}%
+\newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
+\def\qt@showitems#1{\footnote{#1}}%
+\def\qt@no#1{ #1}%
+%
+\DeclareOptionX{nopar}{\let\qt@par\relax}
+\DeclareOptionX{nonumber}{\def\qt@no##1{\relax}}
+\DeclareOptionX{uthmani}{\qt@uthmanitrue}
+\DeclareOptionX{uthmani-min}{\qt@uthmanimintrue}
+\DeclareOptionX{translt}{\qt@translttrue}
+\DeclareOptionX{transen}{\qt@transentrue}
+\DeclareOptionX{transde}{\qt@transdetrue}
+\DeclareOptionX{transfa}{\qt@transfatrue}
+\DeclareOptionX{transfr}{\qt@transfrtrue}
+\DeclareOptionX{trans}[lt]{%
+    \IfSubStr{#1}{lt}{\qt@translttrue}{}%
+    \IfSubStr{#1}{de}{\qt@transdetrue}{}%
+    \IfSubStr{#1}{en}{\qt@transentrue}{}%
+    \IfSubStr{#1}{fa}{\qt@transfatrue}{}%
+    \IfSubStr{#1}{fr}{\qt@transfrtrue}{}%
+}%
+\DeclareOptionX{wordwise}{\qt@wordwisetrue}
+\DeclareOptionX*{\PackageWarning{quran}{Unknown option ‘\CurrentOption’}}
+\ProcessOptionsX\relax
+%\ProcessOptions\relax
+%
+\ifqt@wordwise
+    \let\qt@newcmd\newcommand%
+\else
+    \let\qt@newcmd\bidi@newrobustcmd%
+\fi
+\bidi@newrobustcmd\surahname{%
+  \@ifstar\@@surahname\@surahname
+}%
+%
+\def\@@surahname[#1]{%
+\ifcase#1 {}\or الفاتحة\or البقرة\or آل عمران\or النساء\or المائدة\or الأنعام\or الأعراف\or الأنفال\or التوبة\or يونس\or هود\or يوسف\or الرعد\or إبراهيم\or الحجر\or النحل\or الإسراء\or الكهف\or مريم\or طه\or الأنبياء\or الحج\or المؤمنون\or النور\or الفرقان\or الشعراء\or النمل\or القصص\or العنكبوت\or الروم\or لقمان\or السجدة\or الأحزاب\or سبأ\or فاطر\or يس\or الصافات\or ص\or الزمر\or غافر\or فصلت\or الشورى\or الزخرف\or الدخان\or الجاثية\or الأحقاف\or محمد\or الفتح\or الحجرات\or ق\or الذاريات\or الطور\or النجم\or القمر\or الرحمن\or الواقعة\or الحديد\or المجادلة\or الحشر\or الممتحنة\or الصف\or الجمعة\or المنافقون\or التغابن\or الطلاق\or التحريم\or الملك\or القلم\or الحاقة\or المعارج\or نوح\or الجن\or المزمل\or المدثر\or القيامة\or الإنسان\or المرسلات\or النبأ\or النازعات\or عبس\or التكوير\or الإنفطار\or المطففين\or الانشقاق\or البروج\or الطارق\or الأعلى\or الغاشية\or الفجر\or البلد\or الشمس\or الليل\or الضحى\or الشرح\or التين\or العلق\or القدر\or البينة\or الزلزلة\or العاديات\or القارعة\or التكاثر\or العصر\or الهمزة\or الفيل\or قريش\or الماعون\or الكوثر\or الكافرون\or النصر\or المسد\or الإخلاص\or الفلق\or الناس\else\relax\fi}
+\def\@surahname[#1]{%
+\ifcase#1\or Al-Fatiha\or Al-Baqara\or Aal-e-Imran\or An-Nisa\or Al-Maeda\or Al-Anaam\or Al-Araf\or Al-Anfal\or At-Taubah\or Yunus\or Hud\or Yusuf\or Ar-Rad\or Ibrahim\or Al-Hijr\or An-Nahl\or Al-Isra\or Al-Kahf\or Maryam\or Taha\or Al-Anbiya\or Al-Hajj\or Al-Mumenoon\or An-Noor\or Al-Furqan\or Ash-Shuara\or An-Naml\or Al-Qasas\or Al-Ankaboot\or Ar-Room\or Luqman\or As-Sajda\or Al-Ahzab\or Saba\or Fatir\or Ya-Seen\or As-Saaffat\or Sad\or Az-Zumar\or Ghafir\or Fussilat\or Ash-Shura\or Az-Zukhruf\or Ad-Dukhan\or Al-Jathiya\or Al-Ahqaf\or Muhammad\or Al-Fath\or Al-Hujraat\or Qaf\or Adh-Dhariyat\or At-tur\or An-Najm\or Al-Qamar\or Al-Rahman\or Al-Waqia\or Al-Hadid\or Al-Mujadila\or Al-Hashr\or Al-Mumtahina\or As-Saff\or Al-Jumua\or Al-Munafiqoon\or At-Taghabun\or At-Talaq\or At-Tahrim\or Al-Mulk\or Al-Qalam\or Al-Haaqqa\or Al-Maarij\or Nooh\or Al-Jinn\or Al-Muzzammil\or Al-Muddathir\or Al-Qiyama\or Al-Insan\or Al-Mursalat\or An-Naba\or An-Naziat\or Abasa\or At-Takwir\or AL-Infitar\or Al-Mutaffifin\or Al-Inshiqaq\or Al-Burooj\or At-Tariq\or Al-Ala\or Al-Ghashiya\or Al-Fajr\or Al-Balad\or Ash-Shams\or Al-Lail\or Ad-Dhuha\or Al-Inshirah\or At-Tin\or Al-Alaq\or Al-Qadr\or Al-Bayyina\or Al-Zalzala\or Al-Adiyat\or Al-Qaria\or At-Takathur\or Al-Asr\or Al-Humaza\or Al-Fil\or Quraish\or Al-Maun\or Al-Kauther\or Al-Kafiroon\or An-Nasr\or Al-Masadd\or Al-Ikhlas\or Al-Falaq\or An-Nas\else\relax\fi}%
+%
+%% makes some macros for surah name to convert them to their original number in surah list.
+    \newcount\qt@tempcount \qt@tempcount=1%
+    \loop%
+        \edef\qt@tmp{\lowercase{\edef\noexpand\qt@surah@name{\@surahname[\qt@tempcount]}}}%
+        \qt@tmp%
+        \expandafter\xdef\csname qt@surah@\qt@surah@name\endcsname{\the\qt@tempcount}%
+    \ifnum\qt@tempcount<114%
+        \advance\qt@tempcount by 1\relax%
+    \repeat%
+%
+\newcount\surahcount%
+\newcount\ayahcount%
+%
+\def\indexconvert#1#2#3{%
+    \surahcount=1%
+    \ayahcount=#1%
+    \loop
+    \ifnum\ayahcount>\qt@getversenum\surahcount%
+        \advance\ayahcount by -\qt@getversenum\surahcount\relax%
+        \advance\surahcount by 1\relax%
+    \repeat
+    \ifdefined#2\else\newcount#2\fi#2=\surahcount%
+    \ifdefined#3\else\newcount#3\fi#3=\ayahcount%
+}%
+%
+\bidi@newrobustcmd\qt@default{1-7}% Surah Al-hamd
+\bidi@newrobustcmd\setqurantextdefault[1]{%
+\bidi@renewrobustcmd{\qt@default}{#1}}%
+%
+\def\clap#1{\hbox to 0pt{\hss#1\hss}}%
+\newcount\qt@WordCount%
+\newcommand*{\qt@PrintWordCount}{\leavevmode\raise-.6\baselineskip%
+\clap{\tiny\global\advance\qt@WordCount\@ne{\the\qt@WordCount}}}%
+\def\showitemsmacro#1{%
+    \begingroup\fboxsep=0.25pt \fboxrule=0.5pt%
+    {\ifxetex\beginL\special{color push rgb 1 0 0}\ttfamily\fi%
+    \ifluatex\addfontfeature{Color=FF0000BB}\fi%
+    \qt@PrintWordCount%
+    \ifxetex\special{color pop}\endL\fi}%
+    \mbox{\strut#1}\endgroup%
+    \hskip0.25em\relax%
+}%
+%
+\DeclareDocumentCommand{\qt@doqt}{ o o }{%
+    \addtocounter{qt@count}{1}%
+    \def\@qtexp{}%
+    \loop%
+        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi\qt@par}%
+        \ifnum\value{qt@count}<\qt@max\relax%
+        \addtocounter{qt@count}{1}%
+    \repeat%
+    \IfNoValueTF{#1}%
+    {\@qtexp}%true
+    {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
+    \readlist*\qt@words{\@qtexp}%
+        \IfNoValueTF{#2}%
+        {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
+        \foreachitem\qt@word\in\qt@words{%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
+        }%
+        \global\edef\qt@currentfont{\the\font}%
+        \qt@showitems{\qt@currentfont\showitems\qt@words}%
+    }%false
+}%
+%
+\bidi@newrobustcmd\ChangeQtPar{%
+  \ifx\qt@par\relax%
+    \def\qt@par{\par}%
+  \else%
+    \let\qt@par\relax%
+  \fi%
+}%
+%
+\bidi@newrobustcmd\ToggleAyahNumber{%
+  \expandafter\ifx\qt@no{0}\relax%
+    \def\qt@no##1{ ##1}%
+  \else%
+    \def\qt@no##1{\relax}%
+  \fi%
+}%
+\DeclareDocumentCommand{\qurantext}{ s O{\qt@default} o t{+} }{%
+    \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+    \IfBooleanTF{#1}{%
+        \begingroup%
+        \ChangeQtPar%
+        \@qurantext[#2][#3]%
+        \endgroup%
+    }%
+    {\@qurantext[#2][#3]}%
+    \def\qt@showitems##1{\relax}%
+}%
+%
+\def\@qurantext[#1][#2]{%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \setcounter{qt@count}{\qt@min}%
+  \addtocounter{qt@count}{-1}%
+  \IfNoValueTF{#2}{\qt@doqt}{%
+      \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
+      \qt@doqt[\qt@@start][\qt@@end]%
+      }%
+      {\qt@doqt[#2]}%
+    }%
+}%
+%
+\def\qt@get#1-#2;{\edef\qt@min{#1}\edef\qt@max{#2}}%
+\def\qt@stripmax#1-{\edef\qt@max{#1}}%
+\def\qt@minmax#1{%
+  \qt@get#1-\relax;%
+  \edef\qt@tmpa{\qt@max}%
+  \edef\qt@relax{\relax}%
+  \ifx\qt@tmpa\qt@relax\edef\qt@max{\qt@min}%
+  \else\expandafter\qt@stripmax\qt@max\fi%
+}%
+%
+\def\qt@getrange#1--#2;{\def\qt@min{#1}\def\qt@max{#2}}%
+%
+\newcounter{qt@i}%
+\newcounter{qt@start}%
+\newcounter{qt@end}%
+%
+\bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlas
+\bidi@newrobustcmd\setsurahdefault[1]{%
+\bidi@renewrobustcmd{\qt@surah@default}{#1}}%
+%
+\DeclareDocumentCommand\quransurah{ s O{\qt@surah@default} }{%
+    \lowercase{\edef\qt@arglc{#2}}%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quransurah[\qt@arglc]%
+        \endgroup%
+    }%
+    {\@quransurah[\qt@arglc]}%
+}%
+%
+\bidi@newrobustcmd\@quransurah[1][\qt@surah@default]{%
+    \setcounter{qt@i}{1}%
+    \setcounter{qt@start}{1}%
+%
+    \IfSubStr{#1}{--}{% case of surahname range, e.g. An-Nasr--An-Nas
+        \expandafter\qt@getrange#1;%
+        \edef\qt@min{\csname qt@surah@\qt@min\endcsname}%
+        \edef\qt@max{\csname qt@surah@\qt@max\endcsname}%
+        \setcounter{qt@end}{\qt@getversenum\qt@max}%
+    }%
+    {%
+        \expandafter\qt@minmax\expandafter{#1}%
+        \if!\ifnum9<1\qt@min!\fi% \qt@min is a number.
+            \ifx\qt@min\qt@max%
+                \setcounter{qt@end}{\qt@getversenum{\qt@min}}%
+            \else%
+                \setcounter{qt@end}{\qt@getversenum{\qt@max}}%
+            \fi%
+        \else% in this case the argument is tranliteration of surahname
+                \edef\qt@min{\csname qt@surah@#1\endcsname}%
+                \edef\qt@max{\qt@min}%
+                \setcounter{qt@end}{\qt@getversenum\qt@min}%
+        \fi%
+    }%
+    \loop%
+    \ifnum\value{qt@i}<\qt@min%
+        \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
+        \addtocounter{qt@i}{1}%
+    \repeat%
+%
+    \ifx\qt@min\qt@max\relax%
+    \else%
+        \loop%
+        \ifnum\value{qt@i}<\qt@max%
+            \addtocounter{qt@end}{\qt@getversenum{\value{qt@i}}}%
+            \addtocounter{qt@i}{1}%
+        \repeat%
+    \fi%
+    \addtocounter{qt@end}{\value{qt@start}}%
+    \addtocounter{qt@end}{-1}%
+    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+}%
+%
+\DeclareDocumentCommand{\quranayah}{ s o o o t{+} }{%
+%    \IfBooleanTF{#5}{\let\showitems\showitems@Orig}{\def\showitems##1{\relax}}%
+    \IfBooleanTF{#5}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+    \lowercase{\edef\qt@arglc{#2}}%
+    \IfBooleanTF {#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranayah[\qt@arglc][#3][#4]#5%
+        \endgroup%
+    }%
+    {%
+        \@quranayah[\qt@arglc][#3][#4]#5%
+    }%
+    \def\qt@showitems##1{\relax}%
+}%
+%
+\def\@quranayah[#1][#2][#3]#4{% #1->Surah, #2->Ayah, #3->specific part
+    \if!\ifnum9<1#1!\fi% #1 is a number.
+        \def\qt@surahnumber{#1}%
+    \else%
+        \def\qt@surahnumber{\csname qt@surah@#1\endcsname}%
+    \fi%
+    \setcounter{qt@i}{1}%
+    \expandafter\qt@minmax\expandafter{#2}%
+    \setcounter{qt@start}{\qt@min}%
+    \setcounter{qt@end}{\qt@max}%
+%
+    \ifnum\qt@max>\qt@getversenum{\qt@surahnumber}\relax%
+        \ifx\qt@max\qt@min%
+            \relax%
+        \else%
+            \def\qt@max{\qt@getversenum{\qt@surahnumber}}%
+            \setcounter{qt@end}{\qt@max}%
+        \fi%
+    \fi%
+    \ifnum\qt@min>\qt@getversenum{\qt@surahnumber}%
+        \relax%
+    \else%
+        \loop%
+        \ifnum\value{qt@i}<\qt@surahnumber%
+            \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
+            \addtocounter{qt@i}{1}%
+        \repeat%
+%
+        \ifx\qt@max\qt@min%
+            %omitting basmalah when only first ayah is requested
+            \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
+            \IfBooleanTF{#4}%
+            {\begingroup\qurantext[\value{qt@start}][#3]+\endgroup}%
+            {\begingroup\qurantext[\value{qt@start}][#3]\endgroup}%
+            \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
+        \else%
+            \addtocounter{qt@end}{\value{qt@start}}%
+            \addtocounter{qt@end}{-\qt@min}%
+            \IfBooleanTF{#4}%
+            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]+\endgroup}%
+            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]\endgroup}%
+        \fi%
+    \fi%
+}%
+%
+\DeclareDocumentCommand\quranjuz{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranjuz[#2]%
+        \endgroup%
+    }%
+    {\@quranjuz[#2]}%
+}%
+%
+\def\@quranjuz[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \edef\qt@juz{\qt@getjuzdomain{\qt@min}}%
+        \begingroup\qurantext[\qt@juz]\endgroup%
+    \else%
+        \edef\qt@juz@start{\qt@getjuzdomain{\qt@min}}%
+        \edef\qt@juz@end{\qt@getjuzdomain{\qt@max}}%
+        \expandafter\qt@minmax\expandafter{\qt@juz@start}%
+        \setcounter{qt@start}{\qt@min}% start ayah
+        \expandafter\qt@minmax\expandafter{\qt@juz@end}%
+        \setcounter{qt@end}{\qt@max}% end ayah
+        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+    \fi%
+}%
+%
+\DeclareDocumentCommand\quranpage{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranpage[#2]%
+        \endgroup%
+    }%
+    {\@quranpage[#2]}%
+}%
+%
+\def\@quranpage[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \edef\qt@page{\qt@getpagedomain{\qt@min}}%
+        \begingroup\qurantext[\qt@page]\endgroup%
+    \else%
+        \edef\qt@page@start{\expandafter\qt@getpagedomain{\qt@min}}%
+        \edef\qt@page@end{\expandafter\qt@getpagedomain{\qt@max}}%
+        \expandafter\qt@minmax\expandafter{\qt@page@start}%
+        \setcounter{qt@start}{\qt@min}% start ayah
+        \expandafter\qt@minmax\expandafter{\qt@page@end}%
+        \setcounter{qt@end}{\qt@max}% end ayah
+        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+    \fi%
+}%
+%
+\DeclareDocumentCommand\quranquarter{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranquarter[#2]%
+        \endgroup%
+    }%
+    {\@quranquarter[#2]}%
+}%
+%
+\def\@quranquarter[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \edef\qt@page{\qt@getquarterdomain{\qt@min}}
+        \begingroup\qurantext[\qt@page]\endgroup%
+    \else%
+        \edef\qt@page@start{\expandafter\qt@getquarterdomain{\qt@min}}%
+        \edef\qt@page@end{\expandafter\qt@getquarterdomain{\qt@max}}%
+        \expandafter\qt@minmax\expandafter{\qt@page@start}%
+        \setcounter{qt@start}{\qt@min}% start ayah
+        \expandafter\qt@minmax\expandafter{\qt@page@end}%
+        \setcounter{qt@end}{\qt@max}% end ayah
+        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+    \fi%
+}%
+%
+\DeclareDocumentCommand\quranruku{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranruku[#2]%
+        \endgroup%
+    }%
+    {\@quranruku[#2]}%
+}%
+%
+\def\@quranruku[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \edef\qt@page{\qt@getrukudomain{\qt@min}}%
+        \begingroup\qurantext[\qt@page]\endgroup%
+    \else%
+        \edef\qt@page@start{\expandafter\qt@getrukudomain{\qt@min}}%
+        \edef\qt@page@end{\expandafter\qt@getrukudomain{\qt@max}}%
+        \expandafter\qt@minmax\expandafter{\qt@page@start}%
+        \setcounter{qt@start}{\qt@min}% start ayah
+        \expandafter\qt@minmax\expandafter{\qt@page@end}%
+        \setcounter{qt@end}{\qt@max}% end ayah
+        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+    \fi%
+}%
+%
+\DeclareDocumentCommand\quranhizb{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranhizb[#2]%
+        \endgroup%
+    }%
+    {\@quranhizb[#2]}%
+}%
+%
+\def\@quranhizb[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \c@qt@start=#1%
+        \c@qt@end=#1%
+    \else%
+        \c@qt@start=\qt@min%
+        \c@qt@end=\qt@max%
+    \fi%
+    \multiply\c@qt@start by 4%
+    \advance\c@qt@start by -3%
+    \multiply\c@qt@end by 4%
+    \quranquarter[\c@qt@start-\c@qt@end]%
+}%
+%
+\DeclareDocumentCommand\quranmanzil{ s o }{%
+    \IfBooleanTF{#1}%
+    {%
+        \begingroup%
+        \ChangeQtPar%
+        \@quranmanzil[#2]%
+        \endgroup%
+    }%
+    {\@quranmanzil[#2]}%
+}%
+%
+\def\@quranmanzil[#1]{%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \ifx\qt@max\qt@min%
+        \edef\qt@surah{\expandafter\qt@getmanzildomain{\qt@max}}%
+        \expandafter\quransurah[\qt@surah]%
+    \else%
+        \edef\qt@surah@start{\expandafter\qt@getmanzildomain{\qt@min}}%
+        \edef\qt@surah@end{\expandafter\qt@getmanzildomain{\qt@max}}%
+        \expandafter\qt@minmax\expandafter{\qt@surah@start}%
+        \setcounter{qt@start}{\qt@min}% start surah
+        \expandafter\qt@minmax\expandafter{\qt@surah@end}%
+        \setcounter{qt@end}{\qt@max}% end surah
+        \quransurah[\the\c@qt@start-\the\c@qt@end]%
+    \fi%
+}%
+%
+\def\qt@getmanzildomain#1{\ifcase#1\or1-4%Al-Hamd to An-Nisa
+    \or5-9%Al-Maeda through At-Taubah%
+    \or10-16%Yunus through An-Nahl%
+    \or17-25%Al-Isra through Al-Furqan%
+    \or26-36%Ash-Shuara through Ya seen%
+    \or37-49%As-Saaffat through Al-Hujraat%
+    \or50-114%Qaf through An-Nas%
+\else\relax\fi}%
+%
+\def\qt@getversenum#1{%
+\ifcase#1\or7\or286\or200\or176\or120\or165\or206\or75\or129\or109\or123\or111\or43\or52\or99\or128\or111\or110\or98\or135\or112\or78\or118\or64\or77\or227\or93\or88\or69\or60\or34\or30\or73\or54\or45\or83\or182\or88\or75\or85\or54\or53\or89\or59\or37\or35\or38\or29\or18\or45\or60\or49\or62\or55\or78\or96\or29\or22\or24\or13\or14\or11\or11\or18\or12\or12\or30\or52\or52\or44\or28\or28\or20\or56\or40\or31\or50\or40\or46\or42\or29\or19\or36\or25\or22\or17\or19\or26\or30\or20\or15\or21\or11\or8\or8\or19\or5\or8\or8\or11\or11\or8\or3\or9\or5\or4\or7\or3\or6\or3\or5\or4\or5\or6 \else \relax
+\fi}%
+%
+\def\qt@getjuzdomain#1{%
+\ifcase#1\or1-148\or149-259\or260-385\or386-516\or517-640\or641-750\or751-899\or900-1041\or1042-1200\or1201-1327\or1328-1478\or1479-1648\or1649-1802\or1803-2029\or2030-2214\or2215-2483\or2484-2673\or2674-2875\or2876-3214\or3215-3385\or3386-3563\or3564-3732\or3733-4089\or4090-4264\or4265-4510\or4511-4705\or4706-5104\or5105-5241\or5242-5672
+\or5673-6236 \else \relax \fi%
+}%
+%
+\def\qt@getpagedomain#1{%
+\ifcase#1\or1-7\or8-12\or13-23\or24-31\or32-36\or37-44\or45-55\or56-64\or65-68\or69-76\or77-83\or84-90\or91-95\or96-100\or101-108\or109-112\or113-119\or120-126\or127-133\or134-141\or142-148\or149-152\or153-160\or161-170\or171-176\or177-183\or184-188\or189-193\or194-197\or198-203\or204-209\or210-217\or218-222\or223-226\or227-231\or232-237\or238-240\or241-244\or245-252\or253-255\or256-259\or260-263\or264-266\or267-271\or272-276\or277-281\or282-288\or289-289\or290-293\or294-302\or303-308\or309-315\or316-322\or323-330\or331-338\or339-345\or346-354\or355-363\or364-370\or371-376\or377-384\or385-393\or394-401\or402-408\or409-414\or415-425\or426-433\or434-441\or442-446\or447-450\or451-458\or459-466\or467-473\or474-479\or480-487\or488-493\or494-499\or500-504\or505-507\or508-512\or513-516\or517-519\or520-526\or527-530\or531-537\or538-544\or545-552\or553-558\or559-567\or568-572\or573-579\or580-584\or585-587\or588-594\or595-598\or599-606\or607-614\or615-620\or621-627\or628-633\or634-640\or641-647\or648-655\or656-663\or664-668\or669-671\or672-674\or675-678\or679-682\or683-686\or687-692\or693-700\or701-705\or706-710\or711-714\or715-719\or720-726\or727-733\or734-739\or740-745\or746-751\or752-758\or759-764\or765-772\or773-777\or778-782\or783-789\or790-797\or798-807\or808-816\or817-824\or825-833\or834-841\or842-848\or849-857\or858-862\or863-870\or871-879\or880-883\or884-890\or891-899\or900-907\or908-913\or914-920\or921-926\or927-931\or932-935\or936-940\or941-946\or947-954\or955-965\or966-976\or977-984\or985-991\or992-997\or998-1005\or1006-1011\or1012-1021\or1022-1027\or1028-1035\or1036-1041\or1042-1049\or1050-1058\or1059-1074\or1075-1084\or1085-1091\or1092-1097\or1098-1103\or1104-1109\or1110-1113\or1114-1117\or1118-1124\or1125-1132\or1133-1141\or1142-1149\or1150-1160\or1161-1168\or1169-1176\or1177-1185\or1186-1193\or1194-1200\or1201-1205\or1206-1212\or1213-1221\or1222-1229\or1230-1235\or1236-1241\or1242-1248\or1249-1255\or1256-1261\or1262-1266\or1267-1271\or1272-1275\or1276-1282\or1283-1289\or1290-1296\or1297-1303\or1304-1307\or1308-1314\or1315-1321\or1322-1328\or1329-1334\or1335-1341\or1342-1346\or1347-1352\or1353-1357\or1358-1364\or1365-1370\or1371-1378\or1379-1384\or1385-1389\or1390-1397\or1398-1406\or1407-1417\or1418-1425\or1426-1434\or1435-1442\or1443-1452\or1453-1461\or1462-1470\or1471-1478\or1479-1485\or1486-1492\or1493-1501\or1502-1510\or1511-1518\or1519-1526\or1527-1535\or1536-1544\or1545-1554\or1555-1561\or1562-1570\or1571-1581\or1582-1590\or1591-1600\or1601-1610\or1611-1618\or1619-1626\or1627-1633\or1634-1639\or1640-1648\or1649-1659\or1660-1665\or1666-1674\or1675-1682\or1683-1691\or1692-1699\or1700-1707\or1708-1712\or1713-1720\or1721-1725\or1726-1735\or1736-1741\or1742-1749\or1750-1755\or1756-1760\or1761-1768\or1769-1774\or1775-1783\or1784-1792\or1793-1802\or1803-1817\or1818-1833\or1834-1853\or1854-1872\or1873-1892\or1893-1907\or1908-1915\or1916-1927\or1928-1935\or1936-1943\or1944-1955\or1956-1965\or1966-1973\or1974-1980\or1981-1988\or1989-1994\or1995-2003\or2004-2011\or2012-2019\or2020-2029\or2030-2036\or2037-2046\or2047-2056\or2057-2067\or2068-2078\or2079-2087\or2088-2095\or2096-2104\or2105-2115\or2116-2125\or2126-2133\or2134-2144\or2145-2155\or2156-2160\or2161-2167\or2168-2174\or2175-2185\or2186-2193\or2194-2201\or2202-2214\or2215-2223\or2224-2237\or2238-2250\or2251-2261\or2262-2275\or2276-2288\or2289-2301\or2302-2314\or2315-2326\or2327-2345\or2346-2360\or2361-2385\or2386-2399\or2400-2412\or2413-2424\or2425-2435\or2436-2446\or2447-2461\or2462-2473\or2474-2483\or2484-2493\or2494-2507\or2508-2518\or2519-2527\or2528-2540\or2541-2555\or2556-2564\or2565-2573\or2574-2584\or2585-2595\or2596-2600\or2601-2610\or2611-2618\or2619-2625\or2626-2633\or2634-2641\or2642-2650\or2651-2659\or2660-2667\or2668-2673\or2674-2690\or2691-2700\or2701-2715\or2716-2732\or2733-2747\or2748-2762\or2763-2777\or2778-2791\or2792-2801\or2802-2811\or2812-2818\or2819-2822\or2823-2827\or2828-2834\or2835-2844\or2845-2849\or2850-2852\or2853-2857\or2858-2866\or2867-2875\or2876-2887\or2888-2898\or2899-2910\or2911-2922\or2923-2932\or2933-2951\or2952-2971\or2972-2992\or2993-3015\or3016-3043\or3044-3068\or3069-3091\or3092-3115\or3116-3138\or3139-3159\or3160-3172\or3173-3181\or3182-3194\or3195-3203\or3204-3214\or3215-3222\or3223-3235\or3236-3247\or3248-3257\or3258-3265\or3266-3273\or3274-3280\or3281-3287\or3288-3295\or3296-3302\or3303-3311\or3312-3322\or3323-3329\or3330-3336\or3337-3346\or3347-3354\or3355-3363\or3364-3370\or3371-3378\or3379-3385\or3386-3392\or3393-3403\or3404-3414\or3415-3424\or3425-3433\or3434-3441\or3442-3450\or3451-3459\or3460-3469\or3470-3480\or3481-3488\or3489-3497\or3498-3503\or3504-3514\or3515-3523\or3524-3533\or3534-3539\or3540-3548\or3549-3555\or3556-3563\or3564-3568\or3569-3576\or3577-3583\or3584-3587\or3588-3595\or3596-3606\or3607-3613\or3614-3620\or3621-3628\or3629-3637\or3638-3645\or3646-3654\or3655-3663\or3664-3671\or3672-3678\or3679-3690\or3691-3698\or3699-3704\or3705-3717\or3718-3732\or3733-3745\or3746-3759\or3760-3775\or3776-3788\or3789-3812\or3813-3839\or3840-3864\or3865-3890\or3891-3914\or3915-3941\or3942-3970\or3971-3986\or3987-3996\or3997-4012\or4013-4031\or4032-4053\or4054-4063\or4064-4068\or4069-4079\or4080-4089\or4090-4098\or4099-4105\or4106-4114\or4115-4125\or4126-4132\or4133-4140\or4141-4149\or4150-4158\or4159-4166\or4167-4173\or4174-4182\or4183-4191\or4192-4199\or4200-4210\or4211-4218\or4219-4229\or4230-4238\or4239-4247\or4248-4256\or4257-4264\or4265-4272\or4273-4282\or4283-4287\or4288-4294\or4295-4303\or4304-4316\or4317-4323\or4324-4335\or4336-4347\or4348-4358\or4359-4372\or4373-4385\or4386-4398\or4399-4414\or4415-4432\or4433-4453\or4454-4473\or4474-4486\or4487-4495\or4496-4505\or4506-4515\or4516-4524\or4525-4530\or4531-4538\or4539-4545\or4546-4556\or4557-4564\or4565-4574\or4575-4583\or4584-4592\or4593-4598\or4599-4606\or4607-4611\or4612-4616\or4617-4623\or4624-4630\or4631-4645\or4646-4665\or4666-4681\or4682-4705\or4706-4726\or4727-4749\or4750-4766\or4767-4784\or4785-4810\or4811-4828\or4829-4852\or4853-4873\or4874-4895\or4896-4917\or4918-4941\or4942-4968\or4969-4995\or4996-5029\or5030-5055\or5056-5078\or5079-5086\or5087-5093\or5094-5099\or5100-5104\or5105-5110\or5111-5115\or5116-5125\or5126-5129\or5130-5135\or5136-5142\or5143-5150\or5151-5155\or5156-5161\or5162-5168\or5169-5177\or5178-5185\or5186-5192\or5193-5199\or5200-5208\or5209-5217\or5218-5222\or5223-5229\or5230-5236\or5237-5241\or5242-5253\or5254-5267\or5268-5286\or5287-5313\or5314-5331\or5332-5357\or5358-5385\or5386-5414\or5415-5429\or5430-5447\or5448-5460\or5461-5475\or5476-5494\or5495-5512\or5513-5542\or5543-5570\or5571-5596\or5597-5616\or5617-5641\or5642-5672\or5673-5702\or5703-5727\or5728-5758\or5759-5800\or5801-5829\or5830-5854\or5855-5882\or5883-5909\or5910-5931\or5932-5963\or5964-5993\or5994-6016\or6017-6043\or6044-6072\or6073-6098\or6099-6125\or6126-6137\or6138-6155\or6156-6176\or6177-6193\or6194-6207\or6208-6221\or6222-6236\else\relax\fi%
+}
+%
+\def\qt@getquarterdomain#1{
+\ifcase#1\or1-32\or33-50\or51-66\or67-81\or82-98\or99-112\or113-130\or131-148\or149-164\or165-183\or184-195\or196-209\or210-225\or226-239\or240-249\or250-259\or260-269\or270-278\or279-289\or290-307\or308-325\or326-344\or345-367\or368-385\or386-405\or406-425\or426-445\or446-463\or464-478\or479-493\or494-504\or505-516\or517-528\or529-550\or551-566\or567-580\or581-592\or593-606\or607-627\or628-640\or641-655\or656-669\or670-680\or681-695\or696-709\or710-719\or720-735\or736-750\or751-765\or766-777\or778-801\or802-824\or825-847\or848-862\or863-883\or884-899\or900-915\or916-929\or930-939\or940-954\or955-984\or985-1000\or1001-1018\or1019-1041\or1042-1070\or1071-1095\or1096-1109\or1110-1124\or1125-1142\or1143-1160\or1161-1181\or1182-1200\or1201-1220\or1221-1235\or1236-1253\or1254-1268\or1269-1280\or1281-1294\or1295-1309\or1310-1327\or1328-1345\or1346-1356\or1357-1374\or1375-1389\or1390-1416\or1417-1434\or1435-1453\or1454-1478\or1479-1496\or1497-1513\or1514-1533\or1534-1556\or1557-1580\or1581-1602\or1603-1625\or1626-1648\or1649-1672\or1673-1696\or1697-1711\or1712-1725\or1726-1741\or1742-1759\or1760-1777\or1778-1802\or1803-1851\or1852-1901\or1902-1930\or1931-1951\or1952-1975\or1976-1990\or1991-2011\or2012-2029\or2030-2051\or2052-2078\or2079-2098\or2099-2127\or2128-2156\or2157-2171\or2172-2190\or2191-2214\or2215-2238\or2239-2271\or2272-2308\or2309-2348\or2349-2402\or2403-2430\or2431-2458\or2459-2483\or2484-2511\or2512-2533\or2534-2565\or2566-2595\or2596-2613\or2614-2632\or2633-2654\or2655-2673\or2674-2708\or2709-2747\or2748-2791\or2792-2811\or2812-2825\or2826-2843\or2844-2855\or2856-2875\or2876-2907\or2908-2932\or2933-2983\or2984-3042\or3043-3112\or3113-3159\or3160-3185\or3186-3214\or3215-3240\or3241-3263\or3264-3280\or3281-3302\or3303-3327\or3328-3340\or3341-3365\or3366-3385\or3386-3409\or3410-3439\or3440-3462\or3463-3490\or3491-3513\or3514-3533\or3534-3550\or3551-3563\or3564-3583\or3584-3592\or3593-3615\or3616-3629\or3630-3651\or3652-3674\or3675-3700\or3701-3732\or3733-3764\or3765-3809\or3810-3870\or3871-3932\or3933-3990\or3991-4021\or4022-4065\or4066-4089\or4090-4110\or4111-4133\or4134-4153\or4154-4173\or4174-4198\or4199-4226\or4227-4242\or4243-4264\or4265-4284\or4285-4298\or4299-4322\or4323-4348\or4349-4381\or4382-4430\or4431-4484\or4485-4510\or4511-4530\or4531-4554\or4555-4577\or4578-4600\or4601-4612\or4613-4625\or4626-4656\or4657-4705\or4706-4758\or4759-4809\or4810-4854\or4855-4901\or4902-4979\or4980-5053\or5054-5090\or5091-5104\or5105-5117\or5118-5136\or5137-5156\or5157-5177\or5178-5191\or5192-5217\or5218-5229\or5230-5241\or5242-5271\or5272-5323\or5324-5393\or5394-5447\or5448-5494\or5495-5551\or5552-5609\or5610-5672\or5673-5758\or5759-5829\or5830-5884\or5885-5948\or5949-6023\or6024-6090\or6091-6154\or6155-6236\else\relax\fi%
+}%
+%
+\def\qt@getrukudomain#1{%
+\ifcase#1\or1-7\or8-14\or15-27\or28-36\or37-46\or47-53\or54-66\or67-68\or69-78\or79-89\or90-93\or94-103\or104-110\or111-119\or120-128\or129-136\or137-148\or149-154\or155-159\or160-170\or171-174\or175-183\or184-189\or190-195\or196-203\or204-217\or218-223\or224-228\or229-235\or236-238\or239-242\or243-249\or250-255\or256-260\or261-264\or265-267\or268-273\or274-280\or281-288\or289-290\or291-293\or294-302\or303-313\or314-323\or324-334\or335-347\or348-356\or357-364\or365-373\or374-384\or385-394\or395-402\or403-413\or414-422\or423-436\or437-441\or442-448\or449-464\or465-473\or474-482\or483-493\or494-503\or504-507\or508-515\or516-518\or519-526\or527-535\or536-543\or544-552\or553-563\or564-569\or570-580\or581-584\or585-589\or590-593\or594-597\or598-605\or606-608\or609-619\or620-627\or628-634\or635-645\or646-655\or656-664\or665-669\or670-674\or675-680\or681-688\or689-695\or696-703\or704-712\or713-719\or720-725\or726-735\or736-746\or747-755\or756-762\or763-769\or770-777\or778-784\or785-789\or790-799\or800-809\or810-819\or820-830\or831-839\or840-844\or845-849\or850-859\or860-871\or872-879\or880-883\or884-889\or890-899\or900-910\or911-918\or919-929\or930-933\or934-939\or940-943\or944-954\or955-964\or965-979\or980-985\or986-993\or994-1001\or1002-1007\or1008-1012\or1013-1018\or1019-1026\or1027-1038\or1039-1047\or1048-1053\or1054-1062\or1063-1080\or1081-1083\or1084-1095\or1096-1101\or1102-1105\or1106-1111\or1112-1116\or1117-1125\or1126-1135\or1136-1142\or1143-1160\or1161-1170\or1171-1179\or1180-1188\or1189-1197\or1198-1204\or1205-1208\or1209-1218\or1219-1224\or1225-1229\or1230-1235\or1236-1241\or1242-1251\or1252-1259\or1260-1264\or1265-1272\or1273-1277\or1278-1294\or1295-1301\or1302-1307\or1308-1315\or1316-1324\or1325-1334\or1335-1345\or1346-1353\or1354-1357\or1358-1364\or1365-1374\or1375-1384\or1385-1394\or1395-1404\or1405-1417\or1418-1424\or1425-1434\or1435-1446\or1447-1456\or1457-1467\or1468-1473\or1474-1481\or1482-1497\or1498-1508\or1509-1522\or1523-1533\or1534-1541\or1542-1556\or1557-1568\or1569-1582\or1583-1596\or1597-1602\or1603-1616\or1617-1625\or1626-1631\or1632-1638\or1639-1645\or1646-1653\or1654-1664\or1665-1675\or1676-1689\or1690-1700\or1701-1707\or1708-1714\or1715-1725\or1726-1733\or1734-1738\or1739-1744\or1745-1750\or1751-1756\or1757-1762\or1763-1771\or1772-1777\or1778-1784\or1785-1791\or1792-1802\or1803-1817\or1818-1827\or1828-1846\or1847-1862\or1863-1881\or1882-1901\or1902-1910\or1911-1922\or1923-1926\or1927-1935\or1936-1941\or1942-1951\or1952-1961\or1962-1966\or1967-1971\or1972-1977\or1978-1984\or1985-1990\or1991-2001\or2002-2011\or2012-2020\or2021-2029\or2030-2039\or2040-2051\or2052-2059\or2060-2069\or2070-2081\or2082-2089\or2090-2099\or2100-2106\or2107-2113\or2114-2122\or2123-2129\or2130-2140\or2141-2152\or2153-2157\or2158-2162\or2163-2171\or2172-2184\or2185-2189\or2190-2193\or2194-2199\or2200-2210\or2211-2222\or2223-2241\or2242-2250\or2251-2265\or2266-2290\or2291-2300\or2301-2315\or2316-2332\or2333-2348\or2349-2372\or2373-2402\or2403-2424\or2425-2437\or2438-2452\or2453-2463\or2464-2476\or2477-2483\or2484-2493\or2494-2512\or2513-2524\or2525-2533\or2534-2558\or2559-2576\or2577-2595\or2596-2605\or2606-2617\or2618-2620\or2621-2628\or2629-2633\or2634-2643\or2644-2652\or2653-2659\or2660-2667\or2668-2673\or2674-2695\or2696-2705\or2706-2723\or2724-2750\or2751-2765\or2766-2791\or2792-2801\or2802-2811\or2812-2817\or2818-2825\or2826-2831\or2832-2841\or2842-2848\or2849-2852\or2853-2855\or2856-2864\or2865-2875\or2876-2889\or2890-2899\or2900-2915\or2916-2932\or2933-2941\or2942-2965\or2966-2984\or2985-3001\or3002-3036\or3037-3054\or3055-3072\or3073-3091\or3092-3107\or3108-3123\or3124-3159\or3160-3173\or3174-3190\or3191-3203\or3204-3217\or3218-3225\or3226-3241\or3242-3252\or3253-3265\or3266-3273\or3274-3280\or3281-3294\or3295-3302\or3303-3312\or3313-3327\or3328-3340\or3341-3353\or3354-3362\or3363-3370\or3371-3384\or3385-3391\or3392-3403\or3404-3409\or3410-3419\or3420-3428\or3429-3436\or3437-3449\or3450-3462\or3463-3469\or3470-3480\or3481-3488\or3489-3503\or3504-3514\or3515-3525\or3526-3533\or3534-3541\or3542-3553\or3554-3560\or3561-3567\or3568-3573\or3574-3585\or3586-3591\or3592-3601\or3602-3606\or3607-3615\or3616-3627\or3628-3636\or3637-3642\or3643-3651\or3652-3660\or3661-3667\or3668-3674\or3675-3686\or3687-3697\or3698-3705\or3706-3717\or3718-3737\or3738-3755\or3756-3772\or3773-3788\or3789-3809\or3810-3862\or3863-3901\or3902-3926\or3927-3970\or3971-3984\or3985-3996\or3997-4010\or4011-4034\or4035-4058\or4059-4067\or4068-4079\or4080-4089\or4090-4099\or4100-4110\or4111-4121\or4122-4128\or4129-4133\or4134-4142\or4143-4153\or4154-4160\or4161-4170\or4171-4183\or4184-4193\or4194-4201\or4202-4211\or4212-4218\or4219-4226\or4227-4236\or4237-4243\or4244-4250\or4251-4262\or4263-4272\or4273-4281\or4282-4291\or4292-4301\or4302-4315\or4316-4325\or4326-4340\or4341-4350\or4351-4360\or4361-4370\or4371-4381\or4382-4392\or4393-4414\or4415-4443\or4444-4456\or4457-4473\or4474-4484\or4485-4494\or4495-4499\or4500-4510\or4511-4520\or4521-4530\or4531-4536\or4537-4545\or4546-4556\or4557-4564\or4565-4573\or4574-4583\or4584-4593\or4594-4600\or4601-4609\or4610-4612\or4613-4622\or4623-4630\or4631-4645\or4646-4659\or4660-4675\or4676-4698\or4699-4721\or4722-4735\or4736-4763\or4764-4784\or4785-4809\or4810-4816\or4817-4846\or4847-4868\or4869-4886\or4887-4901\or4902-4926\or4927-4946\or4947-4979\or4980-5017\or5018-5053\or5054-5075\or5076-5085\or5086-5094\or5095-5100\or5101-5104\or5105-5110\or5111-5117\or5118-5126\or5127-5136\or5137-5143\or5144-5150\or5151-5156\or5157-5163\or5164-5172\or5173-5177\or5178-5185\or5186-5188\or5189-5196\or5197-5199\or5200-5209\or5210-5217\or5218-5224\or5225-5229\or5230-5236\or5237-5241\or5242-5255\or5256-5271\or5272-5304\or5305-5323\or5324-5360\or5361-5375\or5376-5410\or5411-5419\or5420-5439\or5440-5447\or5448-5466\or5467-5475\or5476-5494\or5495-5495\or5496-5526\or5527-5551\or5552-5581\or5582-5591\or5592-5613\or5614-5622\or5623-5662\or5663-5672\or5673-5702\or5703-5712\or5713-5738\or5739-5758\or5759-5800\or5801-5829\or5830-5848\or5849-5884\or5885-5909\or5910-5931\or5932-5948\or5949-5967\or5968-5993\or5994-6023\or6024-6043\or6044-6058\or6059-6079\or6080-6090\or6091-6098\or6099-6106\or6107-6125\or6126-6130\or6131-6138\or6139-6146\or6147-6157\or6158-6168\or6169-6176\or6177-6179\or6180-6188\or6189-6193\or6194-6197\or6198-6204\or6205-6207\or6208-6213\or6214-6216\or6217-6221\or6222-6225\or6226-6230\or6231-6236\else\relax\fi
+}%
+%
+\bidi@newrobustcmd\ToggleBasmalah{%
+  \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
+  \ifx\basmalah\relax%
+    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
+  \else%
+    \let\basmalah\relax%
+  \fi%
+  \ifqt@translt\ToggleBasmalahlt\fi%
+  \ifqt@transen\ToggleBasmalahen\fi%
+  \ifqt@transde\ToggleBasmalahde\fi%
+  \ifqt@transfa\ToggleBasmalahfa\fi%
+}%
+\ifqt@uthmani%
+    \input{qurantext-uthmani.def}%
+\else%
+    \ifqt@uthmanimin%
+        \input{qurantext-uthmani-min.def}%
+    \else%
+        \input{qurantext-simple.def}%
+    \fi%
+\fi%
+%%
+\ifqt@translt%
+    \input{qurantext-en.transliteration.def}%
+    \input{quran-translt.def}%
+\fi%
+\ifqt@transen%
+    \input{qurantext-en.translation.def}%
+    \input{quran-transen.def}%
+\fi%
+\ifqt@transde%
+    \input{qurantext-de.translation.def}%
+    \input{quran-transde.def}%
+\fi%
+\ifqt@transfa%
+    \input{qurantext-fa.translation.def}%
+    \input{quran-transfa.def}%
+\fi%
+\ifqt@transfr%
+    \input{qurantext-fr.translation.def}%
+    \input{quran-transfr.def}%
+\fi%
+%% End of file `quran.sty'.

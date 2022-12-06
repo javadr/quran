@@ -1,0 +1,23 @@
+\documentclass[twocolumn]{article}
+\usepackage{arabxetex} % for typesetting Arabic text in Rigth−To−Left direction
+\usepackage[trans={en, lt, de, fa}, uthmani]{quran}
+
+\def\titlerule#1{\hrulefill  #1: \par}
+
+\begin{document}
+
+
+\begin{arab}[utf]
+\qurantext\par
+\titlerule{\beginL Persian Translation\endL}
+\qurantextfa\par
+\end{arab}
+\newpage
+\titlerule{Transliteration}
+\qurantextlt\par
+\titlerule{German Traslation}
+\qurantextde\par
+\titlerule{English Translation}
+\qurantexten\par
+
+\end{document}

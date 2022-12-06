@@ -1,0 +1,18 @@
+\documentclass[12pt]{article}
+
+\usepackage[uthmani, wordwise]{quran}
+%%% for typesetting arabic text
+\usepackage{polyglossia}
+\setotherlanguage{arabic}
+\usepackage{fontspec}
+\setmainfont{Scheherazade}
+
+%%% for typesetting in Rigth-To-Left direction
+\usepackage{bidi}
+
+\begin{document} 
+
+\setRTL
+\textarabic{\quranayah[2][10-20][1-99]}
+\textarabic{\textbf{\quranayah*[2][10-20][100]}}
+\end{document}

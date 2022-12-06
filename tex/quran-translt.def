@@ -1,0 +1,140 @@
+%% This is file `quran-translt.def',
+%% 
+%% Copyright © 2015-2021
+%% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% This work is “author-maintained” (as per LPPL maintenance status).
+%% 
+%% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
+%% 
+%% to one who has devoted his life to Quran
+%%
+\bidi@newrobustcmd\q@b[1]{\textbf{#1}}%
+\bidi@newrobustcmd\q@i[1]{\textit{#1}}%
+\bidi@newrobustcmd\q@u[1]{\underline{#1}}%
+\let\qt@doqt@orig\qt@doqt%
+\let\ToggleBasmalah@orig\ToggleBasmalah%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\basmalahlt{Bismi All\q@u{a}hi a\q@b{l}rra\q@u{h}m\q@u{a}ni a\q@b{l}rra\q@u{h}eem\q@b{i} \qt@par}%
+\bidi@newrobustcmd\ToggleBasmalahlt{%
+  \ifx\basmalahlt\relax%
+    \def\basmalahlt{Bismi All\q@u{a}hi a\q@b{l}rra\q@u{h}m\q@u{a}ni a\q@b{l}rra\q@u{h}eem\q@b{i} \qt@par}%
+  \else%
+    \let\basmalahlt\relax%
+  \fi%
+}%
+\def\Basmalahlt{%
+        \begingroup%
+        \let\par\relax%
+        \def\qt@no##1{\relax}%
+        \quranayahlt[1][1][1]%
+        \endgroup%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand\qt@dolt{ o o }{%
+    \addtocounter{qt@count}{1}%
+    \def\@qtexp{}%
+    \loop%
+        \global\xdef\@qtexp{\@qtexp\csname qurantrans@lt@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi\qt@par}%
+        \ifnum\value{qt@count}<\qt@max\relax%
+        \addtocounter{qt@count}{1}%
+    \repeat%
+    \IfNoValueTF{#1}%
+    {\@qtexp}%true
+    {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
+    \readlist*\qt@words{\@qtexp}%
+        \IfNoValueTF{#2}%
+        {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
+        \foreachitem\qt@word\in\qt@words{%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
+        }%
+        \qt@showitems{\ifdefined\arabicfont\arabicfont\fi\showitems\qt@words}%
+    }%false
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\qurantextlt}{ s O{\qt@default} o t{+} }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+    \IfBooleanTF{#1}%
+    {\IfBooleanTF{#4}{\qurantext*[#2][#3]+}{\qurantext*[#2][#3]}}%
+    {\IfBooleanTF{#4}{\qurantext[#2][#3]+}{\qurantext[#2][#3]}}%
+    \let\qt@doqt\qt@doqt@orig% 
+    \def\qt@showitems##1{\relax}%        
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand\quransurahlt{ s O{\qt@surah@default} }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quransurah*[#2]}%
+    {\quransurah[#2]}%
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranayahlt}{ s o o o t{+} }{%
+    \let\qt@doqt\qt@dolt%
+    \let\ToggleBasmalah\ToggleBasmalahlt%
+    \IfBooleanTF{#1}%
+    {\IfBooleanTF{#5}{\quranayah*[#2][#3][#4]+}{\quranayah*[#2][#3][#4]}}%
+    {\IfBooleanTF{#5}{\quranayah[#2][#3][#4]+}{\quranayah[#2][#3][#4]}}%    
+    \let\qt@doqt\qt@doqt@orig%    
+    \let\ToggleBasmalah\ToggleBasmalah@orig%        
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranjuzlt}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranjuz*[#2]}%
+    {\quranjuz[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranpagelt}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranpage*[#2]}%
+    {\quranpage[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranquarterlt}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranquarter*[#2]}%
+    {\quranquarter[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranrukult}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranruku*[#2]}%
+    {\quranruku[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranhizblt}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranhizb*[#2]}%
+    {\quranhizb[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareDocumentCommand{\quranmanzillt}{ s o }{%
+    \let\qt@doqt\qt@dolt%
+    \IfBooleanTF{#1}%
+    {\quranmanzil*[#2]}%
+    {\quranmanzil[#2]}%        
+    \let\qt@doqt\qt@doqt@orig%    
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%

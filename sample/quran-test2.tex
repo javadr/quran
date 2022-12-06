@@ -1,0 +1,96 @@
+%This document wants to the explain the quran package with some examples.
+\documentclass{article}
+
+\usepackage{forloop}
+\usepackage[trans={lt,de,en,fa}]{quran}
+%The xepersian package automatically load bidi, and I've loaded it because I want to set a font that supports Arabic letters
+\usepackage{xepersian}
+
+% This macro set the main text font for non-latin letter, and it can scale font.
+\settextfont[Scale=1.1]{Scheherazade}
+
+\def\surna[#1]{\centerline{\hss\surahname*[#1]\hss\surahname[#1]\hss}}
+\def\test#1{%
+    \par
+    \surna[#1]
+    \quransurah*[#1]
+    \bigskip
+}
+
+\begin{document}
+\quransurah*[1]
+
+\quranayah*[2][286][5-24]
+
+\quranayah*[1][1-7][3-4]
+
+\qurantext*[1-2][6]+
+
+\qurantext*[1-2][6-8]
+% For typesetting بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ use below macro
+%\centerline{\basmalah}
+
+\quransurah[108] % Surah Al-Kauther
+
+%%\surna[110]\quransurah*[110]  % Surah Al-Nasr
+
+%The below typeset 104th surah through 113th surah.
+%%\quransurah*[104-113]
+
+\makeatletter
+\surna[\qt@surah@default]\quransurah*  % Surah Al-Ikhlas
+\makeatother
+
+\quranayah[33][33]
+\quranayah*[76][1-22]
+
+%%You can typeset whole of Holy Quran with below commands.
+\newcounter{ct}
+\forloop{ct}{110}{\value{ct} < 115} {\test{\the\value{ct}}}
+
+%%You can typeset whole of Holy Quran with below commands.
+%%\newcounter{jz}
+%%\forloop{jz}{1}{\value{jz} < 31} {\quranjuz[\value{jz}]}
+
+%%\quranjuz*[28-30]
+
+%\quranpage*[256]
+%\quranpage*[3-4]
+
+%%You can typeset whole of Holy Quran with below commands, just replace 8 with 605.
+\newcounter{pg}
+\forloop{pg}{1}{\value{pg} < 8} {
+\hfill  صفحة  \arabic{pg} \par
+\quranpage*[\value{pg}]\vfill}
+
+%\quranhizb*[57-60]
+
+%\quranquarter*[1-4]
+%\quranquarter*[239-240]
+
+%\quranruku[313]
+%\quranruku[556]
+
+%\quranmanzil*[2]
+
+
+%%\surna[1]\qurantext  % Surah Al-Hamd
+
+%%\surna[1]\qurantext* % Surah Al-Hamd
+
+%%\surna[114]\qurantext[6231-6236]  % Surah Al-Nas
+
+%%\surna[114]\qurantext*[6231-6236]  % Surah Al-Nas
+
+%%%\surna[2]\qurantext*[8-293] % Surah Al-Baqara
+
+%\qurantext[1-6236] % The whole of Holy Quran
+
+
+\newcount\mysurah
+\newcount\myayah
+\indexconvert{1436}{\mysurah}{\myayah}
+سوره \the\mysurah
+
+آیه  \the\myayah
+\end{document}
