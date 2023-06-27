@@ -1,6 +1,6 @@
 %% This is file `quran.sty',
 %%
-%% Copyright © 2015-2021
+%% Copyright © 2015-2023
 %% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
 %%
 %% This work may be distributed and/or modified under the
@@ -20,8 +20,8 @@
 %% to one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2021/02/02}
-\def\quranversion{1.81}
+\def\qurandate{2023/06/28}
+\def\quranversion{1.9}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -54,6 +54,7 @@
 \newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
 \def\qt@showitems#1{\footnote{#1}}%
 \def\qt@no#1{ #1}%
+\def\qt@begin{\relax}\def\qt@end{\relax}%
 %
 \DeclareOptionX{nopar}{\let\qt@par\relax}
 \DeclareOptionX{nonumber}{\def\qt@no##1{\relax}}
@@ -72,6 +73,8 @@
     \IfSubStr{#1}{fr}{\qt@transfrtrue}{}%
 }%
 \DeclareOptionX{wordwise}{\qt@wordwisetrue}
+\newcommand*\SetOrnamentalBraces[2]{\def\qt@begin{#1}\def\qt@end{#2}}%
+\DeclareOptionX{ornbraces}{\SetOrnamentalBraces{﴿}{﴾}}%
 \DeclareOptionX*{\PackageWarning{quran}{Unknown option ‘\CurrentOption’}}
 \ProcessOptionsX\relax
 %\ProcessOptions\relax
@@ -82,7 +85,7 @@
     \let\qt@newcmd\bidi@newrobustcmd%
 \fi
 \bidi@newrobustcmd\surahname{%
-  \@ifstar\@@surahname\@surahname
+    \@ifstar\@@surahname\@surahname
 }%
 %
 \def\@@surahname[#1]{%
@@ -133,22 +136,22 @@
     \hskip0.25em\relax%
 }%
 %
-\DeclareDocumentCommand{\qt@doqt}{ o o }{%
+\DeclareDocumentCommand{\qt@doqt}{ o o }{\qt@begin%
     \addtocounter{qt@count}{1}%
     \def\@qtexp{}%
     \loop%
-        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi\qt@par}%
+        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi}%
         \ifnum\value{qt@count}<\qt@max\relax%
         \addtocounter{qt@count}{1}%
     \repeat%
     \IfNoValueTF{#1}%
-    {\@qtexp}%true
+    {\@qtexp\qt@end\qt@par}%true
     {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
     \readlist*\qt@words{\@qtexp}%
         \IfNoValueTF{#2}%
         {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
         \foreachitem\qt@word\in\qt@words{%
-            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\relax\else\xspace\fi\fi\fi%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\qt@end\qt@par\relax\else\xspace\fi\fi\fi%
         }%
         \global\edef\qt@currentfont{\the\font}%
         \qt@showitems{\qt@currentfont\showitems\qt@words}%

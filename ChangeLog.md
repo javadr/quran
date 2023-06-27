@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 1.9 ## June 28th, 2023
+%% Use the `ornbraces` option and the \SetOrnamentalBraces command to customize the ornamental braces surrounding the Quran text.
 %% ver 1.81 ## Feb. 2nd, 2021
 %% Doc update for quran-bn
 %% ver 1.8 ## Oct. 14th, 2020
@@ -10,33 +12,33 @@
 %% ver 1.61 ## March 9th, 2020
 %% use current font in showitem instead of Amiri
 %% ver 1.6 ## March 7th, 2020
-%% support for getting any chunks of an Ayah with two extra optional arguments for \qurantext and \quranayah. 
+%% support for getting any chunks of an Ayah with two extra optional arguments for \qurantext and \quranayah.
 %% \Basmalah outputs basmalah without any surrounding whitespaces.
-%% This feature has been suggested and supported financially by Atiyah Ahmad. May God bless him. 
+%% This feature has been suggested and supported financially by Atiyah Ahmad. May God bless him.
 %% ver 1.51 ## May 4th, 2019
 %% A typo in quran-transde.def.
 %% ver 1.5 ## December 31th, 2018
 %% some minor bugs in \ToggleBasmalah and \quransurah.
 %% ver 1.42b ## November 29th, 2018
-%% A typo in quran-transde.def. 
+%% A typo in quran-transde.def.
 %% ver 1.42a ## December 22nd, 2017
-%% A typo in doc. Some of files were missed in the last update so the new version put them back. 
+%% A typo in doc. Some of files were missed in the last update so the new version put them back.
 %% ver 1.42 ## December 22nd, 2017
-%% \quransurahX and \quranayahX macros also act case-insensitive with anglicized title of surahs. X is one of en, de, fa, and lt. 
+%% \quransurahX and \quranayahX macros also act case-insensitive with anglicized title of surahs. X is one of en, de, fa, and lt.
 %% ver 1.41 ## December 22nd, 2017
-%% in previous versions, \quransurah and \quranayah macros were case-sensitive in case of using surah names, 
-%% but by this version both macros are case-insensitive, i.e. there in no diffirences between Al-Fatihda, al-fatiha, al-Fatiha, 
+%% in previous versions, \quransurah and \quranayah macros were case-sensitive in case of using surah names,
+%% but by this version both macros are case-insensitive, i.e. there in no diffirences between Al-Fatihda, al-fatiha, al-Fatiha,
 %% and the other possible combinations of lower-uppercase letters.
 %% ver 1.4 ## October 28th, 2017
-%% Persian, English, and Deutsch tranliteration added and ``fa", ``en", and ``de" version of macros defined for them. 
-%% for using this option, the `transfa`, `transen`, `transde` is defined. There is also a `trans` option that can get the 
-%% `'lt`, `en`, `de`, and `fa` as its value seperated by comma. 
+%% Persian, English, and Deutsch tranliteration added and ``fa", ``en", and ``de" version of macros defined for them.
+%% for using this option, the `transfa`, `transen`, `transde` is defined. There is also a `trans` option that can get the
+%% `'lt`, `en`, `de`, and `fa` as its value seperated by comma.
 %% ver 1.3 ## October 22th, 2017
 %% Transliteration support, now all macros have an ``lt" version for typesetting transliteration of the original macros.
 %% ver 1.261 ## August 22th, 2017
-%% typo in version number. 
+%% typo in version number.
 %% ver 1.26 ## August 22th, 2017
-%% minor improvements, fixes a bug in using \quranayah[x][y] that in this case it hadn't enclosed in group + manual update. 
+%% minor improvements, fixes a bug in using \quranayah[x][y] that in this case it hadn't enclosed in group + manual update.
 %% ver 1.252 ## February 28th, 2017
 %% minor improvements
 %% ver 1.25 and 1.251## December 25th, 2016
@@ -55,17 +57,17 @@
 %% ver 1.14  ## May 15th, 2016
 %% Some improvements in help document.
 %% ver 1.1  ## Apr 21st, 2016
-%% \indexconvert macro converts a number between 1 to 6236 to its exact surah and ayah number in 
+%% \indexconvert macro converts a number between 1 to 6236 to its exact surah and ayah number in
 %% the whole text of Quran.
 %% ver 1.05  ## Feb 9th, 2016
-%% \ChangeBasmalah and \ChangeAyahNumber are converted to \ToggleBasmalah and \ToggleAyahNumber respectively. 
-%% a minor bug in \quransurah* macro has fixed, this bug caused extra space in the text. 
+%% \ChangeBasmalah and \ChangeAyahNumber are converted to \ToggleBasmalah and \ToggleAyahNumber respectively.
+%% a minor bug in \quransurah* macro has fixed, this bug caused extra space in the text.
 %% ver 1.0 ## Feb 5th, 2016
 %% support for surahname as an argument in \quransurah and \quranayah macros.
 %% ver 0.941 ## July 11th, 2015
 %%  \qt@par moved to \qurantext from Ayat for minimizing sourcefile.
 %% ver 0.94 ## July 11th, 2015
-%%  \ChangeAyahNumber, \ChangeBasmalah can change the way ayah number and basmalah will appear.  
+%%  \ChangeAyahNumber, \ChangeBasmalah can change the way ayah number and basmalah will appear.
 %% a minor bug in extra white space around one ayah is solved now, it is founded by Masoud Yazdani.
 %% ver 0.91 ## July 10th, 2015
 %% default surah in \quransurah is now Al-Ikhlas
@@ -84,12 +86,12 @@
 %% ver 0.5 ## Jun 24, 2015
 %% package renamed form qurantext to quran
 %% \quranayah command can put a specific ayah/ayar from a surah.
-%% ver 0.4 
+%% ver 0.4
 %% Sura's name add by \surahname command, it'll choose the arabic/latin name of  sura based on text direction.
 %% ver 0.3
 %% Ayat numbers added.
 %% ver 0.2
 %%  Stack overflow solved by a nonrecursive function
-%% ver 0.1 
+%% ver 0.1
 %% initial commit
 
