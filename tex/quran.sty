@@ -159,19 +159,19 @@
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
-  \ifx\qt@par\relax%
-    \def\qt@par{\par}%
-  \else%
-    \let\qt@par\relax%
-  \fi%
+    \ifx\qt@par\relax%
+        \def\qt@par{\par}%
+    \else%
+        \let\qt@par\relax%
+    \fi%
 }%
 %
 \bidi@newrobustcmd\ToggleAyahNumber{%
-  \expandafter\ifx\qt@no{0}\relax%
-    \def\qt@no##1{ ##1}%
-  \else%
-    \def\qt@no##1{\relax}%
-  \fi%
+    \expandafter\ifx\qt@no{0}\relax%
+        \def\qt@no##1{ ##1}%
+    \else%
+        \def\qt@no##1{\relax}%
+    \fi%
 }%
 \DeclareDocumentCommand{\qurantext}{ s O{\qt@default} o t{+} }{%
     \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
@@ -186,25 +186,25 @@
 }%
 %
 \def\@qurantext[#1][#2]{%
-  \expandafter\qt@minmax\expandafter{#1}%
-  \setcounter{qt@count}{\qt@min}%
-  \addtocounter{qt@count}{-1}%
-  \IfNoValueTF{#2}{\qt@doqt}{%
-      \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
-      \qt@doqt[\qt@@start][\qt@@end]%
-      }%
-      {\qt@doqt[#2]}%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \setcounter{qt@count}{\qt@min}%
+    \addtocounter{qt@count}{-1}%
+    \IfNoValueTF{#2}{\qt@doqt}{%
+        \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
+        \qt@doqt[\qt@@start][\qt@@end]%
+        }%
+        {\qt@doqt[#2]}%
     }%
 }%
 %
 \def\qt@get#1-#2;{\edef\qt@min{#1}\edef\qt@max{#2}}%
 \def\qt@stripmax#1-{\edef\qt@max{#1}}%
 \def\qt@minmax#1{%
-  \qt@get#1-\relax;%
-  \edef\qt@tmpa{\qt@max}%
-  \edef\qt@relax{\relax}%
-  \ifx\qt@tmpa\qt@relax\edef\qt@max{\qt@min}%
-  \else\expandafter\qt@stripmax\qt@max\fi%
+    \qt@get#1-\relax;%
+    \edef\qt@tmpa{\qt@max}%
+    \edef\qt@relax{\relax}%
+    \ifx\qt@tmpa\qt@relax\edef\qt@max{\qt@min}%
+    \else\expandafter\qt@stripmax\qt@max\fi%
 }%
 %
 \def\qt@getrange#1--#2;{\def\qt@min{#1}\def\qt@max{#2}}%
@@ -526,16 +526,16 @@
 }%
 %
 \bidi@newrobustcmd\ToggleBasmalah{%
-  \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
-  \ifx\basmalah\relax%
-    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
-  \else%
-    \let\basmalah\relax%
-  \fi%
-  \ifqt@translt\ToggleBasmalahlt\fi%
-  \ifqt@transen\ToggleBasmalahen\fi%
-  \ifqt@transde\ToggleBasmalahde\fi%
-  \ifqt@transfa\ToggleBasmalahfa\fi%
+    \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
+    \ifx\basmalah\relax%
+        \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
+    \else%
+        \let\basmalah\relax%
+    \fi%
+    \ifqt@translt\ToggleBasmalahlt\fi%
+    \ifqt@transen\ToggleBasmalahen\fi%
+    \ifqt@transde\ToggleBasmalahde\fi%
+    \ifqt@transfa\ToggleBasmalahfa\fi%
 }%
 \ifqt@uthmani%
     \input{qurantext-uthmani.def}%
