@@ -21,17 +21,17 @@ test:
 
 .PHONY: cleanup
 cleanup:
-	$(MAKE) clean 
-	$(MAKE) clean -C doc -f ../Makefile 
+	$(MAKE) clean
+	$(MAKE) clean -C doc -f ../Makefile
 	$(MAKE) clean -C tex -f ../Makefile
-	$(MAKE) clean -C sample -f ../Makefile 
+	$(MAKE) clean -C sample -f ../Makefile
 
 .PHONY: clean
 clean:
 	@rm *.aux *.log *.toc *.idx *.hd *~ *.out
 
 .PHONY: ctan
-ctan: 
+ctan:
 	$(MAKE) cleanup
 	mkdir -p quran/doc quran/tex
 	cp -v README        quran

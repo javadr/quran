@@ -1,6 +1,6 @@
 %% This is file `quran-translt.def',
-%% 
-%% Copyright © 2015-2021
+%%
+%% Copyright © 2015-2023
 %% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
 %%
 %% This work may be distributed and/or modified under the
@@ -12,11 +12,11 @@
 %% version 2005/12/01 or later.
 %%
 %% This work has the LPPL maintenance status `maintained'.
-%% 
+%%
 %% This work is “author-maintained” (as per LPPL maintenance status).
-%% 
+%%
 %% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
-%% 
+%%
 %% to one who has devoted his life to Quran
 %%
 \bidi@newrobustcmd\q@b[1]{\textbf{#1}}%
@@ -68,8 +68,8 @@
     \IfBooleanTF{#1}%
     {\IfBooleanTF{#4}{\qurantext*[#2][#3]+}{\qurantext*[#2][#3]}}%
     {\IfBooleanTF{#4}{\qurantext[#2][#3]+}{\qurantext[#2][#3]}}%
-    \let\qt@doqt\qt@doqt@orig% 
-    \def\qt@showitems##1{\relax}%        
+    \let\qt@doqt\qt@doqt@orig%
+    \def\qt@showitems##1{\relax}%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand\quransurahlt{ s O{\qt@surah@default} }{%
@@ -77,7 +77,7 @@
     \IfBooleanTF{#1}%
     {\quransurah*[#2]}%
     {\quransurah[#2]}%
-    \let\qt@doqt\qt@doqt@orig%    
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranayahlt}{ s o o o t{+} }{%
@@ -85,56 +85,56 @@
     \let\ToggleBasmalah\ToggleBasmalahlt%
     \IfBooleanTF{#1}%
     {\IfBooleanTF{#5}{\quranayah*[#2][#3][#4]+}{\quranayah*[#2][#3][#4]}}%
-    {\IfBooleanTF{#5}{\quranayah[#2][#3][#4]+}{\quranayah[#2][#3][#4]}}%    
-    \let\qt@doqt\qt@doqt@orig%    
-    \let\ToggleBasmalah\ToggleBasmalah@orig%        
+    {\IfBooleanTF{#5}{\quranayah[#2][#3][#4]+}{\quranayah[#2][#3][#4]}}%
+    \let\qt@doqt\qt@doqt@orig%
+    \let\ToggleBasmalah\ToggleBasmalah@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranjuzlt}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranjuz*[#2]}%
-    {\quranjuz[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranjuz[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranpagelt}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranpage*[#2]}%
-    {\quranpage[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranpage[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranquarterlt}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranquarter*[#2]}%
-    {\quranquarter[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranquarter[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranrukult}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranruku*[#2]}%
-    {\quranruku[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranruku[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranhizblt}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranhizb*[#2]}%
-    {\quranhizb[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranhizb[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareDocumentCommand{\quranmanzillt}{ s o }{%
     \let\qt@doqt\qt@dolt%
     \IfBooleanTF{#1}%
     {\quranmanzil*[#2]}%
-    {\quranmanzil[#2]}%        
-    \let\qt@doqt\qt@doqt@orig%    
+    {\quranmanzil[#2]}%
+    \let\qt@doqt\qt@doqt@orig%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%
