@@ -1,9 +1,9 @@
-#!/bin/bash
-
-.PHONY: all
-all: doc test cleanup
+#!/usr/bin/bash
 
 .ONESHELL:
+
+.PHONY: all
+all: readme doc test cleanup
 
 .PHONY: doc
 doc:
@@ -33,7 +33,7 @@ clean:
 	@rm -fv ./*.{aux,log,toc,idx,hd,out} ./*~
 
 .PHONY: ctan
-ctan:
+ctan: readme
 	$(MAKE) cleanup
 	mkdir -p quran/doc quran/tex
 	cp -v README        quran
@@ -53,3 +53,36 @@ ctan:
 	mv -fv quran.zip ..
 	rm -rfv ../quran
 	mv -fv quran ..
+
+
+.PHONY: readme
+
+QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
+QURANVERSION := $(shell grep "quranversion{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
+YEAR := $(shell date +%Y)
+readme-file := README
+
+readme:
+	@echo "_____________________" > "${readme-file}"
+	@echo "The quran package" >> "${readme-file}"
+	@echo "v${QURANVERSION}" >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "The package is prepared for typesetting the holy Quran." >> "${readme-file}"
+	@echo "This work provides several macros for typesetting the whole or" >> "${readme-file}"
+	@echo "any parts of the holy Quran based on its popular divisions." >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "For more information, please see the documentation." >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "Current version release date: ${QURANDATE}" >> "${readme-file}"
+	@echo "___________________" >> "${readme-file}"
+	@echo "Seiied-Mohammad-Javad Razvian" >> "${readme-file}"
+	@echo "javadr@gmail.com" >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "Copyright © 2015-${YEAR}" >> "${readme-file}"
+	@echo "It may be distributed and/or modified under the LaTeX Project Public License," >> "${readme-file}"
+	@echo "version 1.3c or higher \"(your choice)\". The latest version of" >> "${readme-file}"
+	@echo "this license is at: http://www.latex-project.org/lppl.txt" >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "This work is “author-maintained” (as per LPPL maintenance status)" >> "${readme-file}"
+	@echo "" >> "${readme-file}"
+	@echo "by Seiied-Mohammad-Javad Razavian." >> "${readme-file}"
