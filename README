@@ -1,6 +1,6 @@
 _____________________
 The quran package
-v1.9
+v2.0
 
 The package is prepared for typesetting the holy Quran.
 This work provides several macros for typesetting the whole or
@@ -8,7 +8,7 @@ any parts of the holy Quran based on its popular divisions.
 
 For more information, please see the documentation.
 
-Current version release date: 2023/06/28
+Current version release date: 2023/07/10
 ___________________
 Seiied-Mohammad-Javad Razvian
 javadr@gmail.com
