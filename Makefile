@@ -30,7 +30,7 @@ cleanup:
 
 .PHONY: clean
 clean:
-	@rm -fv "*.{aux,log,toc,idx,hd,out}" ./*~
+	@rm -fv ./*.{aux,log,toc,idx,hd,out} ./*~
 
 .PHONY: ctan
 ctan:
