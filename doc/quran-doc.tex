@@ -34,7 +34,7 @@
 \usepackage[toc]{multitoc}
 \usepackage{manfnt}
 
-\usepackage[trans={lt, de, en, fa}, wordwise]{quran}
+\usepackage[trans={lt, de, en, fa}, wordwise, uthmani]{quran}
 \newfontfamily\quran[Script=Arabic]{Scheherazade}
 \newfontfamily\amiri[Script=Arabic]{Amiri}
 \hypersetup{%
@@ -115,8 +115,7 @@
 The \xpackage{quran} Package\thanks{To one having devoted his life to the Holy Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{\qurandate,\space version \quranversion\footnote{First release: June 1st, 2015}\\
-Eid al-Adha 1444 AH}
+\date{\qurandate,\space version \quranversion\footnote{First release: June 1st, 2015}}
 
 \parindent=0pt
 
@@ -545,9 +544,9 @@ The package, by default, typesets the text of the Holy Quran in simple script,
 but \xmgpar{uthmani} and \xmgpar{uthmani-min} change the default to  Uthmani script.
 Compare the following texts to figure out the differences between ``default'', ``uthmani'', and  ``uthmani-min'' scripts.
 
-    %\makeatletter\let\qt@newcmd\renewcommand
-    %\input{qurantext-simple.def}%
-    %\makeatother
+    \makeatletter\let\qt@newcmd\renewcommand
+    \input{qurantext-simple.def}%
+    \makeatother
     \centerline{\mxf{quranayah*[Al-Araf][54-56] (default)}{\quranayah*[al-araf][54-56]}}
     \makeatletter\let\qt@newcmd\renewcommand
     \input{qurantext-uthmani.def}%
@@ -1079,6 +1078,9 @@ fontspec{,} and bidi"]
         \item \cs{SetOrnamentalBraces} personalizes the ornamental braces surrounding the Quran text.
     \end{Version}
 
+    \begin{Version}{2023/07/10 v2.0}
+        \item The text of the Holy Quran in the package has been updated to comply with \href{https://tanzil.net/updates/}{Tanzil text version 1.1}.
+    \end{Version}
 
     \def\cb{{\tiny$\bullet$\space}}
     \def\mrule{\leaders\vrule height 2.5pt depth -1.5pt \hfill}
@@ -1155,6 +1157,7 @@ fontspec{,} and bidi"]
         2021/02/01 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-bn} package \mrule \space\null}\\
         2021/02/02 & 1.81 &  \cb  Documentation updates \\
         2023/06/28 & 1.9 &  \cb  `\xoption{ornbraces}' option \par\cb \cs{SetOrnamentalBraces} to customize the ornamental braces. \\
+        2023/07/10 & 2.0 &  \cb  Quran text update in compliance with tanzil version 1.1. \\
         \bottomrule
     \end{longtable}
     \end{small}

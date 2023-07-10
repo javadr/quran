@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 2.0 ## July 10th, 2023
+%% In compliance with [Tanzil version 1.1](https://tanzil.net/updates/).
 %% ver 1.9 ## June 28th, 2023
 %% Use the `ornbraces` option and the \SetOrnamentalBraces command to customize the ornamental braces surrounding the Quran text.
 %% ver 1.81 ## Feb. 2nd, 2021
