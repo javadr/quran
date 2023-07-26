@@ -55,13 +55,12 @@ ctan: readme
 	mv -fv quran ..
 
 
-.PHONY: readme
-
 QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
 QURANVERSION := $(shell grep "quranversion{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
 YEAR := $(shell date +%Y)
 readme-file := README
 
+.PHONY: readme
 readme:
 	@echo "_____________________" > "${readme-file}"
 	@echo "The quran package" >> "${readme-file}"
