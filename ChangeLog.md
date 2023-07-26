@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 2.1 ## July 27th, 2023
+%% Anglicized names of Quran surahs revised.
 %% ver 2.0 ## July 10th, 2023
 %% In compliance with [Tanzil version 1.1](https://tanzil.net/updates/).
 %% ver 1.9 ## June 28th, 2023

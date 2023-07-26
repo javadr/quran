@@ -20,8 +20,8 @@
 %% to one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2023/07/10}
-\def\quranversion{2.0}
+\def\qurandate{2023/07/25}
+\def\quranversion{2.1}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -87,11 +87,11 @@
 \bidi@newrobustcmd\surahname{%
     \@ifstar\@@surahname\@surahname
 }%
-%
+% surah name taken from http://tanzil.net/res/text/metadata/quran-data.xml
 \def\@@surahname[#1]{%
 \ifcase#1 {}\or الفاتحة\or البقرة\or آل عمران\or النساء\or المائدة\or الأنعام\or الأعراف\or الأنفال\or التوبة\or يونس\or هود\or يوسف\or الرعد\or إبراهيم\or الحجر\or النحل\or الإسراء\or الكهف\or مريم\or طه\or الأنبياء\or الحج\or المؤمنون\or النور\or الفرقان\or الشعراء\or النمل\or القصص\or العنكبوت\or الروم\or لقمان\or السجدة\or الأحزاب\or سبأ\or فاطر\or يس\or الصافات\or ص\or الزمر\or غافر\or فصلت\or الشورى\or الزخرف\or الدخان\or الجاثية\or الأحقاف\or محمد\or الفتح\or الحجرات\or ق\or الذاريات\or الطور\or النجم\or القمر\or الرحمن\or الواقعة\or الحديد\or المجادلة\or الحشر\or الممتحنة\or الصف\or الجمعة\or المنافقون\or التغابن\or الطلاق\or التحريم\or الملك\or القلم\or الحاقة\or المعارج\or نوح\or الجن\or المزمل\or المدثر\or القيامة\or الإنسان\or المرسلات\or النبأ\or النازعات\or عبس\or التكوير\or الإنفطار\or المطففين\or الانشقاق\or البروج\or الطارق\or الأعلى\or الغاشية\or الفجر\or البلد\or الشمس\or الليل\or الضحى\or الشرح\or التين\or العلق\or القدر\or البينة\or الزلزلة\or العاديات\or القارعة\or التكاثر\or العصر\or الهمزة\or الفيل\or قريش\or الماعون\or الكوثر\or الكافرون\or النصر\or المسد\or الإخلاص\or الفلق\or الناس\else\relax\fi}
 \def\@surahname[#1]{%
-\ifcase#1\or Al-Fatiha\or Al-Baqara\or Aal-e-Imran\or An-Nisa\or Al-Maeda\or Al-Anaam\or Al-Araf\or Al-Anfal\or At-Taubah\or Yunus\or Hud\or Yusuf\or Ar-Rad\or Ibrahim\or Al-Hijr\or An-Nahl\or Al-Isra\or Al-Kahf\or Maryam\or Taha\or Al-Anbiya\or Al-Hajj\or Al-Mumenoon\or An-Noor\or Al-Furqan\or Ash-Shuara\or An-Naml\or Al-Qasas\or Al-Ankaboot\or Ar-Room\or Luqman\or As-Sajda\or Al-Ahzab\or Saba\or Fatir\or Ya-Seen\or As-Saaffat\or Sad\or Az-Zumar\or Ghafir\or Fussilat\or Ash-Shura\or Az-Zukhruf\or Ad-Dukhan\or Al-Jathiya\or Al-Ahqaf\or Muhammad\or Al-Fath\or Al-Hujraat\or Qaf\or Adh-Dhariyat\or At-tur\or An-Najm\or Al-Qamar\or Al-Rahman\or Al-Waqia\or Al-Hadid\or Al-Mujadila\or Al-Hashr\or Al-Mumtahina\or As-Saff\or Al-Jumua\or Al-Munafiqoon\or At-Taghabun\or At-Talaq\or At-Tahrim\or Al-Mulk\or Al-Qalam\or Al-Haaqqa\or Al-Maarij\or Nooh\or Al-Jinn\or Al-Muzzammil\or Al-Muddathir\or Al-Qiyama\or Al-Insan\or Al-Mursalat\or An-Naba\or An-Naziat\or Abasa\or At-Takwir\or AL-Infitar\or Al-Mutaffifin\or Al-Inshiqaq\or Al-Burooj\or At-Tariq\or Al-Ala\or Al-Ghashiya\or Al-Fajr\or Al-Balad\or Ash-Shams\or Al-Lail\or Ad-Dhuha\or Al-Inshirah\or At-Tin\or Al-Alaq\or Al-Qadr\or Al-Bayyina\or Al-Zalzala\or Al-Adiyat\or Al-Qaria\or At-Takathur\or Al-Asr\or Al-Humaza\or Al-Fil\or Quraish\or Al-Maun\or Al-Kauther\or Al-Kafiroon\or An-Nasr\or Al-Masadd\or Al-Ikhlas\or Al-Falaq\or An-Nas\else\relax\fi}%
+\ifcase#1\or Al-Faatiha\or Al-Baqara\or Aal-i-Imraan\or An-Nisaa\or Al-Maaida\or Al-An'aam\or Al-A'raaf\or Al-Anfaal\or At-Tawba\or Yunus\or Hud\or Yusuf\or Ar-Ra'd\or Ibrahim\or Al-Hijr\or An-Nahl\or Al-Israa\or Al-Kahf\or Maryam\or Taa-Haa\or Al-Anbiyaa\or Al-Hajj\or Al-Muminoon\or An-Noor\or Al-Furqaan\or Ash-Shu'araa\or An-Naml\or Al-Qasas\or Al-Ankaboot\or Ar-Room\or Luqman\or As-Sajda\or Al-Ahzaab\or Saba\or Faatir\or Yaseen\or As-Saaffaat\or Saad\or Az-Zumar\or Ghaafir\or Fussilat\or Ash-Shura\or Az-Zukhruf\or Ad-Dukhaan\or Al-Jaathiya\or Al-Ahqaf\or Muhammad\or Al-Fath\or Al-Hujuraat\or Qaaf\or Adh-Dhaariyat\or At-Tur\or An-Najm\or Al-Qamar\or Ar-Rahmaan\or Al-Waaqia\or Al-Hadid\or Al-Mujaadila\or Al-Hashr\or Al-Mumtahana\or As-Saff\or Al-Jumu'a\or Al-Munaafiqoon\or At-Taghaabun\or At-Talaaq\or At-Tahrim\or Al-Mulk\or Al-Qalam\or Al-Haaqqa\or Al-Ma'aarij\or Nooh\or Al-Jinn\or Al-Muzzammil\or Al-Muddaththir\or Al-Qiyaama\or Al-Insaan\or Al-Mursalaat\or An-Naba\or An-Naazi'aat\or Abasa\or At-Takwir\or Al-Infitaar\or Al-Mutaffifin\or Al-Inshiqaaq\or Al-Burooj\or At-Taariq\or Al-A'laa\or Al-Ghaashiya\or Al-Fajr\or Al-Balad\or Ash-Shams\or Al-Lail\or Ad-Dhuhaa\or Ash-Sharh\or At-Tin\or Al-Alaq\or Al-Qadr\or Al-Bayyina\or Az-Zalzala\or Al-Aadiyaat\or Al-Qaari'a\or At-Takaathur\or Al-Asr\or Al-Humaza\or Al-Fil\or Quraish\or Al-Maa'un\or Al-Kawthar\or Al-Kaafiroon\or An-Nasr\or Al-Masad\or Al-Ikhlaas\or Al-Falaq\or An-Naas\else\relax\fi}%
 %
 %% makes some macros for surah name to convert them to their original number in surah list.
     \newcount\qt@tempcount \qt@tempcount=1%
@@ -213,7 +213,7 @@
 \newcounter{qt@start}%
 \newcounter{qt@end}%
 %
-\bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlas
+\bidi@newrobustcmd\qt@surah@default{112}% Surah Al-Ikhlaas
 \bidi@newrobustcmd\setsurahdefault[1]{%
 \bidi@renewrobustcmd{\qt@surah@default}{#1}}%
 %
