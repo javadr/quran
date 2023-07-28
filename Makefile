@@ -54,6 +54,10 @@ ctan: readme
 	rm -rfv ../quran
 	mv -fv quran ..
 
+.PHONY: dev
+dev:
+	cd tex || exit
+	sudo cp -v *.def quran.sty /usr/local/texlive/2023/texmf-dist/tex/latex/quran
 
 QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
 QURANVERSION := $(shell grep "quranversion{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
