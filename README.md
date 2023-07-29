@@ -25,4 +25,5 @@ any parts of the holy Quran based on its popular divisions.
 ```
 ![surah108](images/surah108.png)
 
-
+### Documentation
+For more details, please refer to [this link](http://mirrors.ctan.org/macros/unicodetex/latex/quran/doc/quran-doc.pdf).
