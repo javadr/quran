@@ -20,7 +20,7 @@
 %% to one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2023/07/25}
+\def\qurandate{2023/08/01}
 \def\quranversion{2.1}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
@@ -140,7 +140,8 @@
     \addtocounter{qt@count}{1}%
     \def\@qtexp{}%
     \loop%
-        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi}%
+        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi%
+        \ifnum\value{qt@count}<\qt@max\relax\qt@par\fi}%
         \ifnum\value{qt@count}<\qt@max\relax%
         \addtocounter{qt@count}{1}%
     \repeat%
@@ -151,11 +152,11 @@
         \IfNoValueTF{#2}%
         {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
         \foreachitem\qt@word\in\qt@words{%
-            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\qt@ob@end\qt@par\relax\else\xspace\fi\fi\fi%
+            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\qt@ob@end\relax\else\xspace\fi\fi\fi%
         }%
         \global\edef\qt@currentfont{\the\font}%
         \qt@showitems{\qt@currentfont\showitems\qt@words}%
-    }%false
+    \qt@par}%false
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
