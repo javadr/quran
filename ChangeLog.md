@@ -1,5 +1,7 @@
 %% Change Log
-%% ver 2.1 ## August 1st, 2023
+%% ver 2.2 ## August 1st, 2023
+%% Added support for old Anglicized names of Quran surahs
+%% ver 2.1 ## July 27st, 2023
 %% Anglicized names of Quran surahs revised.
 %% Fixes issue with droping \par in version 1.9.
 %% ver 2.0 ## July 10th, 2023

@@ -435,7 +435,7 @@ an ayah requires the \meta{chunck range} to have both \meta{number}s as the same
 \begin{declcs}{surahname}\oarg{index}\\
 \cs{surahname*}\oarg{index}
 \end{declcs}
-These commands return the anglicized/arabic title of \textit{index}$^{th}$ surah of the Holy Quran,
+These commands return the Anglicized/Arabic title of \textit{index}$^{th}$ surah of the Holy Quran,
 as depicted in table~\ref{tab1} and table~\ref{tab2}
 
     \centerline{\mx{surahname[19]}{\surahname[19]}
@@ -1098,7 +1098,7 @@ fontspec{,} and bidi"]
         \item The text of the Holy Quran in the package has been updated to comply with \href{https://tanzil.net/updates/}{Tanzil text version 1.1}.
     \end{Version}
 
-    \begin{Version}{2023/08/01 v2.1}
+    \begin{Version}{2023/07/27 v2.1}
         \item Anglicized names of Quran surahs Revised Using \href{http://tanzil.net/res/text/metadata/quran-data.xml}{Quran Metadata}.
         See table~\ref{tab:newnames}
         \item Fixed the issue with dropping \cs{par} introduced in version 1.9.
@@ -1115,21 +1115,22 @@ fontspec{,} and bidi"]
             4 & An-Nisa 	 & 	An-Nisaa & 5 & Al-Maeda 	 & 	Al-Maaida \\
             6 & Al-Anaam 	 & 	Al-An'aam & 7 & Al-Araf 	 & 	Al-A'raaf \\
             8 & Al-Anfal 	 & 	Al-Anfaal & 9 & At-Taubah 	 & 	At-Tawba \\
-            13 & Ar-Rad 	 & 	Ar-Ra'd & 17 & Al-Isra 	 & 	Al-Israa \\
-            20 & Taha 	 & 	Taa-Haa & 21 & Al-Anbiya 	 & 	Al-Anbiyaa \\
-            23 & Al-Mumenoon 	 & 	Al-Muminoon & 25 & Al-Furqan 	 & 	Al-Furqaan \\
-            26 & Ash-Shuara 	 & 	Ash-Shu'araa & 33 & Al-Ahzab 	 & 	Al-Ahzaab \\
-            35 & Fatir 	 & 	Faatir & 36 & Ya-Seen 	 & 	Yaseen \\
-            37 & As-Saaffat 	 & 	As-Saaffaat & 38 & Sad 	 & 	Saad \\
-            40 & Ghafir 	 & 	Ghaafir & 44 & Ad-Dukhan 	 & 	Ad-Dukhaan \\
-            45 & Al-Jathiya 	 & 	Al-Jaathiya & 49 & Al-Hujraat 	 & 	Al-Hujuraat \\
+            13 & Ar-Rad 	 & 	Ar-Ra'd & 14 & Ibrahim & Ibraahim \\
+            17 & Al-Isra 	 & 	Al-Israa & 20 & Taha 	 & 	Taa-Haa \\
+            21 & Al-Anbiya 	 & 	Al-Anbiyaa & 23 & Al-Mumenoon 	 & 	Al-Muminoon \\
+            25 & Al-Furqan 	 & 	Al-Furqaan & 26 & Ash-Shuara 	 & 	Ash-Shu'araa \\
+            33 & Al-Ahzab 	 & 	Al-Ahzaab & 35 & Fatir 	 & 	Faatir \\
+            36 & Ya-Seen 	 & 	Yaseen & 37 & As-Saaffat 	 & 	As-Saaffaat \\
+            38 & Sad 	 & 	Saad & 40 & Ghafir 	 & 	Ghaafir \\
+            44 & Ad-Dukhan 	 & 	Ad-Dukhaan & 45 & Al-Jathiya 	 & 	Al-Jaathiya \\
+            46 & Al-Ahqaf & Al-Al-Ahqaaf & 49 & Al-Hujraat 	 & 	Al-Hujuraat \\
             50 & Qaf 	 & 	Qaaf & 51 & Adh-Dhariyat 	 & 	Adh-Dhaariyat \\
             52 & At-tur 	 & 	At-Tur & 55 & Al-Rahman 	 & 	Ar-Rahmaan \\
             56 & Al-Waqia 	 & 	Al-Waaqia & 58 & Al-Mujadila 	 & 	Al-Mujaadila \\
             60 & Al-Mumtahina 	 & 	Al-Mumtahana & 62 & Al-Jumua 	 & 	Al-Jumu'a \\
             63 & Al-Munafiqoon 	 & 	Al-Munaafiqoon & 64 & At-Taghabun 	 & 	At-Taghaabun \\
             65 & At-Talaq 	 & 	At-Talaaq & 70 & Al-Maarij 	 & 	Al-Ma'aarij \\
-            74 & Al-Muddathir 	 & 	Al-Muddaththir & 75 & Al-Qiyama 	 & 	Al-Qiyaama \\
+            74 & Al-Muddathir 	 & 	Al-Muddaththir & 75 & Al-Qiyama & 	Al-Qiyaama \\
             76 & Al-Insan 	 & 	Al-Insaan & 77 & Al-Mursalat 	 & 	Al-Mursalaat \\
             79 & An-Naziat 	 & 	An-Naazi'aat & 82 & AL-Infitar 	 & 	Al-Infitaar \\
             84 & Al-Inshiqaq 	 & 	Al-Inshiqaaq & 86 & At-Tariq 	 & 	At-Taariq \\
@@ -1144,6 +1145,10 @@ fontspec{,} and bidi"]
         \end{tabular}
         \caption{Revision of Anglicized Names of Quran Surahs in ver. 2.1}\label{tab:newnames}
         \end{table}
+
+    \begin{Version}{2023/08/01 v2.2}
+        \item Added support for old Anglicized names of Quran surahs, making the package backward compatible.
+    \end{Version}
 
 
     \def\cb{{\tiny$\bullet$\space}}
@@ -1223,7 +1228,8 @@ fontspec{,} and bidi"]
         2021/02/02 & 1.81 &  \cb  Documentation updates \\
         2023/06/28 & 1.9 &  \cb  `\xoption{ornbraces}' option \par\cb \cs{SetOrnamentalBraces} to customize the ornamental braces. \\
         2023/07/10 & 2.0 &  \cb  Quran text update in compliance with tanzil version 1.1. \\
-        2023/08/01 & 2.1 &  \cb  Revision of the Anglicized names of Quran surahs \\
+        2023/07/27 & 2.1 &  \cb  Revision of the Anglicized names of Quran surahs \\
+        2023/08/01 & 2.2 &  \cb  Added support for old Anglicized names of Quran surahs \\
         \bottomrule
     \end{longtable}
     \end{small}
