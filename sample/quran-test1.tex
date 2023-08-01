@@ -1,18 +1,35 @@
 \documentclass[12pt]{article}
 
-\usepackage[uthmani, wordwise]{quran}
 %%% for typesetting arabic text
 \usepackage{polyglossia}
 \setotherlanguage{arabic}
 \usepackage{fontspec}
 \setmainfont{Scheherazade}
 
+\usepackage[uthmani, wordwise, ornbraces, nonumber]{quran}
 %%% for typesetting in Rigth-To-Left direction
 \usepackage{bidi}
 
-\begin{document} 
-
+\parindent=0pt
+\pagestyle{empty}
+\begin{document}
 \setRTL
-\textarabic{\quranayah[2][10-20][1-99]}
-\textarabic{\textbf{\quranayah*[2][10-20][100]}}
+
+\section{\LRE{Getting a Portion of an Ayah/Ayat}}
+\textarabic{\quranayah[92][1-21][22-32]+}
+\textarabic{\quranayah[92][1-21][73]}
+
+\section{\LRE{Changing the Ornamental Braces}}
+
+\SetOrnamentalBraces{[[}{]]}
+\textarabic{\quranayah*[2][286][5-24]+}
+
+\section{\LRE{Toggling the Effect of Ayah Number}}
+\ToggleAyahNumber
+\textarabic{\qurantext*[1-7][28]+}
+
+\section{\LRE{Toggling the Effect of Basmalah}}
+\ToggleBasmalah
+\textarabic{\quransurah*[110-114]}
+
 \end{document}
