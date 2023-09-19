@@ -5,7 +5,7 @@ The package is prepared for typesetting the holy Quran.
 This work provides several macros for typesetting the whole or
 any parts of the holy Quran based on its popular divisions.
 
-### Sample
+## Sample Usage
 
 ```
 \documentclass{article}
@@ -25,5 +25,22 @@ any parts of the holy Quran based on its popular divisions.
 ```
 ![surah108](images/surah108.png)
 
-### Documentation
+## Documentation
 For more details, please refer to [this link](http://mirrors.ctan.org/macros/unicodetex/latex/quran/doc/quran-doc.pdf).
+
+
+## License
+
+[The LaTeX project public license (LPPL), version 1.3c](https://www.latex-project.org/lppl/lppl-1-3c/)
+
+## Citation
+
+```tex
+@misc{quran,
+  title={{quran}: An easy way to typeset any part of The Holy Quran},
+  url={https://ctan.org/pkg/quran},
+  note={Software available from https://github.com/javadr/quran},
+  author={Javad Razavian},
+  year={2015},
+}
+```
