@@ -61,7 +61,7 @@ dev:
 
 QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
 QURANVERSION := $(shell grep "quranversion{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
-YEAR := $(shell date +%Y)
+YEAR := "$(shell echo ${QURANDATE} | cut -d'/' -f1)"
 readme-file := README
 
 .PHONY: readme
@@ -83,9 +83,8 @@ readme:
 	@echo "" >> "${readme-file}"
 	@echo "Copyright © 2015-${YEAR}" >> "${readme-file}"
 	@echo "It may be distributed and/or modified under the LaTeX Project Public License," >> "${readme-file}"
-	@echo "version 1.3c or higher \"(your choice)\". The latest version of" >> "${readme-file}"
+	@echo "version 1.3c or higher (your choice). The latest version of" >> "${readme-file}"
 	@echo "this license is at: http://www.latex-project.org/lppl.txt" >> "${readme-file}"
 	@echo "" >> "${readme-file}"
 	@echo "This work is “author-maintained” (as per LPPL maintenance status)" >> "${readme-file}"
-	@echo "" >> "${readme-file}"
 	@echo "by Seiied-Mohammad-Javad Razavian." >> "${readme-file}"
