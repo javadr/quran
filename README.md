@@ -16,14 +16,14 @@ any parts of the holy Quran based on its popular divisions.
 \begin{document}
 
     \begin{arab}[utf]
-        \quransurah[108]
+        \quransurah
         \medskip
         \quransurah*[108]
     \end{arab}
 
 \end{document}
 ```
-![surah108](images/surah108.png)
+![surah108](images/sample.png)
 
 ## Documentation
 For more details, please refer to [this link](http://mirrors.ctan.org/macros/unicodetex/latex/quran/doc/quran-doc.pdf).
@@ -39,7 +39,7 @@ For more details, please refer to [this link](http://mirrors.ctan.org/macros/uni
 @misc{quran,
   title={{quran}: An easy way to typeset any part of The Holy Quran},
   url={https://ctan.org/pkg/quran},
-  note={Software available from https://github.com/javadr/quran},
+  note={Available at https://github.com/javadr/quran},
   author={Javad Razavian},
   year={2015},
 }
