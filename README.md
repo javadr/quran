@@ -1,9 +1,10 @@
 # The quran package
-Copyright © 2015-2023
+Copyright © 2015-2024
 
-The package is prepared for typesetting the holy Quran.
-This work provides several macros for typesetting the whole or
-any parts of the holy Quran based on its popular divisions.
+The package is designed for typesetting the Holy Quran.
+It offers several macros for typesetting the entire text or specific sections,
+based on its traditional divisions.
+
 
 ## Sample Usage
 
@@ -26,7 +27,7 @@ any parts of the holy Quran based on its popular divisions.
 ![surah108](images/sample.png)
 
 ## Documentation
-For more details, please refer to [this link](http://mirrors.ctan.org/macros/unicodetex/latex/quran/doc/quran-doc.pdf).
+For further details, please refer to [this link](http://mirrors.ctan.org/macros/unicodetex/latex/quran/doc/quran-doc.pdf).
 
 
 ## License
