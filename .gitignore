@@ -2,6 +2,7 @@
 *.aux
 *~
 *.toc
+*.pdf
 WebNote.*
 test.*
 *-de-*
