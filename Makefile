@@ -57,7 +57,9 @@ ctan: readme
 .PHONY: dev
 dev:
 	cd tex || exit
-	sudo cp -v *.def quran.sty /usr/local/texlive/2023/texmf-dist/tex/latex/quran
+	sudo mkdir -p /usr/local/texlive/2024/texmf-dist/tex/latex/quran
+	sudo cp -v *.def quran.sty /usr/local/texlive/2024/texmf-dist/tex/latex/quran
+	sudo mktexlsr
 
 QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
 QURANVERSION := $(shell grep "quranversion{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
@@ -70,21 +72,20 @@ readme:
 	@echo "The quran package" >> "${readme-file}"
 	@echo "v${QURANVERSION}" >> "${readme-file}"
 	@echo "" >> "${readme-file}"
-	@echo "The package is prepared for typesetting the holy Quran." >> "${readme-file}"
-	@echo "This work provides several macros for typesetting the whole or" >> "${readme-file}"
-	@echo "any parts of the holy Quran based on its popular divisions." >> "${readme-file}"
+	@echo "The package is designed for typesetting the Holy Quran." >> "${readme-file}"
+	@echo "It offers several macros for typesetting the entire text " >> "${readme-file}"
+	@echo "or specific sections, based on its traditional divisions." >> "${readme-file}"	
 	@echo "" >> "${readme-file}"
-	@echo "For more information, please see the documentation." >> "${readme-file}"
+	@echo "For further details, please refer to the documentation." >> "${readme-file}"
 	@echo "" >> "${readme-file}"
-	@echo "Current version release date: ${QURANDATE}" >> "${readme-file}"
+	@echo "Release Date of the Current Version: ${QURANDATE}" >> "${readme-file}"
 	@echo "___________________" >> "${readme-file}"
 	@echo "Seiied-Mohammad-Javad Razvian" >> "${readme-file}"
 	@echo "javadr@gmail.com" >> "${readme-file}"
 	@echo "" >> "${readme-file}"
 	@echo "Copyright © 2015-${YEAR}" >> "${readme-file}"
-	@echo "It may be distributed and/or modified under the LaTeX Project Public License," >> "${readme-file}"
-	@echo "version 1.3c or higher (your choice). The latest version of" >> "${readme-file}"
-	@echo "this license is at: http://www.latex-project.org/lppl.txt" >> "${readme-file}"
+	@echo "This package may be distributed and/or modified under the terms of the LaTeX Project Public License," >> "${readme-file}"
+	@echo "version 1.3c or later (at your option). The latest version of" >> "${readme-file}"
+	@echo "the license is at: http://www.latex-project.org/lppl.txt" >> "${readme-file}"
 	@echo "" >> "${readme-file}"
-	@echo "This work is “author-maintained” (as per LPPL maintenance status)" >> "${readme-file}"
-	@echo "by Seiied-Mohammad-Javad Razavian." >> "${readme-file}"
+	@echo "This work has the LPPL maintenance status 'author-maintained'." >> "${readme-file}"
