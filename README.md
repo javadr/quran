@@ -2,8 +2,8 @@
 Copyright © 2015-2024
 
 The package is designed for typesetting the Holy Quran.
-It offers several macros for typesetting the entire text or specific sections,
-based on its traditional divisions.
+It offers several macros for typesetting the entire text
+or specific sections, based on its traditional divisions.
 
 
 ## Sample Usage
