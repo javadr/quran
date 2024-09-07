@@ -133,10 +133,10 @@ specific sections of the Holy Quran based on its traditional divisions,
 but also individual segments of an ayah. Additionally, 
 the package supports four translations of the Holy Quran in 
 German, English, French, and Persian, as well as its transliteration.%
-\footnote{There are four companion packages, \xpackage{quran-de},
-\xpackage{quran-ur}, \xpackage{quran-bn}, and \xpackage{quran-es}.
+\footnote{There are six companion packages, \xpackage{quran-de},
+\xpackage{quran-ur}, \xpackage{quran-bn}, \xpackage{quran-id}, \xpackage{quran-en}, and \xpackage{quran-es}.
 These packages provide additional translations of the Holy Quran in German, 
-Urdu, Bengali, and Spanish, respectively.}
+Urdu, Bengali, Indonesian, English, and Spanish, respectively.}
 
 Please report any issues, including bugs or typos in the documentation, 
 or submit feature requests at \url{https://github.com/javadr/quran/issues}.
@@ -1194,9 +1194,21 @@ fontspec{,} and bidi"]
         ensuring backward compatibility with previous versions of the package.
     \end{Version}
 
+    \begin{Version}{2023/11/01}
+        \item \href{https://github.com/javadr/quran-id}{\xpackage{quran-id}} 
+        package is released, adding three translations in Indonesian
+        as requested on \href{https://github.com/javadr/quran/issues/11}{this issue}.
+    \end{Version}
+
+    \begin{Version}{2023/11/04}
+        \item \href{https://github.com/javadr/quran-en}{\xpackage{quran-en}} 
+        package is released, adding three translations in English
+        as requested on \href{https://github.com/javadr/quran/issues/7}{this issue}.
+    \end{Version}
+
     \begin{Version}{2024/09/05}
         \item \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}} 
-        package is released, adding three translations of the Spanish language
+        package is released, adding three translations in Spanish
         as requested on \href{https://github.com/javadr/quran/issues/12}{this issue}.
     \end{Version}
 
@@ -1330,6 +1342,10 @@ fontspec{,} and bidi"]
         2023/07/10 & 2.0 &  \cb  Quran text update in compliance with tanzil version 1.1. \\
         2023/07/27 & 2.1 &  \cb  Revised Anglicized names of Quran surahs \\
         2023/08/01 & 2.2 &  \cb  Added support for old Anglicized names of Quran surahs \\
+        2023/11/01 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+            \href{https://github.com/javadr/quran-id}{\xpackage{quran-id}} package \mrule \space\null}\\
+        2023/11/04 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+            \href{https://github.com/javadr/quran-en}{\xpackage{quran-en}} package \mrule \space\null}\\
         2024/09/05 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
             \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}} package \mrule \space\null}\\
         2024/09/07 & 2.3 &  \cb  Documentation retouching \\
