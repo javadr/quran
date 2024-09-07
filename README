@@ -1,22 +1,21 @@
 _____________________
 The quran package
-v2.2
+v2.3
 
-The package is prepared for typesetting the holy Quran.
-This work provides several macros for typesetting the whole or
-any parts of the holy Quran based on its popular divisions.
+The package is designed for typesetting the Holy Quran.
+It offers several macros for typesetting the entire text 
+or specific sections, based on its traditional divisions.
 
-For more information, please see the documentation.
+For further details, please refer to the documentation.
 
-Current version release date: 2023/08/01
+Release Date of the Current Version: 2024/09/07
 ___________________
 Seiied-Mohammad-Javad Razvian
 javadr@gmail.com
 
-Copyright © 2015-2023
-It may be distributed and/or modified under the LaTeX Project Public License,
-version 1.3c or higher (your choice). The latest version of
-this license is at: http://www.latex-project.org/lppl.txt
+Copyright © 2015-2024
+This package may be distributed and/or modified under the terms of the LaTeX Project Public License,
+version 1.3c or later (at your option). The latest version of
+the license is at: http://www.latex-project.org/lppl.txt
 
-This work is “author-maintained” (as per LPPL maintenance status)
-by Seiied-Mohammad-Javad Razavian.
+This work has the LPPL maintenance status 'author-maintained'.
