@@ -1,6 +1,6 @@
 %% This is file `quran-transfr.def',
 %%
-%% Copyright © 2015-2023
+%% Copyright © 2015-2024
 %% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
 %%
 %% This work may be distributed and/or modified under the
@@ -17,7 +17,7 @@
 %%
 %% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
 %%
-%% to one who has devoted his life to Quran
+%% To one who has devoted his life to Quran
 %%
 \let\qt@doqt@orig\qt@doqt%
 \let\ToggleBasmalah@orig\ToggleBasmalah%
