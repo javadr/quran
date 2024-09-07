@@ -1,4 +1,6 @@
 %% Change Log
+%% ver 2.3 ## September 7th, 2024
+%% Documentation update with quran-es release
 %% ver 2.2 ## August 1st, 2023
 %% Added support for old Anglicized names of Quran surahs
 %% Retouchment of samples
