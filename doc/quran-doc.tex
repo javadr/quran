@@ -1,6 +1,6 @@
 %% This is file `quran-doc.tex',
 %%
-%% Copyright © 2015-2023
+%% Copyright © 2015-2024
 %% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
 %%
 %% This work may be distributed and/or modified under the
@@ -17,7 +17,7 @@
 %%
 %% The Current Maintainer of this work is Seiied-Mohammad-Javad Razavian.
 %%
-%% to one who has devoted his life to Quran
+%% To one who has devoted his life to Quran
 %%
 \documentclass{ltxdoc}
 
@@ -112,10 +112,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{\includegraphics[scale=.3]{quran.png}\\
-The \xpackage{quran} Package\thanks{To one having devoted his life to the Holy Quran}}
+The \xpackage{quran} Package\thanks{To one who has devoted his life to the Holy Quran}}
 \author{Seiied Mohammad Javad Razavian\\\xemail{javadr@gmail.com}}
 
-\date{\qurandate,\space version \quranversion\footnote{First release: June 1st, 2015}}
+\date{\qurandate,\space version \quranversion\footnote{Initial release: June 1st, 2015}}
 
 \parindent=0pt
 
@@ -124,16 +124,22 @@ The \xpackage{quran} Package\thanks{To one having devoted his life to the Holy Q
 \maketitle{
 \centerline{\large\bfseries Abstract}
 \bigskip
+
 The \xpackage{quran} package\footnote{This work has been inspired by \xpackage{lipsum} and
-\xpackage{ptext} packages and was initially released in June 2015 (Sha'ban 1436 AH).}
-has been prepared for typesetting the Holy Quran.
-It provides several macros for typesetting not only the entire or any specific parts of the Holy Quran based on its popular divisions
-but also any segments of an ayah.
-Additionally, it supports four translations of the Holy Quran in German, English, French, and Persian,
-as well as its transliteration.%
-\footnote{There are three companion packages, \xpackage{quran-de}, \xpackage{quran-ur}, and \xpackage{quran-bn}, which provide several other translations in Deutsch, Urdu and Bengali, respectively.}
-Please report any issues including bugs or typos in the documentation
-or make feature requests on \url{https://github.com/javadr/quran/issues}.
+\xpackage{ptext} packages and was initially released in June 2015 (Sha'ban 1436 AH).} 
+has been developed for typesetting the Holy Quran. 
+It offers several macros for typesetting not only the entire text or 
+specific sections of the Holy Quran based on its traditional divisions, 
+but also individual segments of an ayah. Additionally, 
+the package supports four translations of the Holy Quran in 
+German, English, French, and Persian, as well as its transliteration.%
+\footnote{There are four companion packages, \xpackage{quran-de},
+\xpackage{quran-ur}, \xpackage{quran-bn}, and \xpackage{quran-es}.
+These packages provide additional translations of the Holy Quran in German, 
+Urdu, Bengali, and Spanish, respectively.}
+
+Please report any issues, including bugs or typos in the documentation, 
+or submit feature requests at \url{https://github.com/javadr/quran/issues}.
 }
 
 \null\vfill
@@ -150,11 +156,11 @@ or make feature requests on \url{https://github.com/javadr/quran/issues}.
 I would like to express my utmost gratitude to:
 \begin{enumerate}
     \parskip=0pt
-    \item \emph{Vafa Khaligi} who paved the way for typesetting right-to-left in \XeTeX.
-    \item \emph{Hamid Zarrabi-Zadeh}, the creator of the invaluable website of \emph{Tanzil}
+    \item \emph{Vafa Khaligi}, who pioneered typesetting right-to-left in \XeTeX.
+    \item \emph{Hamid Zarrabi-Zadeh}, the creator of the invaluable \href{https://tanzil.net}{Tanzil} website, 
     for providing the text of the Holy Quran and some of its translations.
-    \item Parsi\LaTeX\ group that tested and commented on the package in advance.
-    \item Those who have \textbf{donated} to the \xpackage{quran} package--arranged in chronological order:
+    \item The Parsi\LaTeX\ group, which tested and provided feedback on the package.
+    \item Those who have \textbf{donated} to the \xpackage{quran} package, listed in chronological order:
     \begin{enumerate}
         \item \emph{Atiyah Elsheikh}, Feburary 2020.
     \end{enumerate}
@@ -162,10 +168,13 @@ I would like to express my utmost gratitude to:
 
 \newpage
 
-\section{Loading Package}
-The package can be loaded in the usual manner using the command
-\cs{usepackage[option]\{quran\}}. All  \tt{option}s are explained in the section \ref{sec:options}.
-Once the package is loaded, it will write some information about itself to the log file. The information will be something like this:
+\section{Loading the Package}
+
+The package can be loaded using the standard command:\\
+\cs{usepackage[option]\{quran\}}\\
+All available \texttt{option}s are explained in Section \ref{sec:options}. 
+Once the package is loaded, it will log some information about itself. 
+The log entries will look something like this:
 
 \begin{quote}
 \begin{lstlisting}[style=BashInputStyle, escapechar={|},]
@@ -174,37 +183,45 @@ An easy way to typeset the whole or any parts of the Holy Quran
 \end{lstlisting}
 \end{quote}
 
-\section{Typesetting The Holy Quran}\label{sec:qurantypesetting}
-For typesetting any part or the entirety of the Holy Quran, several macros are provided in the package.
-These commands are responsible for typesetting all popular divisions of the Holy Quran based on Uthmani script, including Surah, Ayah, Page, Juz, Hizb, Quarter, Ruku, and Manzil, as well as any segments of an ayah.
+\section{Typesetting the Holy Quran}\label{sec:qurantypesetting}
+
+To typeset any part or the entirety of the Holy Quran, 
+the package provides several macros. 
+These commands support typesetting various traditional divisions 
+of the Holy Quran based on the Uthmani script, 
+including Surah, Ayah, Page, Juz, Hizb, Quarter, Ruku, and Manzil, as well as specific segments of an Ayah.
+
 
 \subsection{Surah/Sovar}
 \begin{declcs}{quransurah}\oarg{surah range}\\
 \cs{quransurah*}\oarg{surah range}
 \end{declcs}
-This macro can typeset any surah of the Quran. A \meta{range} consists
-either of a single \meta{number} or two numbers separated by a dash (-),
-as in \none-\ntwo. In \cs{quransurah} and similar commands,
-if \meta{range} does not satisfy \none~<~\ntwo{} within its domain,
-it might result in failure or produce undesired results. As you know there are 114 surahs in total,
-so \meta{range} should be an integer between 1 to 114.
 
-The macro \cs{quransurah} terminates the typesetting of every ayah using \cs{par} (depending on
-the package option) while \cs{quransurah*} uses a blank space for each ayah.
-As a simplified rule of thumb, \cs{quransurah} prints ayahs as multiple paragraphs whereas
-\cs{quransurah*} prints them as a single paragraph.
-All starred macros in the package function similarly in this manner; for futhur details,
-please refer to page~\pageref{starred}.
+This macro can typeset any Surah of the Quran. 
+A \meta{range} can be either a single \meta{number} or two numbers separated by a dash 
+(e.g., \none-\ntwo). In \cs{quransurah} and similar commands, 
+if \meta{range} does not satisfy \none~<~\ntwo{} within the valid domain, 
+it may result in an error or produce undesired results. 
+As there are a total of 114 Surahs, \meta{range} should be an integer between 1 and 114.
 
-The macro also accepts the anglicized title of the surah's name. For instance,
-both of \cs{quransurah[19]} and \cs{quransurah[Maryam]} have the same effect.
+The macro \cs{quransurah} terminates the typesetting of each Ayah with \cs{par} 
+(depending on the package option), whereas \cs{quransurah*} uses a blank space between Ayahs. 
+As a rule of thumb, \cs{quransurah} prints Ayahs as multiple paragraphs, 
+while \cs{quransurah*} prints them as a single paragraph. 
+All starred macros in the package function similarly. 
+For further details, please refer to page~\pageref{starred}.
+
+The macro also accepts the anglicized title of a Surah. 
+For instance, both \cs{quransurah[19]} and \cs{quransurah[Maryam]} produce the same result:
 \mgpar{quransurah[19]}\mgpar{quransurah[Maryam]}
-Refer to table~\ref{tab1} how to use the anglicized title of a surah instead of its order.
-As some anglicized titles include a dash (-), the
-\meta{range} has to be separated by two dashes (\tt{--}), for example, \cs{quransurah[An-Nasr--An-Naas]}.
+Refer to Table~\ref{tab1} for instructions on using the anglicized title of a Surah 
+instead of its numerical order. As some anglicized titles include a dash (-), 
+the \meta{range} should be separated by two dashes (\tt{--}), 
+for example, \cs{quransurah[An-Nasr--An-Naas]}.
 
-\cs{quransurah} without its optional argument outputs  the default surah of the package, Al-Ikhlaas,
-(as long as the default has not been overwritten, see below).
+The macro \cs{quransurah} without an optional argument outputs the default Surah of the package, 
+Al-Ikhlaas, provided that this default has not been changed (see below).
+
 
 \centerline{\mx{quransurah[94]}{\quransurah[94]} \hfill
     \mx{quransurah[At-Tin]}{\quransurah[At-Tin]}}
@@ -216,10 +233,10 @@ As some anglicized titles include a dash (-), the
 
 \centerline{\mx{quransurah*}{\quransurah*} \hfill\mx{quransurah}{\quransurah}}
 
-In order to change the default surah, use \cs{setsurahdefault\{m\}}.
-As you have noticed the package's default is 112. \mgpar{setsurahdefault}
-After changing package's default surah to 107 with \cs{setsurahdefault\{107\}},
-the output would be as show below:
+To change the default Surah, use \cs{setsurahdefault\{m\}}. 
+By default, the package sets Surah 112. \mgpar{setsurahdefault}
+For example, after changing the default Surah to 107 with \cs{setsurahdefault\{107\}}, 
+the output will be as shown below:
 
 \setsurahdefault{107}
 \centerline{\mxf{quransurah*}{\quransurah*}}
@@ -243,23 +260,28 @@ the output would be as show below:
     \thect & \mycell{ct} & \thect & \mycell{ct} & \thect & \mycell{ct}\\%
     \hline
     \end{tabular}
-    \protect\caption{\scshape Anglicized Title of Surahs' Names}\label{tab1}
+    \protect\caption{\scshape Anglicized Titles of Surahs' Names}\label{tab1}
 \end{table}
 
 \subsection{Ayah/Ayat}
 \begin{declcs}{quranayah}\oarg{surah range}\oarg{ayah range}\\
 \cs{quranayah*}\oarg{surah range}\oarg{ayah range}
 \end{declcs}
-\meta{range} is similar the one explained for \cs{quransurah} and
-this pattern applies to all commands defined in the package.
-Therefore, this command typesets the \textit{n}$^{th}$ ayah of a surah or \textit{m}$^{th}$ to \textit{n}$^{th}$ ayahs of a surah.
+
+The \meta{range} used here is similar to the one explained for \cs{quransurah}, 
+and this pattern applies to all commands defined in the package. Therefore, 
+this command typesets the \textit{n}$^{th}$ Ayah of a Surah, 
+or the range from the \textit{m}$^{th}$ to the \textit{n}$^{th}$ Ayahs of a Surah.
 
 \centerline{\mx{quranayah[33][33]}{\quranayah[33][33]} \hfill
     \mx{quranayah[Al-Ahzaab][33]}{\quranayah[Al-Ahzaab][33]}}
 
-The basmalah will not be printed if you intend to typeset the first ayah of any surah per se.
-To address this issue, you can use the \cs{basmalah} macro before the ayah. For further information, please refer to page~\pageref{sec:basmalah}.
+The Basmalah will not be printed automatically when typesetting the first Ayah of any Surah. 
+To include the Basmalah, use the \cs{basmalah} macro before the Ayah. 
+For further details, please refer to page~\pageref{sec:basmalah}.
+
 \marginpar{\cs{basmalah}}
+
 
 \centerline{\mx{quranayah[Ibrahim][1]}{\quranayah[Ibrahim][1]} \hfill
     \mx{basmalah\textbackslash{}quranayah[14][1]}{\quran\basmalah\quranayah[14][1]}}
@@ -267,8 +289,9 @@ To address this issue, you can use the \cs{basmalah} macro before the ayah. For 
 \centerline{\mx{quranayah*[Ash-Shura][22-26]}{\quranayah*[Ash-Shura][22-26]} \hfill
     \mx{quranayah*[42][22-26]}{\quranayah*[42][22-26]}}
 
-Both \cs{quransurah} and \cs{quranayah} are \emph{case-insensitive} to the anglicized title of surah.
-In other words, there are, for example, no differences among `Al-Fatiha', `al-fatiha', or any other possible combinations of lowercase and uppercase letters.
+Both \cs{quransurah} and \cs{quranayah} are \emph{case-insensitive} with respect to the anglicized titles of Surahs. 
+In other words, there is no distinction between `Al-Fatiha', `al-fatiha', 
+or any other combination of uppercase and lowercase letters.
 
 \centerline{\mx{quransurah*[Al-Faatiha]}{\quransurah*[Al-Faatiha]} \hfill
     \mx{quransurah*[aL-fAatIhA]}{\quransurah*[aL-fAatIhA]}}
@@ -278,8 +301,9 @@ In other words, there are, for example, no differences among `Al-Fatiha', `al-fa
 \cs{quranpage*}\oarg{page range}
 \end{declcs}
 
-Typesets the specified \meta{range} of page(s) of the Holy Quran.
-The numbers in \meta{range} should be between $1$ to $604$, based on the Medina Mushaf.
+Typesets the specified \meta{range} of pages of the Holy Quran. 
+The page numbers in \meta{range} should be between $1$ and $604$, based on the Medina Mushaf.
+
 
     \centerline{\hboxR{\mx{quranpage*[249]}{\quranpage*[249]}
     \hfill
@@ -292,11 +316,13 @@ The numbers in \meta{range} should be between $1$ to $604$, based on the Medina 
 \cs{quranjuz*}\oarg{juz range}
 \end{declcs}
 
-This macro typesets the specified \meta{range} of juz(zes) of the Holy Quran, ranging from $1$ to $30$.
+This macro typesets the specified \meta{range} of Juz(zes) of the Holy Quran, ranging from $1$ to $30$.
 
 \subsection{Hizb/Ahzab}
-Each juz of the Holy Quran is divided into two ahzab (groups),  resulting in a total of 60 hizbs (ahzab).
-The following macro typesets hizb/ahzab of the Holy Quran.
+
+Each Juz of the Holy Quran is divided into two Hizbs/Ahzab (groups), 
+resulting in a total of 60 Hizbs. 
+The following macro typesets the specified Hizb(s) of the Holy Quran.
 
 \begin{declcs}{quranhizb}\oarg{hizb range}\\
 \cs{quranhizb*}\oarg{hizb range}
@@ -306,8 +332,12 @@ The following macro typesets hizb/ahzab of the Holy Quran.
 \centerline{\mxf{quranquarter*[110]}{\quranquarter*[110]}}
 
 \subsection{Quarter/Quarters}
-Eash hizb of the Holy Quran is devided into four quarters, making eight quarters per juz, called maqra.
-There are 240 of these quarters (of hizb) in the Holy Quran. These maqras are often used as sections for revision when memorizing the Holy Quran.\footnote{\url{https://en.wikipedia.org/wiki/Juz'}}
+
+Each Hizb of the Holy Quran is divided into four quarters, known as Maqras, 
+resulting in eight Maqras per Juz. 
+There are a total of 240 Maqras in the Holy Quran.
+These Maqras are often used as sections for revision 
+during memorization of the Holy Quran.\footnote{\url{https://en.wikipedia.org/wiki/Juz'}}
 
 \begin{declcs}{quranquarter}\oarg{quarter range}\\
 \cs{quranquarter*}\oarg{quarter range}
@@ -316,7 +346,12 @@ There are 240 of these quarters (of hizb) in the Holy Quran. These maqras are of
 
 
 \subsection{Ruku/Rukus}
-``The term ruk\= u --- roughly translated to ``passage", ``pericope" or ``stanza" --- is also used to denote a group of thematically related verses in the Qur'an. Longer suras (chapters) in the Qur'an are usually divided into several ruk\= us, so that the reciters could identify when to make ruk\= u in Salat without breaking an ongoing topic in the Quranic text."\footnote{\url{https://en.wikipedia.org/wiki/Ruku}} There are $556$ rukus.
+``The term ruk\=u --- roughly translated to ``passage", ``pericope" or ``stanza" --- 
+is also used to denote a group of thematically related verses in the Qur'an. 
+Longer suras (chapters) in the Qur'an are usually divided into several ruk\= us, 
+so that the reciters could identify when to make ruk\= u in Salat
+without breaking an ongoing topic in the Quranic 
+text."\footnote{\url{https://en.wikipedia.org/wiki/Ruku}} There are a total of $556$ Rukus.
 
 \begin{declcs}{quranruku}\oarg{ruku range}\\
 \cs{quranruku*}\oarg{ruku range}
@@ -328,29 +363,33 @@ There are 240 of these quarters (of hizb) in the Holy Quran. These maqras are of
 
 
 \subsection{Manzil/Manazil}
-``For the convenience of people who wish to read the Qur'an in a week the text may be divided into 7 portions,
-with each portion known as Manzil.
 
-The following division into 7 equal portions is attributed to Hamza Al-Zayyat (d.156/772):
+``For those who wish to complete reading the Qur'an within a week, 
+the text may be divided into 7 portions, each known as a Manzil.
+
+``The following division into 7 equal portions is attributed to Hamza Al-Zayyat (d. 156/772):
+
 \begin{enumerate}
-    \item Al-Faatiha (chapter 1) through An-Nisaa (chapter 4) consisting of 4 surahs.
-    \item Al-Maaida (chapter 5) through At-Tawba (chapter 9) consisting of 5 surahs.
-    \item Yunus (chapter 10) through An-Nahl (chapter 16) consisting of 7 surahs.
-    \item Al-Israa (chapter 17) through Al-Furqaan (chapter 25) consisting of 9 surahs.
-    \item Ash-Shu'araa (chapter 26) through YaSeen (chapter 36) consisting of 11 surahs.
-    \item As-Saaffaat (chapter 37) through Al-Hujuraat (chapter 49) consisting of 13 surahs.
-    \item Qaaf (chapter 50) through An-Naas (chapter 114) consisting of 65 surahs.''\footnote{\url{https://en.wikipedia.org/wiki/Manzil}}
+    \item Al-Fatiha (Surah 1) through An-Nisa (Surah 4) -- 4 Surahs.
+    \item Al-Maida (Surah 5) through At-Tawba (Surah 9) -- 5 Surahs.
+    \item Yunus (Surah 10) through An-Nahl (Surah 16) -- 7 Surahs.
+    \item Al-Isra (Surah 17) through Al-Furqan (Surah 25) -- 9 Surahs.
+    \item Ash-Shuara (Surah 26) through Ya-Sin (Surah 36) -- 11 Surahs.
+    \item As-Saffat (Surah 37) through Al-Hujurat (Surah 49) -- 13 Surahs.
+    \item Qaf (Surah 50) through An-Nas (Surah 114) — 65 Surahs.''\footnote{\url{https://en.wikipedia.org/wiki/Manzil}}
 \end{enumerate}
 
 \begin{declcs}{quranmanzil}\oarg{manzil range}\\
 \cs{quranmanzil*}\oarg{manzil range}
 \end{declcs}
 
-The above macro typesets manzil/manazil of the Holy Quran.
+The above macro typesets the Manzil(s)/Manazil of the Holy Quran.
 
-\subsection{Text of Quran}
-The next macro is the core of all macros in the package, allowing typesetting of any range of Quranic verses.
-As you know, there are $6236$ ayahs in the Holy Quran. This macro can typeset a specific ayah or any range of ayahs.
+\subsection{Text of the Quran}
+
+The following macro is central to all macros in the package, 
+enabling the typesetting of any range of Quranic verses. The Holy Quran contains 6,236 Ayahs. 
+This macro allows for the typesetting of a specific Ayah or any range of Ayahs.
 
 \begin{declcs}{qurantext}\oarg{index range}\\
 \cs{qurantext*}\oarg{index range}
@@ -360,8 +399,8 @@ As you know, there are $6236$ ayahs in the Holy Quran. This macro can typeset a 
 
 \centerline{\mxf{qurantext*[4111-4117]}{\begingroup\qurantext*[4111-4117]\endgroup}}
 
-Using \cs{qurantext} without its optional argument uses [1-7]  at its default argument-- surah Al-Hamd. To
-change the default text use \cs{setqurantextdefault\{m-n\}}
+Using \cs{qurantext} without its optional argument defaults to \texttt{[1-7]}, 
+which corresponds to Surah Al-Fatiha. To change the default text, use \cs{setqurantextdefault\{m-n\}}.
 \marginpar{\cs{qurantext}}
 
 
@@ -373,8 +412,9 @@ change the default text use \cs{setqurantextdefault\{m-n\}}
     \setqurantextdefault{4128-4137}
     \centerline{\mxf{qurantext*}{\qurantext*}}
 
-\subsection{Whole of The Holy Quran}
-The following macros, when provided with the specified parameters, can typeset the entire Holy Quran.
+\subsection{Whole of the Holy Quran}
+
+The following macros, when provided with the appropriate parameters, can be used to typeset the entire Holy Quran.
 
 \begin{multicols}{2}
 \begin{itemize}
@@ -396,11 +436,14 @@ The following macros, when provided with the specified parameters, can typeset t
     \item \cs{quranmanzil*[1-7]}
 \end{itemize}
 \end{multicols}
+
 \subsection{Chunks of an Ayah}\label{chunk}
-Starting from version 1.6 onward, the package is capable of typesetting not only a whole ayah but also any chunks of an ayah
-if the \xmgpar{wordwise} option has been loaded.\footnote{This new practical feature has been suggested and
-supported financially by \emph{Atiyah Elsheikh} in Feburary 2020.}
- In this case, \cs{quranayah} and \cs{qurantext} macros have additional optional parameters to enable this functionality.
+
+Starting from version 1.6, the package can typeset not only entire Ayahs but also specific segments of an Ayah, 
+provided the \xmgpar{wordwise} option is enabled.\footnote{This practical feature was suggested and 
+financially supported by \emph{Atiyah Elsheikh} in February 2020.} 
+In this case, the \cs{quranayah} and \cs{qurantext} macros include additional optional parameters 
+to enable this functionality.
 
 \begin{declcs}{quranayah}\oarg{surah range}\oarg{ayah range}\oarg{chunk range}\\
 \cs{quranayah}\oarg{surah range}\oarg{ayah range}\oarg{chunk range}\tt{+}
@@ -410,22 +453,26 @@ supported financially by \emph{Atiyah Elsheikh} in Feburary 2020.}
 \cs{qurantext}\oarg{index range}\oarg{chunk range}\tt{+}
 \end{declcs}
 
-These commands separate words included in \meta{ayah range}/\meta{index range}
-by white spaces and then output specified \meta{chunk range}.
-If \meta{chunk range} includes just one number, the output will be from the
-\meta{number}\textsuperscript{th} word to the end of \meta{ayah range}.
+These commands separate the words within the \meta{ayah range}/\meta{index range} 
+by white spaces and then output the specified \meta{chunk range}. 
+If the \meta{chunk range} includes only one number, 
+the output will start from the \meta{number}\textsuperscript{th} word to the end of the \meta{ayah range}.
 
 \centerline{\mx{quranayah[2][156][6]}{\quranayah[2][156][6]} \hfill
                 \mx{quranayah[2][286][31-43]}{\quranayah[2][286][31-43]}}
 
-The way the package enumerates the words of a specified \meta{ayah/index range} could be shown in the footnote
-if the above commands followed by \tt{+}.
+The package enumerates the words in a specified \meta{ayah/index range}, 
+which can be displayed in the footnote if the commands are followed by \tt{+}.
+
 
 \centerline{\mxf{quranayah[Ar-Ra'd][23-24][10]+}{\quranayah[Ar-Ra'd][23-24][10]+}}
 
 % \pagebreak[4]
 Fetching just one word from
 an ayah requires the \meta{chunck range} to have both \meta{number}s as the same.
+
+To fetch a single word from an Ayah, the \meta{chunk range} 
+must have both \meta{numbers} set to the same value.
 
 \centerline{\mx{quranayah[18][19][34-34]}{\quranayah[18][19][34-34]} }
 
@@ -435,8 +482,9 @@ an ayah requires the \meta{chunck range} to have both \meta{number}s as the same
 \begin{declcs}{surahname}\oarg{index}\\
 \cs{surahname*}\oarg{index}
 \end{declcs}
-These commands return the Anglicized/Arabic title of \textit{index}$^{th}$ surah of the Holy Quran,
-as depicted in table~\ref{tab1} and table~\ref{tab2}
+
+These commands return the Anglicized or Arabic title of the \textit{index}\textsuperscript{th} 
+surah of the Holy Quran, as shown in Table~\ref{tab1} and Table~\ref{tab2}.
 
     \centerline{\mx{surahname[19]}{\surahname[19]}
     \hfill
@@ -470,9 +518,9 @@ as depicted in table~\ref{tab1} and table~\ref{tab2}
 \begin{declcs}{basmalah}\\
 \cs{Basmalah}
 \end{declcs}
-It provides Basmalah (\RLE{\quran\Basmalah})  in Arabic text. There is a subtle
-difference between \cs{Basmalah} and \cs{basmalah} -- the latter is sometimes followed by a \cs{par}
-(depending on the package option).
+It provides the Basmalah (\RLE{\quran\Basmalah}) in Arabic text. 
+There is a subtle difference between \cs{Basmalah} and \cs{basmalah} -- 
+the latter may be followed by a \cs{par} depending on the package option.
 
     \centerline{\mx{basmalah\textbackslash{}quranayah*[14][1]}{\quran\basmalah\quranayah*[14][1]} \hfill
     \mx{Basmalah\textbackslash{}space\textbackslash{}quranayah*[14][1}{\quran\Basmalah\ \quranayah*[14][1]}}
@@ -480,10 +528,12 @@ difference between \cs{Basmalah} and \cs{basmalah} -- the latter is sometimes fo
 \subsection{Index Converting}
 \begin{declcs}{indexconvert}\marg{index}\marg{surah macro}\marg{ayah macro}
 \end{declcs}
-It converts an index number between $1$ to $6236$
-to its exact surah's index and ayah's index. The index must be either a number or a
-\TeX{} counter, and the surah macro and ayah would be defined as a \TeX{} counters if they are undefined. They
-will be set to the numbers representing the surah and ayah of the given index in text of the Holy Quran.
+
+It converts an index number between $1$ and $6236$ to its corresponding surah and ayah indices. 
+The index can be either a number or a \TeX{} counter. 
+If the surah and ayah macros are not already defined, 
+they will be automatically set as \TeX{} counters, 
+representing the surah and ayah of the given index in the text of the Holy Quran.
 
 \begin{SaveVerbatim}{VerbEnv}
 \newcount\index \index=5678
@@ -502,43 +552,47 @@ of surah number \the\surahcount\ (=\surahname[\the\surahcount]).
 Index \the\index\ belongs to ayah number \the\ayahcount\ of surah number \the\surahcount\ (=\surahname[\the\surahcount]).
 }+}
 
-\section{Options to The Package}\label{sec:options}
-All macros of the package, by default, separate ayahs with \cs{par}.
-The \xmgpar{nopar} option is available  to change this default behaviour.
-In this case, ayahs will be separated with space instead \cs{par}.
-Another way to achieve this is by using the starred version of macros.
-All macros of the package \marginpar{starred macros}
-have starred versions that omit the \cs{par} in typesetting ayahs of the Holy Quran. \label{starred}
-With the \xmgpar{nopar} option, starred macros act as if this option was not loaded.
+\section{Options for the Package}\label{sec:options}
+
+By default, all macros in the package separate Ayahs with \cs{par}. 
+To modify this behavior, use the \xmgpar{nopar} option, 
+which changes the separation from \cs{par} to spaces. \marginpar{starred macros}
+Alternatively, you can use the starred versions of macros to achieve the same effect. 
+Starred macros omit \cs{par} when typesetting Ayahs of the Holy Quran. \label{starred} 
+With the \xmgpar{nopar} option, starred macros will function as if this option were not loaded.
+
 
 \medskip
 
-All surahs of the Holy Quran are divided by ayahs which have their own indexes.
-By default, these numbers are typeset with text of each ayah. The \xmgpar{nonumber} option
-causes none of these numbers will be printed with ayahs.
+All surahs of the Holy Quran are divided into ayahs, each of which has its own index. 
+By default, these numbers are typeset alongside the text of each ayah. To suppress these numbers, 
+use the \xmgpar{nonumber} option, which prevents the ayah numbers from being printed.
+
 
 \begin{declcs}{ToggleAyahNumber}{}
 \end{declcs}
-This macro changes the default behavior of the package in the typesetting of the index of ayahs wherever it is called. It means that the macro can enable/disable the ayahs' index in the output text.
+This macro modifies the package's default behavior concerning the typesetting of ayah indices 
+wherever it is invoked. In other words, the macro can toggle the display of ayah indices in the output text, 
+enabling or disabling them as needed.
 
     \centerline{\mxf{ToggleAyahNumber\textbackslash{}quransurah*[89]}
     {\ToggleAyahNumber\quransurah*[89]}}
 
 \medskip
 
-Version 1.9 introduces a new option called `\xmgpar{ornbraces}'.
-This option allows users to include ornamental braces around the Quran text,
-similar to the ones used around the Ayah numbers.
-To customize the ornamental braces, the `\cs{SetOrnamentalBraces}' macro can be utilized.
-This command takes two arguments: the starting brace and the ending brace.
-By leveraging the flexibility of `\cs{SetOrnamentalBraces}',
-users can personalize the appearance of the ornamental braces according to their preferences.
+Version 1.9 introduces a new option, \xmgpar{ornbraces}, 
+which allows users to add ornamental braces around the Quranic text, 
+similar to those surrounding the Ayah numbers. 
+To customize these ornamental braces, the \cs{SetOrnamentalBraces} macro can be employed. 
+This command accepts two arguments: the opening brace and the closing brace. 
+By utilizing the flexibility of the \cs{SetOrnamentalBraces} macro, 
+users can tailor the appearance of the ornamental braces to suit their preferences.
 
 \begin{declcs}{SetOrnamentalBraces}\marg{starting brace}\marg{ending brace}
 \end{declcs}
 
-The \xmgpar{wordwise} option makes the package capable of outputing any chunks of an ayah.
-For more details, please refer to section~\ref{chunk}.
+The \xmgpar{wordwise} option enables the package to output specific portions of an ayah. 
+For further details, please refer to Section~\ref{chunk}.
 
     \centerline{\mx{quranayah[9][111][1-23]}{\quranayah[9][111][1-23]}}
     \centerline{\mxf{ToggleAyahNumber\textbackslash{}quranayah[An-Nisaa][171-172][14-64]}
@@ -547,9 +601,10 @@ For more details, please refer to section~\ref{chunk}.
 
 \medskip
 
-The package, by default, typesets the text of the Holy Quran in the simple script,
-but \xmgpar{uthmani} and \xmgpar{uthmani-min} change the default to  Uthmani script.
-Compare the following texts to figure out the differences between ``default'', ``uthmani'', and  ``uthmani-min'' scripts.
+By default, the package typesets the text of the Holy Quran in a simple script. 
+However, the options \xmgpar{uthmani} and \xmgpar{uthmani-min} modify this default to the Uthmani script. 
+You can compare the following texts to discern the differences between the 
+``default'', ``uthmani,'' and ``uthmani-min'' scripts.
 
     \makeatletter\let\qt@newcmd\renewcommand
     \input{qurantext-simple.def}%
@@ -569,10 +624,11 @@ Compare the following texts to figure out the differences between ``default'', `
 \medskip
 
 
-Starting from version 1.3, the package can typeset the transliteration of the Holy Quran.
-This option will be useful for those who don't know how to read the Arabic text.
-By loading the \xmgpar{translt} option, all macros defined in section~\ref{sec:qurantypesetting}
-will have an ``\texttt{lt}" version. In other words, the following macros are added by this option:
+Starting from version 1.3, the package is capable of typesetting the transliteration of the Holy Quran. 
+This feature is particularly useful for those unfamiliar with reading Arabic script. 
+By enabling the \xmgpar{translt} option, all macros defined in Section~\ref{sec:qurantypesetting}
+will also have a corresponding ``\texttt{lt}" version. 
+In other words, the following macros are introduced through this option:
 
 \begin{multicols}{3}
 \begin{itemize}
@@ -594,21 +650,14 @@ will have an ``\texttt{lt}" version. In other words, the following macros are ad
 
 \medskip
 
-The package can typeset some translations of the Holy Quran in other languages.
-These options were added because of some requests from users who had required the translation of the Holy Quran in their languages.
-Loading \xmgpar{transde}, \xmgpar{transen}, \xmgpar{transfr}, or \xmgpar{transfa} brings some other macros for typesetting the translation in
-German, English, French, and Persian, respectively.
-
-
-The package can typeset translations of the Holy Quran in several languages.
-These options were added in response to requests from users who needed the translation of the Holy Quran in their languages.
-By loading the \xmgpar{transde}, \xmgpar{transen}, \xmgpar{transfr}, or \xmgpar{transfa} option, additional macros are provided for typesetting the translation in `German', `English', `French', and `Persian', respectively.
-
+The package supports typesetting translations of the Holy Quran in various languages. 
+These options were introduced in response to user requests for translations in their respective languages. 
+By loading \xmgpar{transde}, \xmgpar{transen}, \xmgpar{transfr}, or \xmgpar{transfa}, 
+additional macros are provided for typesetting translations in German, English, French, and Persian, respectively.
 
 By loading each of these options, all macros defined in section~\ref{sec:qurantypesetting} will have
-a ``\texttt{de}"/``\texttt{en}"/``\texttt{fr}"/``\texttt{fa}"  version. In other words,
-these  options will add the following macros:
-
+a ``\texttt{de}"/``\texttt{en}"/``\texttt{fr}"/``\texttt{fa}" version. In other words,
+these options will add the following macros:
 
 \begin{multicols}{2}
 \texttt{transde} option:
@@ -665,20 +714,24 @@ these  options will add the following macros:
 
 \end{multicols}
 
-    All translations are sourced from \url{tanzil.net}.
-    For Germen, English, French, and Persian languages the ``Abu Rida Muhammad ibn Ahmad ibn Rassoul",
-    ``Ahmed Ali", ``Muhammad Hamidullah", and ``Mohammad Mahdi Fooladvand" have been chosen respectively,
-    by suggestion of the package's users.
+    All translations are sourced from \url{tanzil.net}. 
+    For the German, English, French, and Persian languages, 
+    the following translators have been selected based on user suggestions: 
+    ``Abu Rida Muhammad ibn Ahmad ibn Rassoul'' for German, 
+    ``Ahmed Ali'' for English, 
+    ``Muhammad Hamidullah'' for French, and 
+    ``Mohammad Mahdi Fooladvand'' for Persian.    
 
 \medskip
 
-    The \xmgpar{trans} option has been prepared to simplify the usage of mutiple translations simultaneously. This option accepts
-    any permutation of  ``\texttt{lt}", ``\texttt{de}", ``\texttt{en}", ``\texttt{fr}", and ``\texttt{fa}", e.g.
-    ``\xoption{trans=\{de, en, lt\}}".
+    The \xmgpar{trans} option is designed to facilitate the simultaneous use of multiple translations. 
+    This option accepts any combination of ``\texttt{lt}", ``\texttt{de}'', ``\texttt{en}'', 
+    ``\texttt{fr}'' and ``\texttt{fa}''. 
+    For example, you can specify multiple translations using \xoption{trans=\{de, en, lt\}}.    
 
-    \marginpar{\dbend} Typically, there is no way to load all translations together
-    as it exceeds \TeX{} memory capacity. For more details and some hacks to break this limitation,
-    see \emph{Why do I get the ``! TeX capacity exceeded'' error?} on page \pageref{sec:texcapacity}.
+    \marginpar{\dbend} Typically, loading all translations simultaneously is not feasible due to 
+    \TeX{} memory limitations. For more details and potential solutions to overcome this restriction, 
+    refer to \emph{Why do I get the ``! TeX capacity exceeded'' error?} on page \pageref{sec:texcapacity}.
 
     \centerline{\mxf{quransurah*[108]}{\quransurah*[108]}}
 
@@ -711,13 +764,18 @@ these  options will add the following macros:
     Amiri is a free, open source project that everyone is encouraged to use and modify.
     \end{quote}
 
+    \subsection{How to use the \xpackage{quran} package?}
 
-    \subsection{How to use \xpackage{quran} package?}
-    As you may have noticed, for typesetting quran text you need a package that can typeset text
-    in RTL mode and use UTF-8 fonts, as the \xpackage{quran} draws its text from a
-    Unicode database.
-    The recommended packages for this purpose are \xpackage{polyglossia}, \xpackage{fontspec}, and \xpackage{bidi}, which will provide the necessary functionality. Alternatively, you can use \xpackage{xepersian}, which also relies on \xpackage{bidi}, and \xpackage{fontspec}.
-    Another option is to use \xpackage{arabxetex} or \xpackage{arabluatex}. While the latter works only with \LuaLaTeX, the former supports \XeLaTeX. Both \xpackage{arabxetex} and \xpackage{arabluatex} use the Amiri font by default. Below are some examples demonstrating all four approaches:
+    To typeset Quranic text, you need a package that supports right-to-left (RTL) text and utilizes UTF-8 fonts, 
+    as the \xpackage{quran} package relies on a Unicode database.
+    The recommended packages for this purpose are \xpackage{polyglossia}, \xpackage{fontspec}, and \xpackage{bidi}, 
+    which together provide the necessary functionality. Alternatively, you can use \xpackage{xepersian}, 
+    which also relies on \xpackage{bidi} and \xpackage{fontspec}.
+    Another option is to use \xpackage{arabxetex} or \xpackage{arabluatex}. 
+    Note that \xpackage{arabxetex} works with \XeLaTeX, 
+    while \xpackage{arabluatex} is compatible only with \LuaLaTeX. 
+    Both \xpackage{arabxetex} and \xpackage{arabluatex} use the Amiri font by default. 
+    Below are examples demonstrating all four approaches:
 
 \begin{quote}
 
@@ -794,9 +852,9 @@ fontspec{,} and bidi"]
 
 \end{quote}
 
-    \subsection{How to set a default font for text of quran?}
-        If you want to automatically change the font of Quranic text in your document,
-        you can simply precede the \cs{qurantext} macro with the font you desire, like below:
+    \subsection{How to set a default font for Quranic text?}
+    To automatically change the font of Quranic text in your document, 
+    you can simply precede the \cs{qurantext} macro with the desired font. For example:
 
     \begin{quote}
 
@@ -820,9 +878,10 @@ fontspec{,} and bidi"]
 
 \end{quote}
 
-    By setting the default font as mentioned above, if you want to use \cs{qurantext},
-    you have to enclose it in curly braces. If you don't,
-    it will affect the font of the following texts.
+    By setting the default font as described above, if you want to use \cs{qurantext}, 
+    you must enclose it in curly braces. Otherwise, 
+    the font change will affect the subsequent text as well.
+
 \begin{quote}
 \begin{lstlisting}[style=BashInputStyle]
 {\qurantext[x-y]}
@@ -832,7 +891,10 @@ fontspec{,} and bidi"]
     \subsection{How to typeset a portion of the Holy Quran in one paragraph
     with no ayah number without using \xoption{nopar} option?}
 
-    Just put the code that was describled on page~\pageref{starred} in a group like below:
+    \subsection{How to Typeset a Portion of the Holy Quran in One Paragraph 
+    without Ayah Numbers, without Using the \xoption{nopar} Option}
+
+    Just place the code described on page~\pageref{starred} within a group, as shown below:
 \begin{quote}
 \begin{lstlisting}[style=BashInputStyle]
 {\ToggleAyahNumber\quransurah*}
@@ -843,24 +905,34 @@ fontspec{,} and bidi"]
 \mxf{quransurah* «\{\textbackslash{}ToggleAyahNumber\textbackslash{}quransurah*\}» \textbackslash{}quransurah*}
 {\quransurah* »{\ToggleAyahNumber\quransurah*}« \quransurah*}
 
-    \subsection{Why do I get the ``\tt{! TeX capacity exceeded}'' error?}
+    \subsection{Why Do I Get the ``\tt{! TeX capacity exceeded}'' Error?}
    \label{sec:texcapacity}
 
-    The invention of \TeX{} dates back many years ago. Although we have powerful hardware nowadays,
-    \TeX{} was originally designed to run efficiently on relatively limited computer hardware available at the time of its creation.
-    The \xpackage{quran} package introduces numerous macros that may deplete \TeX's memory, leading to compilation errors on occasion.
-    To address this issue, one potential solution is to expand \TeX's memory, which can be achieved by referring to the section ``Memory Limitations'' in the \xpackage{pgfplots} manual.
-    However, increasing \TeX's memory might not always be the most optimal approach.
-    Instead, I would recommend considering a redesign of your document. For example, if you are using the \xoption{wordwise} option, you may encounter ``\tt{! TeX capacity exceeded}'' errors when using the starred versions of macros that output large portions of Quran text.
+    The invention of \TeX{} dates back several decades. Despite the advancements in modern hardware, 
+    \TeX{} was originally designed to operate efficiently on the relatively limited computer 
+    resources available at the time of its creation. The \xpackage{quran} package includes 
+    numerous macros that can potentially exhaust \TeX's memory, occasionally resulting in compilation errors.
+    To address this issue, one approach is to increase \TeX's memory allocation. 
+    Detailed instructions on how to do this can be found in the section titled ``Memory Limitations'' 
+    in the \xpackage{pgfplots} manual. However, simply expanding \TeX's memory 
+    may not always be the most effective solution.
+    A more practical approach might be to reconsider the design of your document. 
+    For instance, when using the \xoption{wordwise} option, you might encounter 
+    ``\texttt{! TeX capacity exceeded}'' errors, particularly when employing the starred versions 
+    of macros that output large portions of Quranic text.
 
-    In such cases, you can achieve a similar output by using smaller chunks. For example, if you encounter errors like the following when attempting to typeset the first ten juzes with the \cs{quranjuz*[1-10]} command:
+
+    In such cases, you can achieve a similar output by processing smaller chunks. 
+    For example, if you encounter errors when attempting to typeset the first ten juzes 
+    with the \cs{quranjuz*[1-10]} command, consider breaking the task into smaller segments.
 
     \begin{quote}
     \tt{! TeX capacity exceeded, sorry [main memory size=5000000]} \\or \\
     \tt{! TeX capacity exceeded, sorry [parameter stack size=10000]}
     \end{quote}
-    It would be more effective to typeset each juz separately or even each page within the range.
-    For instance, you can use the commands \cs{quranjuz*[1]} \cs{quranjuz*[2]} $\cdots$ \cs{quranjuz*[10]}
+
+    It would be more effective to typeset each Juz separately or even each page within the desired range. 
+    For instance, you can use the commands \cs{quranjuz*[1]} \cs{quranjuz*[2]} $\cdots$ \cs{quranjuz*[10]} 
     or \cs{quranpage*[1]} \cs{quranpage*[2]} $\cdots$ \cs{quranpage*[201]} to accomplish this.
 
 
@@ -871,78 +943,79 @@ fontspec{,} and bidi"]
 \begin{History}
 
     \begin{Version}{2015/06/01 v0.1}
-        \item Initial release in Parsi\LaTeX\ group under the name of \xpackage{qurantext}.
-        \item \cs{qurantext} added.
+        \item Initial release in Parsi\LaTeX\ group under the name \xpackage{qurantext}.
+        \item Added \cs{qurantext} macro.
     \end{Version}
 
     \begin{Version}{2015/06/02 v0.2}
-        \item Redefinition of \cs{do@qt} in a non-recursive style. The old recursive version sometimes led to \TeX\ stack overflow.
-        Thanks to \emph{Masoud Yazdani} for suggesting a solution to this issue.
+        \item Redefined \cs{do@qt} in a non-recursive style to prevent \TeX\ stack overflow issues. 
+        The previous recursive version occasionally caused stack overflows. 
+        Thanks to \emph{Masoud Yazdani} for suggesting the solution.
     \end{Version}
 
     \begin{Version}{2015/06/02 v0.3}
-        \item Ayah's number has been added to the end of each verse of the output.
+        \item Added Ayah numbers at the end of each verse in the output. 
         Thanks to \emph{Mahmood AminToosi} for suggesting this feature.
     \end{Version}
 
     \begin{Version}{2015/06/04 v0.4} %reluctant about date
-        \item \cs{surahname} added. It outputs the Arabic/Anglicized title of a surah based on text direction.
-        \item Package renamed from \xpackage{qurantext} to \xpackage{quran}
+        \item Added \cs{surahname} macro to output the Arabic or Anglicized title of a surah, based on text direction.
+        \item Renamed the package from \xpackage{qurantext} to \xpackage{quran}.
     \end{Version}
 
     \begin{Version}{2015/06/24 v0.5}
-        \item \cs{quranayah} added. It outputs a \meta{range} of ayahs from a surah.
-        \item \cs{quransurah} added. It outputs a \meta{range} of surahs.
-         Thanks to \emph{Mahmood AminToosi} for suggesting this new feature.
+         \item Added \cs{quranayah} macro to output a \meta{range} of ayahs from a surah.
+         \item Added \cs{quransurah} macro to output a \meta{range} of surahs.
+         \item Special thanks to \emph{Mahmood AminToosi} for suggesting these new features.
     \end{Version}
 
     \begin{Version}{2015/06/28 v0.6}
-        \item \cs{quranjuz} added, which outputs a juz's range of the Holy Quran.
+        \item Added \cs{quranjuz} macro to output a juz's range of the Holy Quran.
     \end{Version}
 
     \begin{Version}{2015/06/30 v0.7}
-        \item \cs{quranpage} added, which outputs one or more pages of the Holy Quran.
+        \item Added \cs{quranpage} macro to output one or more pages of the Holy Quran.
     \end{Version}
 
     \begin{Version}{2015/07/02 v0.71}
-        \item Added a \cs{par} after the basmalah. This change was suggested by \emph{Mahmood AminToosi}.
+        \item Added a \cs{par} command after the Basmalah, following the suggestion of \emph{Mahmood AminToosi}.
     \end{Version}
 
     \begin{Version}{2015/07/02 v0.72}
-        \item Added \cs{basmalah} which typesets basmalah -- \hboxR{\Basmalah}.
+        \item Introduced the \cs{basmalah} macro to typeset the Basmalah: \hboxR{\Basmalah}.
     \end{Version}
 
     \begin{Version}{2015/07/04 v0.8}
-        \item Added \cs{quranquarter} and \cs{quranruku}.
+        \item Added the \cs{quranquarter} and \cs{quranruku} macros.
     \end{Version}
 
     \begin{Version}{2015/07/07 v0.9}
-        \item Added \cs{quranhizb} and \cs{quranmanzil}.
+        \item Added the \cs{quranhizb} and \cs{quranmanzil} macros.
         \item The package was uploaded to CTAN.
     \end{Version}
 
     \begin{Version}{2015/07/10 v0.91}
-        \item ``Al-Ikhlaas'' was set as default option for \cs{quransurah}.
+        \item The default option for \cs{quransurah} was set to ``Al-Ikhlaas''.
     \end{Version}
 
     \begin{Version}{2015/07/11 v0.94}
-        \item Added two new macros, \cs{ChangeAyahNumber} and\cs{ChangeBasmalah}, to change the way ayah's number and basmalah will appear.
-        \item A minor bug related to extra white spaces around one ayah was fixed, thanks to \emph{Masoud Yazdani} by reporting this issue.
+        \item Added two new macros, \cs{ChangeAyahNumber} and \cs{ChangeBasmalah}, to customize the appearance of ayah numbers and basmalah.
+        \item Fixed a minor bug related to extra white spaces around one ayah, with thanks to \emph{Masoud Yazdani} for reporting the issue.
     \end{Version}
 
     \begin{Version}{2015/07/11 v0.941}
-        \item Reduced the size of the ``quran script'' file by moving \cs{qt@par} to the \cs{qurantext} macro.
+        \item Reduced the size of the ``quran script'' file by moving \cs{qt@par} into the \cs{qurantext} macro.
     \end{Version}
 
     \begin{Version}{2016/02/05 v1.0}
-        \item Added support for using anglicized title of surah as well as its index in \cs{quransurah} and \cs{quranayah}.
+        \item Added support for using anglicized titles of surahs, as well as their indexes, in \cs{quransurah} and \cs{quranayah}.
     \end{Version}
 
 
     \begin{Version}{2016/02/09 v1.05}
-        \item Renamed \cs{ChangeBasmalah} and \cs{ChangeAyahNumber} to \cs{ToggleBasmalah} and \cs{ToggleAyahNumber} respectively.
+        \item Renamed \cs{ChangeBasmalah} and \cs{ChangeAyahNumber} to \cs{ToggleBasmalah} and \cs{ToggleAyahNumber}, respectively.
         \item Fixed a minor bug in \cs{quransurah*} that caused unwanted extra spaces in the output.
-        Thanks \emph{Hosein Behboody} for reporting this issue.
+        Thanks to \emph{Hosein Behboody} for reporting this issue.
     \end{Version}
 
     \begin{Version}{2016/04/21 v1.1}
@@ -956,7 +1029,7 @@ fontspec{,} and bidi"]
 
     \begin{Version}{2016/10/05 v1.2}
         \item Added support for Uthmani script via \xoption{uthmani} option,
-        which was requested by one of the package's users.
+        as requested by one of the package's users.
     \end{Version}
 
     \begin{Version}{2016/11/07 v1.21}
@@ -964,7 +1037,7 @@ fontspec{,} and bidi"]
     \end{Version}
 
     \begin{Version}{2016/11/08 v1.22}
-        \item The sources of two pdf files used in the documentation were appended to the bundle.
+        \item The sources of two PDF files used in the documentation were appended to the bundle.
     \end{Version}
 
     \begin{Version}{2016/11/12 v1.24}
@@ -989,40 +1062,46 @@ fontspec{,} and bidi"]
 
     \begin{Version}{2017/08/22 v1.26}
         \item Minor improvements
-        \item Bug in \cs{quranayah[x][y]} fixed by enclosing in a group. Thanks to \emph{Sayyed Saieed Mosavi Nadooshani} for reporting this issue.
+        \item Fixed a bug in \cs{quranayah[x][y]} by enclosing it in a group. Thanks to \emph{Sayyed Saieed Mosavi Nadooshani} for reporting this issue.
         \item Documentation updates.
     \end{Version}
 
     \begin{Version}{2016/08/22 v1.261}
-        \item Documentation updates--a typo in version number.
+        \item Documentation updates--corrected a typo in version number.
     \end{Version}
 
     \begin{Version}{2017/10/22 v1.3}
-        \item Added support for transliteration. Now all macros have an ``lt" version for typesetting transliteration of the original macros.
-        Thanks to \emph{Hamidreza Ahmadian} for suggesting this new feature.
+        \item Added support for transliteration. Now all macros include an ``lt" version 
+        for typesetting transliteration of the original macros. Thanks to \emph{Hamidreza Ahmadian} 
+        for suggesting this feature.
     \end{Version}
 
     \begin{Version}{2017/10/28 v1.4}
-        \item Persian, English, and Deutsch translations added
-            with the addition of the "fa", "en", and "de" versions of macros for them.
-            Three new options, `\xoption{transfa}', `\xoption{transen}', and `\xoption{transde}',
-            are defined to enable these translations.
-        \item There is also a new  option, `\xoption{trans}' which can take the values
-            `lt', `en', `de', and `fa' separated by commas,
-            allowing for multiple translations to be used simultaneously.
+        \item Added Persian, English, and Deutsch translations with the 
+        inclusion of the ``fa", ``en", and ``de" versions of macros. Three new options, 
+        \xoption{transfa}, \xoption{transen}, and \xoption{transde}, 
+        have been introduced to enable these translations.
+        \item Introduced a new option, \xoption{trans}, which can accept values `lt', `en', `de', and `fa' 
+        separated by commas, allowing for the simultaneous use of multiple translations.
     \end{Version}
 
     \begin{Version}{2017/12/22 v1.41}
-        \item In previous versions, \cs{quransurah} and \cs{quranayah} macros were case-sensitive when using surah names. However, starting from this version, both macros are case-insensitive. This means there is no difference between using "Al-Fatihda", "al-fatiha", "al-Fatiha", or any other possible combinations of lower and uppercase letters for specifying surah names.
+        \item In previous versions, the \cs{quransurah} and \cs{quranayah} macros were case-sensitive 
+        with regard to surah names. From this version onward, both macros are case-insensitive. 
+        This change allows for any combination of uppercase and lowercase letters when specifying surah names, 
+        so ``Al-Fatihda", ``al-fatiha", and ``al-Fatiha" are treated equivalently.
     \end{Version}
 
     \begin{Version}{2017/12/22 v1.42}
-        \item Starting from this version, the \cs{quransurahX} and \cs{quranayahX} macros also support case-insensitivity with anglicized titles of surahs. The `X' in the macro names stands for `en', `de', `fa', or `lt'.
+        \item Starting from this version, the \cs{quransurahX} and \cs{quranayahX} macros also 
+        support case-insensitivity for the anglicized titles of surahs. 
+        Here, `X' represents the language codes `en' (English), `de' (Deutsch), `fa' (Persian), or `lt' (Latin). 
+        This ensures that variations in capitalization do not affect the macro's functionality.
     \end{Version}
 
     \begin{Version}{2017/12/22 v1.42a}
-        \item Documentation update--a typo has been fixed.
-        \item Some files were missed in the last update to CTAN.
+        \item Documentation update--A typo has been corrected.
+        \item Some files were missed in the last CTAN update.
     \end{Version}
 
     \begin{Version}{2018/11/29 v1.42b}
@@ -1030,7 +1109,8 @@ fontspec{,} and bidi"]
     \end{Version}
 
     \begin{Version}{2018/12/01}
-        \item \xpackage{quran-de} package is released, adding 3 more translations in the German language.
+        \item \href{https://github.com/javadr/quran-de}{\xpackage{quran-de}} 
+        package is released, adding support for three more translations in German.
     \end{Version}
 
     \begin{Version}{2018/12/31 v1.5}
@@ -1038,7 +1118,8 @@ fontspec{,} and bidi"]
     \end{Version}
 
     \begin{Version}{2019/05/03}
-        \item \xpackage{quran-ur} package is released, adding 8 translations in the Urdu language.
+        \item \href{https://github.com/javadr/quran-ur}{\xpackage{quran-ur}} 
+        package is released, adding eight translations in the Urdu language.
     \end{Version}
 
     \begin{Version}{2019/05/04 v1.51}
@@ -1046,42 +1127,48 @@ fontspec{,} and bidi"]
     \end{Version}
 
     \begin{Version}{2020/03/07 v1.6}
-        \item support for getting any chunks of an ayah with two extra optional arguments for \cs{qurantext} and \cs{quranayah}.
-        This feature has been suggested and supported financially by \emph{Atiyah Elsheikh}.
-        May God bless him.
-        \item \cs{Basmalah} outputs basmalah without any surrounding whitespaces.
-        \item Documentation has beeb revision.
+        \item Added support for getting any chunks of an ayah with two extra optional arguments 
+        for \cs{qurantext} and \cs{quranayah}. This feature was suggested and 
+        financially supported by \emph{Atiyah Elsheikh}. May God bless him.
+        \item \cs{Basmalah} now outputs basmalah without any surrounding whitespaces.
+        \item Documentation has been revised.
     \end{Version}
 
     \begin{Version}{2020/03/09 v1.61}
-        \item The current font of text is now applied in the footnote when \cs{quranayah} or \cs{qurantext} is called with its ``\tt{+}'' optional argument. In the last version, it used the Amiri font for footnotes.
+        \item The current font of the text is now applied to footnotes when \cs{quranayah} or \cs{qurantext} 
+        is called with its \texttt{+} optional argument. Previously, footnotes used the Amiri font.
     \end{Version}
 
     \begin{Version}{2020/03/12 v1.62}
-        \item The license has been updated to LPPL Version 1.3c from LPPL Version 1.3
+        \item The license has been updated from LPPL Version 1.3 to LPPL Version 1.3c.
     \end{Version}
 
     \begin{Version}{2020/03/14 v1.63}
-        \item Pause marks (waqf symbols) have been removed from \cs{quranayah} and \cs{qurantext} whenever the optional parameter \oarg{chunk range} is used.
+        \item Pause marks (waqf symbols) have been removed from \cs{quranayah} and \cs{qurantext} 
+        when the optional parameter \oarg{chunk range} is used.
     \end{Version}
 
     \begin{Version}{2020/06/10 v1.7}
-        \item French translation added and ``fr'' version of macros defined for it. New option, \xoption{transfr}, is defined for this translation.
-        \item There is also a new value `\xoption{fr}' for the \xoption{trans} option.
+        \item French translation added with the introduction of the ``fr'' version of macros. 
+        The new option \xoption{transfr} is defined for this translation.
+        \item A new value \xoption{fr} has been added to the \xoption{trans} option.
         \item Documentation updates.
     \end{Version}
 
     \begin{Version}{2020/06/12 v1.7a}
-        \item Some of the missed files (the French part) were uploaded to CTAN.
+        \item Some of the missed files related to the French translation were uploaded to CTAN.
     \end{Version}
 
     \begin{Version}{2020/10/14 v1.8}
-        \item New option `\xoption{uthmani-min}'; it behaves the same as the `\xoption{uthmani}' option prior to this release.
-        \item Now, the `\xoption{uthmani}' option typesets the text of the Holy Quran with more diacritical marks, as requested on \href{https://github.com/javadr/quran/issues/4}{this issue}.
+        \item Added a new option `\xoption{uthmani-min}'; it behaves the same as 
+        the `\xoption{uthmani}' option prior to this release.
+        \item The `\xoption{uthmani}' option now typesets the text of the Holy Quran with more diacritical marks, 
+        as requested on \href{https://github.com/javadr/quran/issues/4}{this issue}..
     \end{Version}
 
     \begin{Version}{2021/02/01}
-        \item \xpackage{quran-bn} package is released, adding 2 translations of the Bengali language
+        \item \href{https://github.com/javadr/quran-bn}{\xpackage{quran-bn}} 
+        package is released, adding two translations in Bengali,
         as requested on \href{https://github.com/javadr/quran/issues/2}{this issue}.
     \end{Version}
 
@@ -1091,7 +1178,8 @@ fontspec{,} and bidi"]
 
     \begin{Version}{2023/06/28 v1.9; Eid al-Adha 1444 AH}
         \item The new option `\xoption{ornbraces}' adds ornamental braces around the Quran text.
-        \item \cs{SetOrnamentalBraces} allows for personalization of the ornamental braces surrounding the Quran text.
+        \item The \cs{SetOrnamentalBraces} command allows for 
+        the personalization of the ornamental braces surrounding the Quran text.
     \end{Version}
 
     \begin{Version}{2023/07/10 v2.0}
@@ -1099,10 +1187,26 @@ fontspec{,} and bidi"]
     \end{Version}
 
     \begin{Version}{2023/07/27 v2.1}
-        \item Anglicized names of Quran surahs Revised Using \href{http://tanzil.net/res/text/metadata/quran-data.xml}{Quran Metadata}.
-        See table~\ref{tab:newnames}
+        \item Anglicized names of Quran surahs revised using \href{http://tanzil.net/res/text/metadata/quran-data.xml}{Quran Metadata}.
+        See Table~\ref{tab:newnames}
         \item Fixed the issue with dropping \cs{par} introduced in version 1.9.
     \end{Version}
+
+    \begin{Version}{2023/08/01 v2.2}
+        \item Added support for old Anglicized names of Quran surahs, 
+        ensuring backward compatibility with previous versions of the package.
+    \end{Version}
+
+    \begin{Version}{2024/09/05}
+        \item \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}} 
+        package is released, adding three translations of the Spanish language
+        as requested on \href{https://github.com/javadr/quran/issues/12}{this issue}.
+    \end{Version}
+
+    \begin{Version}{2024/09/07 v2.3}
+        \item Documentation update with the release of \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}}.
+    \end{Version}
+
 
     \begin{table}[!htbp]
         \ttfamily\small
@@ -1146,10 +1250,6 @@ fontspec{,} and bidi"]
         \caption{Revision of Anglicized Names of Quran Surahs in ver. 2.1}\label{tab:newnames}
         \end{table}
 
-    \begin{Version}{2023/08/01 v2.2}
-        \item Added support for old Anglicized names of Quran surahs, making the package backward compatible.
-    \end{Version}
-
 
     \def\cb{{\tiny$\bullet$\space}}
     \def\mrule{\leaders\vrule height 2.5pt depth -1.5pt \hfill}
@@ -1169,7 +1269,7 @@ fontspec{,} and bidi"]
                             \cb \cs{qurantext}         \\
         2015/06/02 & 0.2 &  \cb Implementation of \cs{do@qt} in a non-recursive style  \\
         2015/06/02 & 0.3 &  \cb Ayah's number has been appended to each verse.\\
-        2015/06/04 & 0.4 &  \cb \cs{surahname}  outputing the Arabic/Anglicized title of a surah\par
+        2015/06/04 & 0.4 &  \cb \cs{surahname}  outputs the Arabic/Anglicized title of a surah\par
                             \cb The package renamed to \xpackage{quran}\\
         2015/06/24 & 0.5 &  \cb \cs{quranayah} and \cs{quransurah} \\
         2015/06/28 & 0.6 &   \cb \cs{quranjuz} \\
@@ -1189,7 +1289,7 @@ fontspec{,} and bidi"]
                                 \cb Fixed a minor bug in \cs{quransurah*}\\
         2016/04/21 & 1.1 &   \cb \cs{indexconvert} \\
         2016/05/15 & 1.14 &  \cb Documentation updates \\
-        2016/10/05 & 1.2 &  \cb \xoption{uthmani} option supporting Uthmani script  \\
+        2016/10/05 & 1.2 &  \cb Added \xoption{uthmani} option supporting Uthmani script  \\
         2016/11/07 & 1.21 &  \cb Fixed some minor bugs \\
         2016/11/08 & 1.22 &  \cb Documentation updates \\
         2016/11/12 & 1.24 &  \cb Documentation updates\par
@@ -1202,34 +1302,40 @@ fontspec{,} and bidi"]
                             \cb Bug fix in \cs{quranayah[x][y]}\par
                             \cb Documentation updates \\
         2016/08/22 & 1.261 &  \cb Documentation updates \\
-        2017/10/22 & 1.3 &  \cb Transliteration supported via \xoption{translt} option \\
+        2017/10/22 & 1.3 &  \cb Added support for transliteration via \xoption{translt} option \\
         2017/10/28 & 1.4 &  \cb Persian, English, and Deutsch translations via \xoption{transfa}, \xoption{transen}, and \xoption{transde} options\par
                             \cb \xoption{trans} option with `lt', `en', `de', and `fa' values \\
-        2017/12/22 & 1.41 &  \cb case-insensitive  \cs{quransurah} and \cs{quranayah} \\
-        2017/12/22 & 1.42 &  \cb case-insensitive  \cs{quransurahX} and \cs{quranayahX} \par\tt{X} $\in$ \{`en', `de', `fa',  `lt'\}  \\
+        2017/12/22 & 1.41 &  \cb Case-insensitive  \cs{quransurah} and \cs{quranayah} \\
+        2017/12/22 & 1.42 &  \cb Case-insensitive  \cs{quransurahX} and \cs{quranayahX} \par\tt{X} $\in$ \{`en', `de', `fa',  `lt'\}  \\
         2017/12/22 & 1.42a &  \cb Documentation updates \\
         2018/11/29 & 1.42b &  \cb Fixed a typo in \tt{quran-transde.def}\\
-        2018/12/01 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-de} package \mrule \space\null}\\
+        2018/12/01 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+        \href{https://github.com/javadr/quran-de}{\xpackage{quran-de}} package \mrule \space\null}\\
         2018/12/31 & 1.5 &  \cb Bug fix in \cs{ToggleBasmalah} and \cs{quransurah}  \\
-        2019/05/03 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-ur} package \mrule \space\null}\\
+        2019/05/03 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+            \href{https://github.com/javadr/quran-ur}{\xpackage{quran-ur}} package \mrule \space\null}\\
         2019/05/04 & 1.51 &  \cb Fixed a typo in \tt{quran-transde.def}\\
         2020/03/07 & 1.6 &  \cb \cs{qurantext} and \cs{quranayah} support any chunks of an ayah\par
                             \cb \cs{Basmalah} \hfil \cb Documentation revision\\
         2020/03/09 & 1.61 &  \cb Minor update in \cs{quranayah} and \cs{qurantext} \\
-        2020/03/12 & 1.62 &  \cb License update to LPPL Version 1.3c \\
-        2020/03/14 & 1.63 &  \cb Removing pause marks with \meta{chunk range} optional parameter\\
+        2020/03/12 & 1.62 &  \cb License updated to LPPL Version 1.3c \\
+        2020/03/14 & 1.63 &  \cb Removed pause marks with \meta{chunk range} optional parameter\\
         2020/06/10 & 1.7 &  \cb French translation available via
                             \xoption{transfr} option, or
                             \xoption{trans} option with ‘\xoption{fr}’ value\\
         2020/06/12 & 1.7a &  \cb CTAN upload correction. \\
-        2020/10/14 & 1.8 &  \cb `\xoption{uthmani}' is renamed to `\xoption{uthmani-min}' \par
-                            \cb `\xoption{uthmani}' typesets text of the Holy Quran with more diacritical marks.\\
-        2021/02/01 & \multicolumn{2}{c|}{ \null \mrule {\space}First release of the \xpackage{quran-bn} package \mrule \space\null}\\
+        2020/10/14 & 1.8 &  \cb Renamed `\xoption{uthmani}' to `\xoption{uthmani-min}' \par
+                            \cb `\xoption{uthmani}' now typesets text of the Holy Quran with more diacritical marks.\\
+        2021/02/01 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+            \href{https://github.com/javadr/quran-bn}{\xpackage{quran-bn}} package \mrule \space\null}\\
         2021/02/02 & 1.81 &  \cb  Documentation updates \\
-        2023/06/28 & 1.9 &  \cb  `\xoption{ornbraces}' option \par\cb \cs{SetOrnamentalBraces} to customize the ornamental braces. \\
+        2023/06/28 & 1.9 &  \cb  Added `\xoption{ornbraces}' option \par\cb \cs{SetOrnamentalBraces} to customize the ornamental braces. \\
         2023/07/10 & 2.0 &  \cb  Quran text update in compliance with tanzil version 1.1. \\
-        2023/07/27 & 2.1 &  \cb  Revision of the Anglicized names of Quran surahs \\
+        2023/07/27 & 2.1 &  \cb  Revised Anglicized names of Quran surahs \\
         2023/08/01 & 2.2 &  \cb  Added support for old Anglicized names of Quran surahs \\
+        2024/09/05 & \multicolumn{2}{c|}{ \null \mrule {\space}Initial release of the 
+            \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}} package \mrule \space\null}\\
+        2024/09/07 & 2.3 &  \cb  Documentation retouching \\
         \bottomrule
     \end{longtable}
     \end{small}
