@@ -54,11 +54,23 @@ ctan: readme
 	rm -rfv ../quran
 	mv -fv quran ..
 
+.PHONY: increase_tex_memory
+increase_tex_memory:
+	@FILE=$(shell kpsewhich texmf.cnf) && \
+	if ! grep -q '^main_memory *= *8000000' $$FILE; then \
+	  if grep -q '^main_memory *= *[0-9]\+' $$FILE; then \
+	    sudo sed -i 's/^main_memory *= *[0-9]\+/main_memory = 8000000/' $$FILE; \
+	  else \
+	    echo "main_memory = 8000000" | sudo tee -a $$FILE; \
+	  fi; \
+	  sudo fmtutil-sys --all; \
+	fi
+
 .PHONY: dev
 dev:
 	cd tex || exit
-	sudo mkdir -p /usr/local/texlive/2024/texmf-dist/tex/latex/quran
-	sudo cp -v *.def quran.sty /usr/local/texlive/2024/texmf-dist/tex/latex/quran
+	sudo mkdir -p /usr/local/texlive/2025/texmf-dist/tex/latex/quran
+	sudo cp -v *.def quran.sty /usr/local/texlive/2025/texmf-dist/tex/latex/quran
 	sudo mktexlsr
 
 QURANDATE := $(shell grep "qurandate{" tex/quran.sty | cut -d'{' -f2 | tr -d '}')
