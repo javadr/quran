@@ -1,6 +1,6 @@
 %% This is file `quran.sty',
 %%
-%% Copyright © 2015-2024
+%% Copyright © 2015-2025
 %% Seiied-Mohammad-Javad Razavian <javadr@gmail.com>
 %%
 %% This work may be distributed and/or modified under the
@@ -20,8 +20,8 @@
 %% To one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2024/09/07}
-\def\quranversion{2.3}
+\def\qurandate{2025/03/31}
+\def\quranversion{2.31}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -33,6 +33,7 @@
 \RequirePackage{xspace}
 \newcounter{qt@count}
 \setcounter{qt@count}{0}
+\newif\ifqt@qurantext% Ensure the correct ornamental braces are applied inside the \qt@no command.
 \newif\ifqt@uthmani%
 \newif\ifqt@uthmanimin%
 \newif\ifqt@basmalah\qt@basmalahtrue%
@@ -53,7 +54,8 @@
 }%
 \newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
 \def\qt@showitems#1{\footnote{#1}}%
-\def\qt@no#1{ #1}%
+% \def\qt@no#1{ #1}%
+\def\qt@no#1{ \ifqt@qurantext﴿#1﴾\else(#1)\fi}%
 \def\qt@ob@begin{\relax}\def\qt@ob@end{\relax}%
 %
 \DeclareOptionX{nopar}{\let\qt@par\relax}
@@ -144,7 +146,7 @@
     \hskip0.25em\relax%
 }%
 %
-\DeclareDocumentCommand{\qt@doqt}{ o o }{\qt@ob@begin%
+\DeclareDocumentCommand{\qt@doqt}{ o o }{\qt@qurantexttrue\qt@ob@begin%
     \addtocounter{qt@count}{1}%
     \def\@qtexp{}%
     \loop%
@@ -165,6 +167,7 @@
         \global\edef\qt@currentfont{\the\font}%
         \qt@showitems{\qt@currentfont\showitems\qt@words}%
     \qt@par}%false
+    \qt@qurantextfalse%
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
@@ -176,8 +179,10 @@
 }%
 %
 \bidi@newrobustcmd\ToggleAyahNumber{%
-    \expandafter\ifx\qt@no{0}\relax%
-        \def\qt@no##1{ ##1}%
+    \edef\qt@no@string{\detokenize\expandafter{\qt@no{0}}}% Fully expand \qt@no{0} and convert to a string
+    \edef\qt@relax@string{\detokenize{\relax}}% Store "relax" as a string
+    \ifx\qt@no@string\qt@relax@string%
+        \def\qt@no##1{ \ifqt@qurantext﴿##1﴾\else(##1)\fi}%
     \else%
         \def\qt@no##1{\relax}%
     \fi%
