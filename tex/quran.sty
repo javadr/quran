@@ -42,15 +42,15 @@
 \newif\ifqt@transde%
 \newif\ifqt@transfa%
 \newif\ifqt@transfr%
-\newif\ifqt@wordwise
+\newif\ifqt@wordwise%
 \def\qt@par{\par}%
 \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
 \def\Basmalah{%
-        \begingroup%
-        \let\par\relax%
-        \def\qt@no##1{\relax}%
-        \quranayah[1][1][1]%
-        \endgroup%
+  \begingroup%
+    \let\par\relax%
+    \def\qt@no##1{\relax}%
+    \quranayah[1][1][1]%
+  \endgroup%
 }%
 \newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
 \def\qt@showitems#1{\footnote{#1}}%
@@ -68,11 +68,11 @@
 \DeclareOptionX{transfa}{\qt@transfatrue}
 \DeclareOptionX{transfr}{\qt@transfrtrue}
 \DeclareOptionX{trans}[lt]{%
-    \IfSubStr{#1}{lt}{\qt@translttrue}{}%
-    \IfSubStr{#1}{de}{\qt@transdetrue}{}%
-    \IfSubStr{#1}{en}{\qt@transentrue}{}%
-    \IfSubStr{#1}{fa}{\qt@transfatrue}{}%
-    \IfSubStr{#1}{fr}{\qt@transfrtrue}{}%
+  \IfSubStr{#1}{lt}{\qt@translttrue}{}%
+  \IfSubStr{#1}{de}{\qt@transdetrue}{}%
+  \IfSubStr{#1}{en}{\qt@transentrue}{}%
+  \IfSubStr{#1}{fa}{\qt@transfatrue}{}%
+  \IfSubStr{#1}{fr}{\qt@transfrtrue}{}%
 }%
 \DeclareOptionX{wordwise}{\qt@wordwisetrue}
 \newcommand*\SetOrnamentalBraces[2]{\def\qt@ob@begin{#1}\def\qt@ob@end{#2}}%
@@ -82,12 +82,12 @@
 %\ProcessOptions\relax
 %
 \ifqt@wordwise
-    \let\qt@newcmd\newcommand%
+  \let\qt@newcmd\newcommand%
 \else
-    \let\qt@newcmd\bidi@newrobustcmd%
+  \let\qt@newcmd\bidi@newrobustcmd%
 \fi
 \bidi@newrobustcmd\surahname{%
-    \@ifstar\@@surahname\@surahname
+  \@ifstar\@@surahname\@surahname
 }%
 % surah name taken from http://tanzil.net/res/text/metadata/quran-data.xml
 \def\@@surahname[#1]{%
@@ -99,33 +99,33 @@
 }
 %
 %% makes some macros for surah name to convert them to their original number in surah list.
-    \newcount\qt@tempcount \qt@tempcount=1%
-    \loop%
-        % support for Anglicized name pior to ver 2.1
-        \edef\qt@tmp@old{\lowercase{\edef\noexpand\qt@surah@name@old{\@surahname@old[\qt@tempcount]}}}%
-        \qt@tmp@old%
-        \expandafter\xdef\csname qt@surah@\qt@surah@name@old\endcsname{\the\qt@tempcount}%
-        % new Anglicized name of Quran surahs
-        \edef\qt@tmp{\lowercase{\edef\noexpand\qt@surah@name{\@surahname[\qt@tempcount]}}}%
-        \qt@tmp%
-        \expandafter\xdef\csname qt@surah@\qt@surah@name\endcsname{\the\qt@tempcount}%
-    \ifnum\qt@tempcount<114%
-        \advance\qt@tempcount by 1\relax%
-    \repeat%
+\newcount\qt@tempcount \qt@tempcount=1%
+\loop%
+  % support for Anglicized name pior to ver 2.1
+  \edef\qt@tmp@old{\lowercase{\edef\noexpand\qt@surah@name@old{\@surahname@old[\qt@tempcount]}}}%
+  \qt@tmp@old%
+  \expandafter\xdef\csname qt@surah@\qt@surah@name@old\endcsname{\the\qt@tempcount}%
+  % new Anglicized name of Quran surahs
+  \edef\qt@tmp{\lowercase{\edef\noexpand\qt@surah@name{\@surahname[\qt@tempcount]}}}%
+  \qt@tmp%
+  \expandafter\xdef\csname qt@surah@\qt@surah@name\endcsname{\the\qt@tempcount}%
+\ifnum\qt@tempcount<114%
+  \advance\qt@tempcount by 1\relax%
+\repeat%
 %
 \newcount\surahcount%
 \newcount\ayahcount%
 %
 \def\indexconvert#1#2#3{%
-    \surahcount=1%
-    \ayahcount=#1%
-    \loop
-    \ifnum\ayahcount>\qt@getversenum\surahcount%
-        \advance\ayahcount by -\qt@getversenum\surahcount\relax%
-        \advance\surahcount by 1\relax%
-    \repeat
-    \ifdefined#2\else\newcount#2\fi#2=\surahcount%
-    \ifdefined#3\else\newcount#3\fi#3=\ayahcount%
+  \surahcount=1%
+  \ayahcount=#1%
+  \loop
+  \ifnum\ayahcount>\qt@getversenum\surahcount%
+    \advance\ayahcount by -\qt@getversenum\surahcount\relax%
+    \advance\surahcount by 1\relax%
+  \repeat
+  \ifdefined#2\else\newcount#2\fi#2=\surahcount%
+  \ifdefined#3\else\newcount#3\fi#3=\ayahcount%
 }%
 %
 \bidi@newrobustcmd\qt@default{1-7}% Surah Al-hamd
@@ -137,88 +137,88 @@
 \newcommand*{\qt@PrintWordCount}{\leavevmode\raise-.6\baselineskip%
 \clap{\tiny\global\advance\qt@WordCount\@ne{\the\qt@WordCount}}}%
 \def\showitemsmacro#1{%
-    \begingroup\fboxsep=0.25pt \fboxrule=0.5pt%
-    {\ifxetex\beginL\special{color push rgb 1 0 0}\ttfamily\fi%
-    \ifluatex\addfontfeature{Color=FF0000BB}\fi%
-    \qt@PrintWordCount%
-    \ifxetex\special{color pop}\endL\fi}%
-    \mbox{\strut#1}\endgroup%
-    \hskip0.25em\relax%
+  \begingroup\fboxsep=0.25pt \fboxrule=0.5pt%
+  {\ifxetex\beginL\special{color push rgb 1 0 0}\ttfamily\fi%
+  \ifluatex\addfontfeature{Color=FF0000BB}\fi%
+  \qt@PrintWordCount%
+  \ifxetex\special{color pop}\endL\fi}%
+  \mbox{\strut#1}\endgroup%
+  \hskip0.25em\relax%
 }%
 %
 \DeclareDocumentCommand{\qt@doqt}{ o o }{\qt@qurantexttrue\qt@ob@begin%
+  \addtocounter{qt@count}{1}%
+  \def\@qtexp{}%
+  \loop%
+    \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi%
+    \ifnum\value{qt@count}<\qt@max\relax\qt@par\fi}%
+    \ifnum\value{qt@count}<\qt@max\relax%
     \addtocounter{qt@count}{1}%
-    \def\@qtexp{}%
-    \loop%
-        \global\xdef\@qtexp{\@qtexp\csname qurantext@\roman{qt@count}\endcsname\ifnum\value{qt@count}=\qt@max\else\space\fi%
-        \ifnum\value{qt@count}<\qt@max\relax\qt@par\fi}%
-        \ifnum\value{qt@count}<\qt@max\relax%
-        \addtocounter{qt@count}{1}%
-    \repeat%
-    \IfNoValueTF{#1}%
-    {\@qtexp\qt@ob@end\qt@par}%true
-    {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
-    \readlist*\qt@words{\@qtexp}%
-        \IfNoValueTF{#2}%
-        {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
-        \foreachitem\qt@word\in\qt@words{%
-            \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\qt@ob@end\relax\else\xspace\fi\fi\fi%
-        }%
-        \global\edef\qt@currentfont{\the\font}%
-        \qt@showitems{\qt@currentfont\showitems\qt@words}%
-    \qt@par}%false
-    \qt@qurantextfalse%
+  \repeat%
+  \IfNoValueTF{#1}%
+  {\@qtexp\qt@ob@end\qt@par}%true
+  {\qt@WordCount=0\relax\c@qt@start=\numexpr#1-1\relax%
+  \readlist*\qt@words{\@qtexp}%
+    \IfNoValueTF{#2}%
+    {\c@qt@end=\numexpr\qt@wordslen+1\relax}{\c@qt@end=\numexpr#2+1\relax}%
+    \foreachitem\qt@word\in\qt@words{%
+      \ifnum\qt@wordcnt>\c@qt@start\ifnum\qt@wordcnt<\c@qt@end\qt@word\ifnum\qt@wordcnt=\numexpr\c@qt@end-1\qt@ob@end\relax\else\xspace\fi\fi\fi%
+    }%
+    \global\edef\qt@currentfont{\the\font}%
+    \qt@showitems{\qt@currentfont\showitems\qt@words}%
+  \qt@par}%false
+  \qt@qurantextfalse%
 }%
 %
 \bidi@newrobustcmd\ChangeQtPar{%
-    \ifx\qt@par\relax%
-        \def\qt@par{\par}%
-    \else%
-        \let\qt@par\relax%
-    \fi%
+  \ifx\qt@par\relax%
+    \def\qt@par{\par}%
+  \else%
+    \let\qt@par\relax%
+  \fi%
 }%
 %
 \bidi@newrobustcmd\ToggleAyahNumber{%
-    \edef\qt@no@string{\detokenize\expandafter{\qt@no{0}}}% Fully expand \qt@no{0} and convert to a string
-    \edef\qt@relax@string{\detokenize{\relax}}% Store "relax" as a string
-    \ifx\qt@no@string\qt@relax@string%
-        \def\qt@no##1{ \ifqt@qurantext﴿##1﴾\else(##1)\fi}%
-    \else%
-        \def\qt@no##1{\relax}%
-    \fi%
+  \edef\qt@no@string{\detokenize\expandafter{\qt@no{0}}}% Fully expand \qt@no{0} and convert to a string
+  \edef\qt@relax@string{\detokenize{\relax}}% Store "relax" as a string
+  \ifx\qt@no@string\qt@relax@string%
+    \def\qt@no##1{ \ifqt@qurantext﴿##1﴾\else(##1)\fi}%
+  \else%
+    \def\qt@no##1{\relax}%
+  \fi%
 }%
 \DeclareDocumentCommand{\qurantext}{ s O{\qt@default} o t{+} }{%
-    \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
-    \IfBooleanTF{#1}{%
-        \begingroup%
-        \ChangeQtPar%
-        \@qurantext[#2][#3]%
-        \endgroup%
-    }%
-    {\@qurantext[#2][#3]}%
-    \def\qt@showitems##1{\relax}%
+  \IfBooleanTF{#4}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+  \IfBooleanTF{#1}{%
+    \begingroup%
+    \ChangeQtPar%
+    \@qurantext[#2][#3]%
+    \endgroup%
+  }%
+  {\@qurantext[#2][#3]}%
+  \def\qt@showitems##1{\relax}%
 }%
 %
 \def\@qurantext[#1][#2]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \setcounter{qt@count}{\qt@min}%
-    \addtocounter{qt@count}{-1}%
-    \IfNoValueTF{#2}{\qt@doqt}{%
-        \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
-        \qt@doqt[\qt@@start][\qt@@end]%
-        }%
-        {\qt@doqt[#2]}%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \setcounter{qt@count}{\qt@min}%
+  \addtocounter{qt@count}{-1}%
+  \IfNoValueTF{#2}{\qt@doqt}{%
+    \IfSubStr{#2}{-}{\StrCut{#2}{-}\qt@@start\qt@@end\relax%
+    \qt@doqt[\qt@@start][\qt@@end]%
     }%
+    {\qt@doqt[#2]}%
+  }%
 }%
 %
 \def\qt@get#1-#2;{\edef\qt@min{#1}\edef\qt@max{#2}}%
 \def\qt@stripmax#1-{\edef\qt@max{#1}}%
 \def\qt@minmax#1{%
-    \qt@get#1-\relax;%
-    \edef\qt@tmpa{\qt@max}%
-    \edef\qt@relax{\relax}%
-    \ifx\qt@tmpa\qt@relax\edef\qt@max{\qt@min}%
-    \else\expandafter\qt@stripmax\qt@max\fi%
+  \qt@get#1-\relax;%
+  \edef\qt@tmpa{\qt@max}%
+  \edef\qt@relax{\relax}%
+  \ifx\qt@tmpa\qt@relax\edef\qt@max{\qt@min}%
+  \else\expandafter\qt@stripmax\qt@max\fi%
 }%
 %
 \def\qt@getrange#1--#2;{\def\qt@min{#1}\def\qt@max{#2}}%
@@ -232,290 +232,291 @@
 \bidi@renewrobustcmd{\qt@surah@default}{#1}}%
 %
 \DeclareDocumentCommand\quransurah{ s O{\qt@surah@default} }{%
-    \lowercase{\edef\qt@arglc{#2}}%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quransurah[\qt@arglc]%
-        \endgroup%
-    }%
-    {\@quransurah[\qt@arglc]}%
+  \lowercase{\edef\qt@arglc{#2}}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quransurah[\qt@arglc]%
+    \endgroup%
+  }%
+  {\@quransurah[\qt@arglc]}%
 }%
 %
 \bidi@newrobustcmd\@quransurah[1][\qt@surah@default]{%
-    \setcounter{qt@i}{1}%
-    \setcounter{qt@start}{1}%
+  \setcounter{qt@i}{1}%
+  \setcounter{qt@start}{1}%
 %
-    \IfSubStr{#1}{--}{% case of surahname range, e.g. An-Nasr--An-Nas
-        \expandafter\qt@getrange#1;%
-        \edef\qt@min{\csname qt@surah@\qt@min\endcsname}%
-        \edef\qt@max{\csname qt@surah@\qt@max\endcsname}%
-        \setcounter{qt@end}{\qt@getversenum\qt@max}%
-    }%
-    {%
-        \expandafter\qt@minmax\expandafter{#1}%
-        \if!\ifnum9<1\qt@min!\fi% \qt@min is a number.
-            \ifx\qt@min\qt@max%
-                \setcounter{qt@end}{\qt@getversenum{\qt@min}}%
-            \else%
-                \setcounter{qt@end}{\qt@getversenum{\qt@max}}%
-            \fi%
-        \else% in this case the argument is tranliteration of surahname
-                \edef\qt@min{\csname qt@surah@#1\endcsname}%
-                \edef\qt@max{\qt@min}%
-                \setcounter{qt@end}{\qt@getversenum\qt@min}%
-        \fi%
-    }%
-    \loop%
-    \ifnum\value{qt@i}<\qt@min%
-        \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
-        \addtocounter{qt@i}{1}%
-    \repeat%
-%
-    \ifx\qt@min\qt@max\relax%
-    \else%
-        \loop%
-        \ifnum\value{qt@i}<\qt@max%
-            \addtocounter{qt@end}{\qt@getversenum{\value{qt@i}}}%
-            \addtocounter{qt@i}{1}%
-        \repeat%
+  \IfSubStr{#1}{--}{% case of surahname range, e.g. An-Nasr--An-Nas
+    \expandafter\qt@getrange#1;%
+    \edef\qt@min{\csname qt@surah@\qt@min\endcsname}%
+    \edef\qt@max{\csname qt@surah@\qt@max\endcsname}%
+    \setcounter{qt@end}{\qt@getversenum\qt@max}%
+  }%
+  {%
+    \expandafter\qt@minmax\expandafter{#1}%
+    \if!\ifnum9<1\qt@min!\fi% \qt@min is a number.
+      \ifx\qt@min\qt@max%
+        \setcounter{qt@end}{\qt@getversenum{\qt@min}}%
+      \else%
+        \setcounter{qt@end}{\qt@getversenum{\qt@max}}%
+      \fi%
+    \else% in this case the argument is tranliteration of surahname
+      \edef\qt@min{\csname qt@surah@#1\endcsname}%
+      \edef\qt@max{\qt@min}%
+      \setcounter{qt@end}{\qt@getversenum\qt@min}%
     \fi%
-    \addtocounter{qt@end}{\value{qt@start}}%
-    \addtocounter{qt@end}{-1}%
-    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+  }%
+  \loop%
+  \ifnum\value{qt@i}<\qt@min%
+    \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
+    \addtocounter{qt@i}{1}%
+  \repeat%
+%
+  \ifx\qt@min\qt@max\relax%
+  \else%
+    \loop%
+    \ifnum\value{qt@i}<\qt@max%
+      \addtocounter{qt@end}{\qt@getversenum{\value{qt@i}}}%
+      \addtocounter{qt@i}{1}%
+    \repeat%
+  \fi%
+  \addtocounter{qt@end}{\value{qt@start}}%
+  \addtocounter{qt@end}{-1}%
+  \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
 }%
 %
 \DeclareDocumentCommand{\quranayah}{ s o o o t{+} }{%
 %    \IfBooleanTF{#5}{\let\showitems\showitems@Orig}{\def\showitems##1{\relax}}%
-    \IfBooleanTF{#5}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
-    \lowercase{\edef\qt@arglc{#2}}%
-    \IfBooleanTF {#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranayah[\qt@arglc][#3][#4]#5%
-        \endgroup%
-    }%
-    {%
-        \@quranayah[\qt@arglc][#3][#4]#5%
-    }%
-    \def\qt@showitems##1{\relax}%
+  \IfBooleanTF{#5}{\def\qt@showitems##1{\footnote{##1}}}{\def\qt@showitems##1{\relax}}%
+  \lowercase{\edef\qt@arglc{#2}}%
+  \IfBooleanTF {#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranayah[\qt@arglc][#3][#4]#5%
+    \endgroup%
+  }%
+  {%
+    \@quranayah[\qt@arglc][#3][#4]#5%
+  }%
+  \def\qt@showitems##1{\relax}%
 }%
 %
 \def\@quranayah[#1][#2][#3]#4{% #1->Surah, #2->Ayah, #3->specific part
-    \if!\ifnum9<1#1!\fi% #1 is a number.
-        \def\qt@surahnumber{#1}%
-    \else%
-        \def\qt@surahnumber{\csname qt@surah@#1\endcsname}%
-    \fi%
-    \setcounter{qt@i}{1}%
-    \expandafter\qt@minmax\expandafter{#2}%
-    \setcounter{qt@start}{\qt@min}%
-    \setcounter{qt@end}{\qt@max}%
+  \if!\ifnum9<1#1!\fi% #1 is a number.
+    \def\qt@surahnumber{#1}%
+  \else%
+    \def\qt@surahnumber{\csname qt@surah@#1\endcsname}%
+  \fi%
+  \setcounter{qt@i}{1}%
+  \expandafter\qt@minmax\expandafter{#2}%
+  \setcounter{qt@start}{\qt@min}%
+  \setcounter{qt@end}{\qt@max}%
 %
-    \ifnum\qt@max>\qt@getversenum{\qt@surahnumber}\relax%
-        \ifx\qt@max\qt@min%
-            \relax%
-        \else%
-            \def\qt@max{\qt@getversenum{\qt@surahnumber}}%
-            \setcounter{qt@end}{\qt@max}%
-        \fi%
-    \fi%
-    \ifnum\qt@min>\qt@getversenum{\qt@surahnumber}%
-        \relax%
+  \ifnum\qt@max>\qt@getversenum{\qt@surahnumber}\relax%
+    \ifx\qt@max\qt@min%
+      \relax%
     \else%
-        \loop%
-        \ifnum\value{qt@i}<\qt@surahnumber%
-            \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
-            \addtocounter{qt@i}{1}%
-        \repeat%
-%
-        \ifx\qt@max\qt@min%
-            %omitting basmalah when only first ayah is requested
-            \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
-            \IfBooleanTF{#4}%
-            {\begingroup\qurantext[\value{qt@start}][#3]+\endgroup}%
-            {\begingroup\qurantext[\value{qt@start}][#3]\endgroup}%
-            \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
-        \else%
-            \addtocounter{qt@end}{\value{qt@start}}%
-            \addtocounter{qt@end}{-\qt@min}%
-            \IfBooleanTF{#4}%
-            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]+\endgroup}%
-            {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]\endgroup}%
-        \fi%
+      \def\qt@max{\qt@getversenum{\qt@surahnumber}}%
+      \setcounter{qt@end}{\qt@max}%
     \fi%
+  \fi%
+  \ifnum\qt@min>\qt@getversenum{\qt@surahnumber}%
+    \relax%
+  \else%
+    \loop%
+    \ifnum\value{qt@i}<\qt@surahnumber%
+      \addtocounter{qt@start}{\qt@getversenum{\value{qt@i}}}%
+      \addtocounter{qt@i}{1}%
+    \repeat%
+%
+    \ifx\qt@max\qt@min%
+      %omitting basmalah when only first ayah is requested
+      \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
+      \IfBooleanTF{#4}%
+      {\begingroup\qurantext[\value{qt@start}][#3]+\endgroup}%
+      {\begingroup\qurantext[\value{qt@start}][#3]\endgroup}%
+      \ifnum\qt@max=1 \ifqt@basmalah\ToggleBasmalah\fi\fi%
+    \else%
+      \addtocounter{qt@end}{\value{qt@start}}%
+      \addtocounter{qt@end}{-\qt@min}%
+      \IfBooleanTF{#4}%
+      {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]+\endgroup}%
+      {\begingroup\qurantext[\value{qt@start}-\value{qt@end}][#3]\endgroup}%
+    \fi%
+  \fi%
 }%
 %
 \DeclareDocumentCommand\quranjuz{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranjuz[#2]%
-        \endgroup%
-    }%
-    {\@quranjuz[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranjuz[#2]%
+    \endgroup%
+  }%
+  {\@quranjuz[#2]}%
 }%
 %
 \def\@quranjuz[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \edef\qt@juz{\qt@getjuzdomain{\qt@min}}%
-        \begingroup\qurantext[\qt@juz]\endgroup%
-    \else%
-        \edef\qt@juz@start{\qt@getjuzdomain{\qt@min}}%
-        \edef\qt@juz@end{\qt@getjuzdomain{\qt@max}}%
-        \expandafter\qt@minmax\expandafter{\qt@juz@start}%
-        \setcounter{qt@start}{\qt@min}% start ayah
-        \expandafter\qt@minmax\expandafter{\qt@juz@end}%
-        \setcounter{qt@end}{\qt@max}% end ayah
-        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
-    \fi%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \edef\qt@juz{\qt@getjuzdomain{\qt@min}}%
+    \begingroup\qurantext[\qt@juz]\endgroup%
+  \else%
+    \edef\qt@juz@start{\qt@getjuzdomain{\qt@min}}%
+    \edef\qt@juz@end{\qt@getjuzdomain{\qt@max}}%
+    \expandafter\qt@minmax\expandafter{\qt@juz@start}%
+    \setcounter{qt@start}{\qt@min}% start ayah
+    \expandafter\qt@minmax\expandafter{\qt@juz@end}%
+    \setcounter{qt@end}{\qt@max}% end ayah
+    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+  \fi%
 }%
 %
 \DeclareDocumentCommand\quranpage{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranpage[#2]%
-        \endgroup%
-    }%
-    {\@quranpage[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+      \ChangeQtPar%
+      \@quranpage[#2]%
+    \endgroup%
+  }%
+  {\@quranpage[#2]}%
 }%
 %
 \def\@quranpage[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \edef\qt@page{\qt@getpagedomain{\qt@min}}%
-        \begingroup\qurantext[\qt@page]\endgroup%
-    \else%
-        \edef\qt@page@start{\expandafter\qt@getpagedomain{\qt@min}}%
-        \edef\qt@page@end{\expandafter\qt@getpagedomain{\qt@max}}%
-        \expandafter\qt@minmax\expandafter{\qt@page@start}%
-        \setcounter{qt@start}{\qt@min}% start ayah
-        \expandafter\qt@minmax\expandafter{\qt@page@end}%
-        \setcounter{qt@end}{\qt@max}% end ayah
-        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
-    \fi%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \edef\qt@page{\qt@getpagedomain{\qt@min}}%
+    \begingroup\qurantext[\qt@page]\endgroup%
+  \else%
+    \edef\qt@page@start{\expandafter\qt@getpagedomain{\qt@min}}%
+    \edef\qt@page@end{\expandafter\qt@getpagedomain{\qt@max}}%
+    \expandafter\qt@minmax\expandafter{\qt@page@start}%
+    \setcounter{qt@start}{\qt@min}% start ayah
+    \expandafter\qt@minmax\expandafter{\qt@page@end}%
+    \setcounter{qt@end}{\qt@max}% end ayah
+    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+  \fi%
 }%
 %
 \DeclareDocumentCommand\quranquarter{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranquarter[#2]%
-        \endgroup%
-    }%
-    {\@quranquarter[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranquarter[#2]%
+    \endgroup%
+  }%
+  {\@quranquarter[#2]}%
 }%
 %
 \def\@quranquarter[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \edef\qt@page{\qt@getquarterdomain{\qt@min}}
-        \begingroup\qurantext[\qt@page]\endgroup%
-    \else%
-        \edef\qt@page@start{\expandafter\qt@getquarterdomain{\qt@min}}%
-        \edef\qt@page@end{\expandafter\qt@getquarterdomain{\qt@max}}%
-        \expandafter\qt@minmax\expandafter{\qt@page@start}%
-        \setcounter{qt@start}{\qt@min}% start ayah
-        \expandafter\qt@minmax\expandafter{\qt@page@end}%
-        \setcounter{qt@end}{\qt@max}% end ayah
-        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
-    \fi%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \edef\qt@page{\qt@getquarterdomain{\qt@min}}
+    \begingroup\qurantext[\qt@page]\endgroup%
+  \else%
+    \edef\qt@page@start{\expandafter\qt@getquarterdomain{\qt@min}}%
+    \edef\qt@page@end{\expandafter\qt@getquarterdomain{\qt@max}}%
+    \expandafter\qt@minmax\expandafter{\qt@page@start}%
+    \setcounter{qt@start}{\qt@min}% start ayah
+    \expandafter\qt@minmax\expandafter{\qt@page@end}%
+    \setcounter{qt@end}{\qt@max}% end ayah
+    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+  \fi%
 }%
 %
 \DeclareDocumentCommand\quranruku{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranruku[#2]%
-        \endgroup%
-    }%
-    {\@quranruku[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranruku[#2]%
+    \endgroup%
+  }%
+  {\@quranruku[#2]}%
 }%
 %
 \def\@quranruku[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \edef\qt@page{\qt@getrukudomain{\qt@min}}%
-        \begingroup\qurantext[\qt@page]\endgroup%
-    \else%
-        \edef\qt@page@start{\expandafter\qt@getrukudomain{\qt@min}}%
-        \edef\qt@page@end{\expandafter\qt@getrukudomain{\qt@max}}%
-        \expandafter\qt@minmax\expandafter{\qt@page@start}%
-        \setcounter{qt@start}{\qt@min}% start ayah
-        \expandafter\qt@minmax\expandafter{\qt@page@end}%
-        \setcounter{qt@end}{\qt@max}% end ayah
-        \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
-    \fi%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \edef\qt@page{\qt@getrukudomain{\qt@min}}%
+    \begingroup\qurantext[\qt@page]\endgroup%
+  \else%
+    \edef\qt@page@start{\expandafter\qt@getrukudomain{\qt@min}}%
+    \edef\qt@page@end{\expandafter\qt@getrukudomain{\qt@max}}%
+    \expandafter\qt@minmax\expandafter{\qt@page@start}%
+    \setcounter{qt@start}{\qt@min}% start ayah
+    \expandafter\qt@minmax\expandafter{\qt@page@end}%
+    \setcounter{qt@end}{\qt@max}% end ayah
+    \begingroup\qurantext[\value{qt@start}-\value{qt@end}]\endgroup%
+  \fi%
 }%
 %
 \DeclareDocumentCommand\quranhizb{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranhizb[#2]%
-        \endgroup%
-    }%
-    {\@quranhizb[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranhizb[#2]%
+    \endgroup%
+  }%
+  {\@quranhizb[#2]}%
 }%
 %
 \def\@quranhizb[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \c@qt@start=#1%
-        \c@qt@end=#1%
-    \else%
-        \c@qt@start=\qt@min%
-        \c@qt@end=\qt@max%
-    \fi%
-    \multiply\c@qt@start by 4%
-    \advance\c@qt@start by -3%
-    \multiply\c@qt@end by 4%
-    \quranquarter[\c@qt@start-\c@qt@end]%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \c@qt@start=#1%
+    \c@qt@end=#1%
+  \else%
+    \c@qt@start=\qt@min%
+    \c@qt@end=\qt@max%
+  \fi%
+  \multiply\c@qt@start by 4%
+  \advance\c@qt@start by -3%
+  \multiply\c@qt@end by 4%
+  \quranquarter[\c@qt@start-\c@qt@end]%
 }%
 %
 \DeclareDocumentCommand\quranmanzil{ s o }{%
-    \IfBooleanTF{#1}%
-    {%
-        \begingroup%
-        \ChangeQtPar%
-        \@quranmanzil[#2]%
-        \endgroup%
-    }%
-    {\@quranmanzil[#2]}%
+  \IfBooleanTF{#1}%
+  {%
+    \begingroup%
+    \ChangeQtPar%
+    \@quranmanzil[#2]%
+    \endgroup%
+  }%
+  {\@quranmanzil[#2]}%
 }%
 %
 \def\@quranmanzil[#1]{%
-    \expandafter\qt@minmax\expandafter{#1}%
-    \ifx\qt@max\qt@min%
-        \edef\qt@surah{\expandafter\qt@getmanzildomain{\qt@max}}%
-        \expandafter\quransurah[\qt@surah]%
-    \else%
-        \edef\qt@surah@start{\expandafter\qt@getmanzildomain{\qt@min}}%
-        \edef\qt@surah@end{\expandafter\qt@getmanzildomain{\qt@max}}%
-        \expandafter\qt@minmax\expandafter{\qt@surah@start}%
-        \setcounter{qt@start}{\qt@min}% start surah
-        \expandafter\qt@minmax\expandafter{\qt@surah@end}%
-        \setcounter{qt@end}{\qt@max}% end surah
-        \quransurah[\the\c@qt@start-\the\c@qt@end]%
-    \fi%
+  \expandafter\qt@minmax\expandafter{#1}%
+  \ifx\qt@max\qt@min%
+    \edef\qt@surah{\expandafter\qt@getmanzildomain{\qt@max}}%
+    \expandafter\quransurah[\qt@surah]%
+  \else%
+    \edef\qt@surah@start{\expandafter\qt@getmanzildomain{\qt@min}}%
+    \edef\qt@surah@end{\expandafter\qt@getmanzildomain{\qt@max}}%
+    \expandafter\qt@minmax\expandafter{\qt@surah@start}%
+    \setcounter{qt@start}{\qt@min}% start surah
+    \expandafter\qt@minmax\expandafter{\qt@surah@end}%
+    \setcounter{qt@end}{\qt@max}% end surah
+    \quransurah[\the\c@qt@start-\the\c@qt@end]%
+  \fi%
 }%
 %
-\def\qt@getmanzildomain#1{\ifcase#1\or1-4%Al-Hamd to An-Nisa
-    \or5-9%Al-Maeda through At-Taubah%
-    \or10-16%Yunus through An-Nahl%
-    \or17-25%Al-Isra through Al-Furqan%
-    \or26-36%Ash-Shuara through Ya seen%
-    \or37-49%As-Saaffat through Al-Hujraat%
-    \or50-114%Qaf through An-Nas%
+\def\qt@getmanzildomain#1{\ifcase#1%
+  \or1-4%Al-Hamd to An-Nisa
+  \or5-9%Al-Maeda through At-Taubah%
+  \or10-16%Yunus through An-Nahl%
+  \or17-25%Al-Isra through Al-Furqan%
+  \or26-36%Ash-Shuara through Ya seen%
+  \or37-49%As-Saaffat through Al-Hujraat%
+  \or50-114%Qaf through An-Nas%
 \else\relax\fi}%
 %
 \def\qt@getversenum#1{%
@@ -540,45 +541,45 @@
 }%
 %
 \bidi@newrobustcmd\ToggleBasmalah{%
-    \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
-    \ifx\basmalah\relax%
-        \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
-    \else%
-        \let\basmalah\relax%
-    \fi%
-    \ifqt@translt\ToggleBasmalahlt\fi%
-    \ifqt@transen\ToggleBasmalahen\fi%
-    \ifqt@transde\ToggleBasmalahde\fi%
-    \ifqt@transfa\ToggleBasmalahfa\fi%
+  \ifqt@basmalah\qt@basmalahfalse\else\qt@basmalahtrue\fi
+  \ifx\basmalah\relax%
+    \def\basmalah{بِسمِ اللَّهِ الرَّحمٰنِ الرَّحيمِ\qt@par\space}%
+  \else%
+    \let\basmalah\relax%
+  \fi%
+  \ifqt@translt\ToggleBasmalahlt\fi%
+  \ifqt@transen\ToggleBasmalahen\fi%
+  \ifqt@transde\ToggleBasmalahde\fi%
+  \ifqt@transfa\ToggleBasmalahfa\fi%
 }%
 \ifqt@uthmani%
-    \input{qurantext-uthmani.def}%
+  \input{qurantext-uthmani.def}%
 \else%
-    \ifqt@uthmanimin%
-        \input{qurantext-uthmani-min.def}%
-    \else%
-        \input{qurantext-simple.def}%
-    \fi%
+  \ifqt@uthmanimin%
+    \input{qurantext-uthmani-min.def}%
+  \else%
+    \input{qurantext-simple.def}%
+  \fi%
 \fi%
 %%
 \ifqt@translt%
-    \input{qurantext-en.transliteration.def}%
-    \input{quran-translt.def}%
+  \input{qurantext-en.transliteration.def}%
+  \input{quran-translt.def}%
 \fi%
 \ifqt@transen%
-    \input{qurantext-en.translation.def}%
-    \input{quran-transen.def}%
+  \input{qurantext-en.translation.def}%
+  \input{quran-transen.def}%
 \fi%
 \ifqt@transde%
-    \input{qurantext-de.translation.def}%
-    \input{quran-transde.def}%
+  \input{qurantext-de.translation.def}%
+  \input{quran-transde.def}%
 \fi%
 \ifqt@transfa%
-    \input{qurantext-fa.translation.def}%
-    \input{quran-transfa.def}%
+  \input{qurantext-fa.translation.def}%
+  \input{quran-transfa.def}%
 \fi%
 \ifqt@transfr%
-    \input{qurantext-fr.translation.def}%
-    \input{quran-transfr.def}%
+  \input{qurantext-fr.translation.def}%
+  \input{quran-transfr.def}%
 \fi%
 %% End of file `quran.sty'.
