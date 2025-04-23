@@ -20,8 +20,8 @@
 %% To one who has devoted his life to Quran
 %%
 \NeedsTeXFormat{LaTeX2e}
-\def\qurandate{2025/03/31}
-\def\quranversion{2.31}
+\def\qurandate{2025/04/23}
+\def\quranversion{2.4}
 \ProvidesPackage{quran}[\qurandate\space v\quranversion^^JAn easy way to typeset the whole or any parts of the holy Quran]
 \RequirePackage{ifxetex}
 \RequirePackage{biditools}
@@ -55,8 +55,10 @@
 \newcommand*\qt@debug[1]{\typeout{debuging ==::>>> #1 <<<::==}}%
 \def\qt@showitems#1{\footnote{#1}}%
 % \def\qt@no#1{ #1}%
-\def\qt@no#1{ \ifqt@qurantext﴿#1﴾\else(#1)\fi}%
+\def\qt@no#1{ \ifqt@qurantext\qt@no@ob@begin#1\qt@no@ob@end\else(#1)\fi}%
 \def\qt@ob@begin{\relax}\def\qt@ob@end{\relax}%
+\def\qt@no@ob@begin{﴿}%
+\def\qt@no@ob@end{﴾}%
 %
 \DeclareOptionX{nopar}{\let\qt@par\relax}
 \DeclareOptionX{nonumber}{\def\qt@no##1{\relax}}
@@ -74,9 +76,13 @@
   \IfSubStr{#1}{fa}{\qt@transfatrue}{}%
   \IfSubStr{#1}{fr}{\qt@transfrtrue}{}%
 }%
-\DeclareOptionX{wordwise}{\qt@wordwisetrue}
-\newcommand*\SetOrnamentalBraces[2]{\def\qt@ob@begin{#1}\def\qt@ob@end{#2}}%
-\DeclareOptionX{ornbraces}{\SetOrnamentalBraces{﴿}{﴾}}%
+\DeclareOptionX{wordwise}{\qt@wordwisetrue}%
+\DeclareOptionX{ornbraces}{%
+  \newcommand*\SetAyahMarkerStyle[2]{\def\qt@no@ob@begin{##1}\def\qt@no@ob@end{##2}}%
+  \newcommand*\ResetAyahMarkerStyle{\def\qt@no@ob@begin{﴿}\def\qt@no@ob@end{﴾}}%
+  \newcommand*\SetOrnamentalBraces[2]{\def\qt@ob@begin{##1}\def\qt@ob@end{##2}}%
+  \SetOrnamentalBraces{\qt@no@ob@begin}{\qt@no@ob@end}%
+}%
 \DeclareOptionX*{\PackageWarning{quran}{Unknown option ‘\CurrentOption’}}
 \ProcessOptionsX\relax
 %\ProcessOptions\relax
@@ -182,7 +188,7 @@
   \edef\qt@no@string{\detokenize\expandafter{\qt@no{0}}}% Fully expand \qt@no{0} and convert to a string
   \edef\qt@relax@string{\detokenize{\relax}}% Store "relax" as a string
   \ifx\qt@no@string\qt@relax@string%
-    \def\qt@no##1{ \ifqt@qurantext﴿##1﴾\else(##1)\fi}%
+    \def\qt@no##1{ \ifqt@qurantext\qt@no@ob@begin##1\qt@no@ob@end\else(##1)\fi}%
   \else%
     \def\qt@no##1{\relax}%
   \fi%
