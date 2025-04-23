@@ -17,20 +17,36 @@
 \setRTL
 
 \section{\LRE{Getting a Portion of an Ayah/Ayat}}
+
 \textarabic{\quranayah[92][1-21][22-32]+}
 \textarabic{\quranayah[92][1-21][73]}
+
 
 \section{\LRE{Changing the Ornamental Braces}}
 
 \SetOrnamentalBraces{[[}{]]}
 \textarabic{\quranayah*[2][286][5-24]+}
 
-\section{\LRE{Toggling the Effect of Ayah Number}}
 \ToggleAyahNumber
+
+
+\section{\LRE{Toggling the Effect of Ayah Number}}
+
 \textarabic{\qurantext*[1-7][28]+}
 
-\section{\LRE{Toggling the Effect of Basmalah}}
+
+\section{\LRE{Customizing the Ayah Number Style}}
+
+\SetAyahMarkerStyle{(}{)}
+\textarabic{\quranayah*[1][1-5]}
+\ResetAyahMarkerStyle
+\textarabic{\quranayah*[1][6-7]}
+
 \ToggleBasmalah
+
+
+\section{\LRE{Toggling the Effect of Basmalah}}
+
 \textarabic{\quransurah*[110-114]}
 
 \end{document}
