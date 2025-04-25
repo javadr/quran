@@ -47,7 +47,7 @@ ctan: readme
 	cd ../doc/ || exit
 	cp -v quran-doc.pdf quran-doc.tex quran.png     ../quran/doc
 	cd ../sample || exit
-	cp -v quran-test*    ../quran/doc
+	cp -v quran-test*.{tex,pdf}    ../quran/doc
 	cd ..
 	zip -r quran.zip quran
 	mv -fv quran.zip ..
