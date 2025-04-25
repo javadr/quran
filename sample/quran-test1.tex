@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 
+\usepackage{xcolor}
 %%% for typesetting arabic text
 \usepackage{polyglossia}
 \setotherlanguage{arabic}
@@ -13,6 +14,7 @@
 
 \parindent=0pt
 \pagestyle{empty}
+
 \begin{document}
 \setRTL
 
@@ -37,7 +39,7 @@
 
 \section{\LRE{Customizing the Ayah Number Style}}
 
-\SetAyahMarkerStyle{(}{)}
+\SetAyahMarkerStyle{(\textcolor{red}}{)}
 \textarabic{\quranayah*[1][1-5]}
 \ResetAyahMarkerStyle
 \textarabic{\quranayah*[1][6-7]}
