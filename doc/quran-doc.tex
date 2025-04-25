@@ -34,7 +34,7 @@
 \usepackage[toc]{multitoc}
 \usepackage{manfnt}
 
-\usepackage[trans={lt, de, en, fa, fr}, wordwise, uthmani]{quran}
+\usepackage[trans={lt, de, en, fa, fr}, wordwise, uthmani, ornbraces]{quran}
 \newfontfamily\quran[Script=Arabic]{Scheherazade}
 \newfontfamily\amiri[Script=Arabic]{Amiri}
 \hypersetup{%
@@ -118,6 +118,9 @@ The \xpackage{quran} Package\thanks{To one who has devoted his life to the Holy 
 \date{\qurandate,\space version \quranversion\footnote{Initial release: June 1st, 2015}}
 
 \parindent=0pt
+\SetAyahMarkerStyle%
+{\textcolor{green!35!black}﴿\textcolor{red!75!black}\bgroup}%
+{\egroup\textcolor{green!35!black}﴾}
 
 \begin{document}
 
@@ -407,7 +410,7 @@ which corresponds to Surah Al-Fatiha. To change the default text, use \cs{setqur
     \centerline{\mxf{qurantext*}{\qurantext*}}
 
     \noindent In the following example, \cs{setqurantextdefault\{4128-4137\}} has changed the default to index $4128$ to $4137$.
-    \mgpar{setqurantextdefault\{m-n\}}
+    \mgpar{setqurantextdefault}
 
     \setqurantextdefault{4128-4137}
     \centerline{\mxf{qurantext*}{\qurantext*}}
@@ -579,17 +582,35 @@ enabling or disabling them as needed.
     {\ToggleAyahNumber\quransurah*[89]}}
 
 \medskip
+Version 1.9 introduces the \xmgpar{ornbraces} package option, 
+enabling the addition of ornamental braces around Quranic text. 
+These ornamental elements can be fully customized to match specific stylistic preferences.
 
-Version 1.9 introduces a new option, \xmgpar{ornbraces},
-which allows users to add ornamental braces around the Quranic text,
-similar to those surrounding the Ayah numbers.
-To customize these ornamental braces, the \cs{SetOrnamentalBraces} macro can be employed.
-This command accepts two arguments: the opening brace and the closing brace.
-By utilizing the flexibility of the \cs{SetOrnamentalBraces} macro,
-users can tailor the appearance of the ornamental braces to suit their preferences.
+To define custom ornamental braces, use the following macro:
 
-\begin{declcs}{SetOrnamentalBraces}\marg{starting brace}\marg{ending brace}
+\begin{declcs}{SetOrnamentalBraces}\marg{opening brace}\marg{closing brace}
 \end{declcs}
+
+The \cs{SetOrnamentalBraces} macro accepts two mandatory arguments: 
+the opening brace, and the closing brace.
+This provides users with the flexibility to harmonize the visual presentation 
+of Quranic verses with other typographic elements in their document.
+
+Starting from version 2.4, two additional macros allow fine-tuned control over Ayah markers:
+\begin{declcs}{SetAyahMarkerStyle}\marg{begin marker}\marg{end marker}\\
+    \cs{ResetAyahMarkerStyle}
+    \end{declcs}
+
+\begin{itemize}
+    \item \cs{SetAyahMarkerStyle} sets the symbols or characters that enclose Ayah numbers.
+    \item \cs{ResetAyahMarkerStyle} restores the default Ayah marker style used by the package.
+\end{itemize}
+
+By default, Ayah markers are rendered using {\amiri\char"FD3F} and {\amiri\char"FD3E}.
+These correspond to traditional Arabic decorative glyphs used in Quranic typesetting.
+
+\centerline{\mxf{SetOrnamentalBraces\{[\}\{]\}\textbackslash{}SetAyahMarkerStyle\{(\}\{)\}\textbackslash{}quransurah*}
+{\SetOrnamentalBraces{[}{]}\SetAyahMarkerStyle{(}{)}\quransurah*}}
 
 The \xmgpar{wordwise} option enables the package to output specific portions of an ayah.
 For further details, please refer to Section~\ref{chunk}.
@@ -902,6 +923,23 @@ fontspec{,} and bidi"]
 \mxf{quransurah* «\{\textbackslash{}ToggleAyahNumber\textbackslash{}quransurah*\}» \textbackslash{}quransurah*}
 {\quransurah* »{\ToggleAyahNumber\quransurah*}« \quransurah*}
 
+
+    \subsection{Customizing the Ayah Marker Style}
+    The \cs{SetAyahMarkerStyle} macro allows you to customize the symbols 
+    or formatting that appear before and after each Ayah number.
+    The two arguments of the macro will appear immediately before and after of the Ayah number.
+
+    For example, to use ornamental braces around the number, you may write:
+
+    \begin{quote}
+        \begin{lstlisting}[style=BashInputStyle, escapechar={!}]
+\SetAyahMarkerStyle{!{\amiri﴿}!\textcolor{red}\bgroup}{\egroup!{\amiri﴾}!}
+        \end{lstlisting}
+    \end{quote}
+
+    This configuration will render the Ayah number enclosed in traditional Quranic markers.
+
+
     \subsection{Why Do I Get the ``\tt{! TeX capacity exceeded}'' Error?}
    \label{sec:texcapacity}
 
@@ -1189,44 +1227,7 @@ fontspec{,} and bidi"]
         \item Fixed the issue with dropping \cs{par} introduced in version 1.9.
     \end{Version}
 
-    \begin{Version}{2023/08/01 v2.2}
-        \item Added support for old Anglicized names of Quran surahs,
-        ensuring backward compatibility with previous versions of the package.
-    \end{Version}
-
-    \begin{Version}{2023/11/01}
-        \item \href{https://github.com/javadr/quran-id}{\xpackage{quran-id}}
-        package is released, adding three translations in Indonesian
-        as requested on \href{https://github.com/javadr/quran/issues/11}{this issue}.
-    \end{Version}
-
-    \begin{Version}{2023/11/04}
-        \item \href{https://github.com/javadr/quran-en}{\xpackage{quran-en}}
-        package is released, adding three translations in English
-        as requested on \href{https://github.com/javadr/quran/issues/7}{this issue}.
-    \end{Version}
-
-    \begin{Version}{2023/12/21}
-        \item \href{https://github.com/javadr/gedit-quran}{Quran Plugin} for \href{https://gedit-text-editor.org/}{gedit text editor} 
-            released to typeset Quranic Ayat, including full scripts and companion Quran package macros
-    \end{Version}
-
-    \begin{Version}{2024/09/05}
-        \item \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}}
-        package is released, adding three translations in Spanish
-        as requested on \href{https://github.com/javadr/quran/issues/12}{this issue}.
-    \end{Version}
-
-    \begin{Version}{2024/09/07 v2.3}
-        \item Documentation update with the release of \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}}.
-    \end{Version}
-
-    \begin{Version}{2025/03/31 v2.31}
-        \item New implementation of the \cs{qt@no} macro in quran.sty to optimize space usage in Quran text scripts.
-        \item In compliance with the new implementation, all other Quran packages have been updated accordingly.
-    \end{Version}
-
-    \begin{table}[!htbp]
+    \begin{table}[!htb]
         \ttfamily\small
         \begin{tabular}{|c|l|l||c|l|l|}
             \hline
@@ -1269,7 +1270,50 @@ fontspec{,} and bidi"]
         \end{table}
 
 
-    \newpage 
+    \begin{Version}{2023/08/01 v2.2}
+        \item Added support for old Anglicized names of Quran surahs,
+        ensuring backward compatibility with previous versions of the package.
+    \end{Version}
+
+    \begin{Version}{2023/11/01}
+        \item \href{https://github.com/javadr/quran-id}{\xpackage{quran-id}}
+        package is released, adding three translations in Indonesian
+        as requested on \href{https://github.com/javadr/quran/issues/11}{this issue}.
+    \end{Version}
+
+    \begin{Version}{2023/11/04}
+        \item \href{https://github.com/javadr/quran-en}{\xpackage{quran-en}}
+        package is released, adding three translations in English
+        as requested on \href{https://github.com/javadr/quran/issues/7}{this issue}.
+    \end{Version}
+
+    \begin{Version}{2023/12/21}
+        \item \href{https://github.com/javadr/gedit-quran}{Quran Plugin} for \href{https://gedit-text-editor.org/}{gedit text editor} 
+            released to typeset Quranic Ayat, including full scripts and companion Quran package macros
+    \end{Version}
+
+    \begin{Version}{2024/09/05}
+        \item \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}}
+        package is released, adding three translations in Spanish
+        as requested on \href{https://github.com/javadr/quran/issues/12}{this issue}.
+    \end{Version}
+
+    \begin{Version}{2024/09/07 v2.3}
+        \item Documentation update with the release of \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}}.
+    \end{Version}
+
+    \begin{Version}{2025/03/31 v2.31}
+        \item New implementation of the \cs{qt@no} macro in quran.sty to optimize space usage in Quran text scripts.
+        \item In compliance with the new implementation, all other Quran packages have been updated accordingly.
+    \end{Version}
+
+    \begin{Version}{2025/04/25 v2.4}
+        \item \cs{SetAyahMarkerStyle} allows users to customize the visual style of Ayah markers, including the symbols that surround the verse numbers.
+        \item \cs{ResetAyahMarkerStyle} restores the Ayah marker style to the package's default setting, using {\amiri\char"FD3F} and {\amiri\char"FD3E}.
+    \end{Version}
+
+
+    % \newpage 
     
     \def\cb{{\tiny$\bullet$\space}}
     \def\mrule{\leaders\vrule height 2.5pt depth -1.5pt \hfill}
@@ -1363,6 +1407,8 @@ fontspec{,} and bidi"]
             \href{https://github.com/javadr/quran-es}{\xpackage{quran-es}} package \mrule \space\null}\\
         2024/09/07 & 2.3 &  \cb  Documentation retouching \\
         2025/03/31 & 2.31 &  \cb New implementation of the \cs{qt@no} macro\\
+        2025/04/25 & 2.4 &  \cb \cs{SetAyahMarkerStyle} macro to customize Ayah number style\par
+                            \cb \cs{ResetAyahMarkerStyle} macro to reset to default behavior\\
         \bottomrule
     \end{longtable}
     \end{small}
