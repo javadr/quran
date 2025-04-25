@@ -34,7 +34,7 @@
 \usepackage[toc]{multitoc}
 \usepackage{manfnt}
 
-\usepackage[trans={lt, de, en, fa, fr}, wordwise, uthmani, ornbraces]{quran}
+\usepackage[trans={lt, de, en, fa, fr}, wordwise, uthmani]{quran}
 \newfontfamily\quran[Script=Arabic]{Scheherazade}
 \newfontfamily\amiri[Script=Arabic]{Amiri}
 \hypersetup{%
@@ -528,6 +528,38 @@ the latter may be followed by a \cs{par} depending on the package option.
     \centerline{\mx{basmalah\textbackslash{}quranayah*[14][1]}{\quran\basmalah\quranayah*[14][1]} \hfill
     \mx{Basmalah\textbackslash{}space\textbackslash{}quranayah*[14][1}{\quran\Basmalah\ \quranayah*[14][1]}}
 
+
+\subsection{Enclosing Ornamental Braces}
+
+As of version~1.9, the package introduces a new macro designed to place decorative braces around Quranic text. 
+These ornamental elements are fully customizable, allowing users to adapt the visual appearance to suit specific typographic or stylistic requirements.
+
+To define a pair of custom ornamental braces, use the following macro:
+
+\begin{declcs}{SetOrnamentalBraces}\marg{opening brace}\marg{closing brace}
+\end{declcs}
+
+\subsection{Ayah Marker Style}
+
+Starting from version~2.4, the package supports enhanced control over Ayah marker symbols via two dedicated macros:
+
+\begin{declcs}{SetAyahMarkerStyle}\marg{begin marker}\marg{end marker}\\
+\cs{ResetAyahMarkerStyle}
+\end{declcs}
+
+\begin{itemize}
+    \item \cs{SetAyahMarkerStyle} defines the delimiters used to enclose Ayah numbers.
+    \item \cs{ResetAyahMarkerStyle} reverts to the package’s default Ayah marker formatting.
+\end{itemize}
+
+By default, Ayah markers utilize the glyphs {\amiri\char"FD3F} and {\amiri\char"FD3E}, 
+which correspond to classical Arabic typographic ornaments commonly employed in traditional Quranic scripts.
+
+\centerline{\mxf{SetOrnamentalBraces\{[\}\{]\}\textbackslash{}SetAyahMarkerStyle\{(\}\{)\}\textbackslash{}quransurah*}
+{\SetOrnamentalBraces{[}{]}\SetAyahMarkerStyle{(}{)}\quransurah*}}
+
+
+
 \subsection{Index Converting}
 \begin{declcs}{indexconvert}\marg{index}\marg{surah macro}\marg{ayah macro}
 \end{declcs}
@@ -582,35 +614,6 @@ enabling or disabling them as needed.
     {\ToggleAyahNumber\quransurah*[89]}}
 
 \medskip
-Version 1.9 introduces the \xmgpar{ornbraces} package option, 
-enabling the addition of ornamental braces around Quranic text. 
-These ornamental elements can be fully customized to match specific stylistic preferences.
-
-To define custom ornamental braces, use the following macro:
-
-\begin{declcs}{SetOrnamentalBraces}\marg{opening brace}\marg{closing brace}
-\end{declcs}
-
-The \cs{SetOrnamentalBraces} macro accepts two mandatory arguments: 
-the opening brace, and the closing brace.
-This provides users with the flexibility to harmonize the visual presentation 
-of Quranic verses with other typographic elements in their document.
-
-Starting from version 2.4, two additional macros allow fine-tuned control over Ayah markers:
-\begin{declcs}{SetAyahMarkerStyle}\marg{begin marker}\marg{end marker}\\
-    \cs{ResetAyahMarkerStyle}
-    \end{declcs}
-
-\begin{itemize}
-    \item \cs{SetAyahMarkerStyle} sets the symbols or characters that enclose Ayah numbers.
-    \item \cs{ResetAyahMarkerStyle} restores the default Ayah marker style used by the package.
-\end{itemize}
-
-By default, Ayah markers are rendered using {\amiri\char"FD3F} and {\amiri\char"FD3E}.
-These correspond to traditional Arabic decorative glyphs used in Quranic typesetting.
-
-\centerline{\mxf{SetOrnamentalBraces\{[\}\{]\}\textbackslash{}SetAyahMarkerStyle\{(\}\{)\}\textbackslash{}quransurah*}
-{\SetOrnamentalBraces{[}{]}\SetAyahMarkerStyle{(}{)}\quransurah*}}
 
 The \xmgpar{wordwise} option enables the package to output specific portions of an ayah.
 For further details, please refer to Section~\ref{chunk}.
@@ -924,7 +927,7 @@ fontspec{,} and bidi"]
 {\quransurah* »{\ToggleAyahNumber\quransurah*}« \quransurah*}
 
 
-    \subsection{Customizing the Ayah Marker Style}
+    \subsection{How to Colorize the Ayah Marker}
     The \cs{SetAyahMarkerStyle} macro allows you to customize the symbols 
     or formatting that appear before and after each Ayah number.
     The two arguments of the macro will appear immediately before and after of the Ayah number.
@@ -1312,6 +1315,12 @@ fontspec{,} and bidi"]
         \item \cs{ResetAyahMarkerStyle} restores the Ayah marker style to the package's default setting, using {\amiri\char"FD3F} and {\amiri\char"FD3E}.
     \end{Version}
 
+    \begin{Version}{2025/04/26 v2.41}
+        \item The \xoption{ornbraces} package option has been deprecated and removed. 
+        The macros \cs{SetOrnamentalBraces}, \cs{SetAyahMarkerStyle}, and \cs{ResetAyahMarkerStyle} 
+        are now available by default and no longer require explicit option activation.
+    \end{Version}
+
 
     % \newpage 
     
@@ -1409,6 +1418,7 @@ fontspec{,} and bidi"]
         2025/03/31 & 2.31 &  \cb New implementation of the \cs{qt@no} macro.\\
         2025/04/25 & 2.4 &  \cb \cs{SetAyahMarkerStyle} macro to customize Ayah number style.\par
                             \cb \cs{ResetAyahMarkerStyle} macro to reset to default behavior.\\
+        2025/04/26 & 2.41 & \cb The \xoption{ornbraces} option deprecated.\\
         \bottomrule
     \end{longtable}
     \end{small}
